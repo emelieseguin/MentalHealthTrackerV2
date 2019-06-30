@@ -1,0 +1,31 @@
+<StackLayout class="home-panel appBackgroundColor">
+    <CardView class="cardStyleProfile" margin="10" elevation="40" radius="30" >
+        <!-- TODO: Make card fill entire height of screen -->
+        <!-- TODO: Round corners -->
+                <StackLayout>
+                <Label class="user-name" verticalAlignment="top" text="{{currentUser.firstName}} {{currentUser.lastName}}"> </Label>
+                    <FlexboxLayout flexDirection="row">        
+                        <Label class="user-info-heading"  text="     Age:" ></Label>
+                        <Label class="user-info" text=" {{currentUser.age}}"></Label>
+                    </FlexboxLayout>
+                    <FlexboxLayout flexDirection="row">        
+                            <Label class="user-info-heading"  text="     Sex:" ></Label>
+                            <Label class="user-info" text=" {{currentUser.sex}}"></Label>
+                    </FlexboxLayout>
+                    <FlexboxLayout flexDirection="row">        
+                            <Label class="user-info-heading"  text="     Email:" ></Label>
+                            <Label class="user-info" text=" {{currentUser.email}}"></Label>
+                    </FlexboxLayout>
+                    
+                <Label class="space" text="" ></Label>
+                <!-- Diagnoses List -->
+                <Label class="diagnoses-treatments" verticalAlignment="top" text="Diagnoses:" ></Label>
+                <Label class="user-info2" *ngFor="let diag of currentUser.diagnoses" text="   - {{diag}}"></Label>
+                <!-- Treatments List -->
+                <Label class="diagnoses-treatments" verticalAlignment="top" text="Treatments:" ></Label> 
+                <Label class="user-info2" *ngFor="let treatment of currentUser.treatments" text="   - {{treatment}}"></Label>
+            </StackLayout> 
+      </CardView>
+    <Button class="btn btn-primary" text="Edit Profile" [nsRouterLink]="['./edit']"></Button>
+
+</StackLayout>

@@ -1,0 +1,6 @@
+<StackLayout class="home-panel">
+    <Label class="user-info-heading h2"  text="Edit Profile" ></Label>
+    <Button class="btn btn-primary" text="Back" (tap)="goBack()"></Button>
+    <Button class="btn btn-primary" text="Treatments" [nsRouterLink]="['./treatments']"></Button>
+    <Button class="btn btn-primary" text="Diagnoses" [nsRouterLink]="['./diagnoses']"></Button>
+</StackLayout>
