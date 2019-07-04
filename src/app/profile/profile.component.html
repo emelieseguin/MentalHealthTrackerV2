@@ -1,5 +1,5 @@
-<StackLayout class="home-panel appBackgroundColor">
-    <CardView class="cardStyleProfile" margin="10" elevation="40" radius="30" >
+<StackLayout class="profile-panel appBackgroundColor">
+    <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
         <!-- TODO: Make card fill entire height of screen -->
         <!-- TODO: Round corners -->
                 <StackLayout>
@@ -16,16 +16,35 @@
                             <Label class="user-info-heading"  text="     Email:" ></Label>
                             <Label class="user-info" text=" {{currentUser.email}}"></Label>
                     </FlexboxLayout>
-                    
+
                 <Label class="space" text="" ></Label>
                 <!-- Diagnoses List -->
                 <Label class="diagnoses-treatments" verticalAlignment="top" text="Diagnoses:" ></Label>
-                <Label class="user-info2" *ngFor="let diag of currentUser.diagnoses" text="   - {{diag}}"></Label>
+                <ScrollView id="scroll" orientation="horizontal" >
+                    <StackLayout>
+                        <ListView height="90" [items]="currentUser.diagnoses">
+                            <ng-template let-diag="item" let-i="index" let-odd="odd" let-even="even">
+                                <Label class="user-info2" text="   - {{currentUser.diagnoses[i]}}"></Label>
+                            </ng-template>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+                <!-- <Label class="user-info2" *ngFor="let diag of currentUser.diagnoses" text="   - {{diag}}"></Label> -->
                 <!-- Treatments List -->
                 <Label class="diagnoses-treatments" verticalAlignment="top" text="Treatments:" ></Label> 
-                <Label class="user-info2" *ngFor="let treatment of currentUser.treatments" text="   - {{treatment}}"></Label>
+                <ScrollView id="scroll" orientation="horizontal">
+                    <StackLayout>
+                        <ListView height="90" [items]="currentUser.treatments">
+                            <ng-template let-treatment="item" let-i="index" let-odd="odd" let-even="even">
+                                <Label class="user-info2" text="   - {{currentUser.treatments[i]}}"></Label>
+                            </ng-template>
+                        </ListView>
+                    </StackLayout>
+                </ScrollView>
+                <Label class="space" text="" ></Label>
+                <Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['./edit']"></Button>
             </StackLayout> 
       </CardView>
-    <Button class="btn btn-primary" text="Edit Profile" [nsRouterLink]="['./edit']"></Button>
+    
 
 </StackLayout>

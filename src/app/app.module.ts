@@ -10,6 +10,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { ProfileEditComponent } from "./profile/edit/edit.component";
 import { DiagnosesComponent } from "./profile/edit/diagnoses/diagnoses.component";
 import { TreatmentsComponent } from "./profile/edit/treatments/treatments.component";
+import { View } from "tns-core-modules/ui/core/view"
 // Add more components to the declaration here
 
 @NgModule({
@@ -18,7 +19,8 @@ import { TreatmentsComponent } from "./profile/edit/treatments/treatments.compon
     ],
     imports: [
         NativeScriptModule,
-        AppRoutingModule
+        AppRoutingModule,
+        
     ],
     declarations: [
         AppComponent,

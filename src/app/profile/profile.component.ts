@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { isAndroid, Page } from "tns-core-modules/ui/page/page";
+import { isAndroid, Page, EventData } from "tns-core-modules/ui/page/page";
 
 class PersonInfo {
     firstName: string;
@@ -19,11 +19,25 @@ const FakePerson: PersonInfo = {
     email: 'john.smith@email.com',
     diagnoses: [
         'Generalized Anxiety Disorder (GAD)',
-        'Seasonal Affective Disorder (SAD)'
+        'Seasonal Affective Disorder (SAD)',
+        'Generalized Anxiety Disorder (GAD)3',
+        'Generalized Anxiety Disorder (GAD)5',
+        'Generalized Anxiety Disorder (GAD)6',
+        'Generalized Anxiety Disorder (GAD)7',
+        'Generalized Anxiety Disorder (GAD)8',
     ],
     treatments: [
         'Mindfulness Meditation',
-        'Counselling'
+        'Counselling',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
+        'Mindfulness Meditation',
     ]
 }
 
@@ -39,7 +53,6 @@ export class ProfileComponent implements OnInit {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
-
         this.currentUser = FakePerson;
     }
 
