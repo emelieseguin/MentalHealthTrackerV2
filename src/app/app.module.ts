@@ -12,14 +12,23 @@ import { DiagnosesComponent } from "./profile/edit/diagnoses/diagnoses.component
 import { TreatmentsComponent } from "./profile/edit/treatments/treatments.component";
 import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 
+import { BackendService, FirebaseService, UtilsService } from "./services";
+import { LoginComponent } from "./login/login.component";
+
+
 @NgModule({
     bootstrap: [
         AppComponent
     ],
+    providers: [
+        BackendService,
+        FirebaseService,
+        UtilsService,
+    ],
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativeScriptUIChartModule
+        NativeScriptUIChartModule,
     ],
     declarations: [
         AppComponent,
@@ -28,7 +37,8 @@ import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
         ProfileComponent,
         ProfileEditComponent,
         DiagnosesComponent,
-        TreatmentsComponent        
+        TreatmentsComponent,
+        LoginComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA
