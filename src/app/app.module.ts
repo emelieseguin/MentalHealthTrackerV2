@@ -10,8 +10,7 @@ import { ProfileComponent } from "./profile/profile.component";
 import { ProfileEditComponent } from "./profile/edit/edit.component";
 import { DiagnosesComponent } from "./profile/edit/diagnoses/diagnoses.component";
 import { TreatmentsComponent } from "./profile/edit/treatments/treatments.component";
-import { View } from "tns-core-modules/ui/core/view"
-// Add more components to the declaration here
+import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 
 @NgModule({
     bootstrap: [
@@ -20,7 +19,7 @@ import { View } from "tns-core-modules/ui/core/view"
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        
+        NativeScriptUIChartModule
     ],
     declarations: [
         AppComponent,
@@ -29,7 +28,7 @@ import { View } from "tns-core-modules/ui/core/view"
         ProfileComponent,
         ProfileEditComponent,
         DiagnosesComponent,
-        TreatmentsComponent
+        TreatmentsComponent        
     ],
     schemas: [
         NO_ERRORS_SCHEMA
