@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
-import {User} from '../models/user.model';
+import {User, PasswordOptions} from '../models/user.model';
 import { FirebaseService } from '../services/firebase.service';
 import {prompt} from "tns-core-modules/ui/dialogs";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
@@ -19,8 +19,11 @@ export class LoginComponent {
               private routerExtensions: RouterExtensions
             ) {
               this.user = new User();
-              this.user.email = "user@nativescript.org";
+              this.user.email = "emelieseguin@gmail.com";
               this.user.password = "password";
+              this.user.passwordOptions = new PasswordOptions();
+              this.user.passwordOptions.email = "emelieseguin@gmail.com";
+              this.user.passwordOptions.password = "password";
             }
 
  

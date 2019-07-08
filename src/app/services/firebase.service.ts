@@ -21,6 +21,7 @@ export class FirebaseService {
   private _allItems: Array<Gift> = [];
   
   register(user: User) {
+    console.log('trying to actually register')
     return firebase.createUser({
       email: user.email,
       password: user.password
