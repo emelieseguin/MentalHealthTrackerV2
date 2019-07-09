@@ -7,34 +7,32 @@ export class Country {
         public SecondVal?: number, public ThirdVal?: number, public Impact?: number, public Year?: number) {
     }
 }
+let getFatigueMap = new Map([
+    ['2019,7,9,10,33,15', 6],
+    ['2019,7,8,10,33,15', 4],
+    ['2019,7,8,10,33,15', 8] 
+]);
 
-const getFatigueMap: Map<Date,number> = new Map(([
-    [new Date(2019,7,9,10,33,15), 6],
-    [new Date(2019,7,8,10,33,15), 4],
-    [new Date(2019,7,8,10,33,15), 8]
-]));
+let getHeadacheMap = new Map([
+    ['2019,7,9,10,33,15', 1],
+    ['2019,7,8,10,33,15', 8],
+    ['2019,7,8,10,33,15', 10] 
+]);
 
-const getHeadacheMap: Map<Date,number> = new Map(([
-    [new Date(2019,7,9,10,33,15), 1],
-    [new Date(2019,7,8,10,33,15), 8],
-    [new Date(2019,7,8,10,33,15), 10]
-]));
-
-const getApathyMap: Map<Date,number> = new Map(([
-    [new Date(2019,7,9,10,33,15), 9],
-    [new Date(2019,7,8,10,33,15), 2],
-    [new Date(2019,7,8,10,33,15), 1]
-]));
-
+let getApathyMap = new Map([
+    ['2019,7,9,10,33,15', 9],
+    ['2019,7,8,10,33,15', 2],
+    ['2019,7,8,10,33,15', 1] 
+]);
 // Symptom
 export class Symptom {
     Name: string;
-    Values?: Map<Date, number>;
+    Values?: Map<string, number>;
     Active: boolean;
 }
 
 // Mock of all symptoms a user has
-const getMockedSymptoms: Symptom[] =
+let getMockedSymptoms: Symptom[] =
     [
         {
             Name: 'Fatigue',
@@ -71,6 +69,7 @@ export class DataService {
     }
 
     getAllUserSymptoms(): Symptom[] {
+        console.log(getFatigueMap.values);
         return getMockedSymptoms;
     }
 }
