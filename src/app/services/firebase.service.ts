@@ -26,7 +26,7 @@ export class FirebaseService {
       email: user.email,
       password: user.password
     }).then(
-          function (result:any) {
+          function (result:any) {       
             return JSON.stringify(result);
           },
           function (errorMessage:any) {
@@ -35,12 +35,13 @@ export class FirebaseService {
       )
   }
 
+  // Log the user in
   login(user: User) {
     return firebase.login({
       type: firebase.LoginType.PASSWORD,
-      email: user.email,
-      password: user.password
+      passwordOptions: user
     }).then((result: any) => {
+        console.log("I am logged in");
           BackendService.token = result.uid;
           return JSON.stringify(result);
       }, (errorMessage: any) => {

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
 import {User, PasswordOptions} from '../models/user.model';
 import { FirebaseService } from '../services/firebase.service';
-import {prompt} from "tns-core-modules/ui/dialogs";
+import { prompt } from "tns-core-modules/ui/dialogs";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 
 @Component({
@@ -40,7 +40,7 @@ export class LoginComponent {
      this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = false;
-        this.routerExtensions.navigate(["/"], { clearHistory: true } );
+        this.routerExtensions.navigateByUrl("", { clearHistory: true } );
 
       })
       .catch((message:any) => {
