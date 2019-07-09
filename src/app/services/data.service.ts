@@ -1,14 +1,62 @@
 import { Injectable } from '@angular/core';
 
+// Create a Country Object
 export class Country {
-    
-    constructor(public Country?: string, public Amount?: number, 
+
+    constructor(public Country?: string, public Amount?: number,
         public SecondVal?: number, public ThirdVal?: number, public Impact?: number, public Year?: number) {
     }
 }
 
+const getFatigueMap: Map<Date,number> = new Map(([
+    [new Date(2019,7,9,10,33,15), 6],
+    [new Date(2019,7,8,10,33,15), 4],
+    [new Date(2019,7,8,10,33,15), 8]
+]));
+
+const getHeadacheMap: Map<Date,number> = new Map(([
+    [new Date(2019,7,9,10,33,15), 1],
+    [new Date(2019,7,8,10,33,15), 8],
+    [new Date(2019,7,8,10,33,15), 10]
+]));
+
+const getApathyMap: Map<Date,number> = new Map(([
+    [new Date(2019,7,9,10,33,15), 9],
+    [new Date(2019,7,8,10,33,15), 2],
+    [new Date(2019,7,8,10,33,15), 1]
+]));
+
+// Symptom
+export class Symptom {
+    Name: string;
+    Values?: Map<Date, number>;
+    Active: boolean;
+}
+
+// Mock of all symptoms a user has
+const getMockedSymptoms: Symptom[] =
+    [
+        {
+            Name: 'Fatigue',
+            Values: getFatigueMap,
+            Active: true
+        },
+        {
+            Name: 'Headache',
+            Values: getHeadacheMap,
+            Active: true
+        },
+        {
+            Name: 'Apathy',
+            Values: getApathyMap,
+            Active: true
+        }
+    ];
+
+
+
 @Injectable({
-providedIn: 'root',
+    providedIn: 'root',
 })
 export class DataService {
 
@@ -20,5 +68,9 @@ export class DataService {
             { Country: "Spain", Amount: 11, SecondVal: 19, ThirdVal: 24, Impact: 0, Year: 0 },
             { Country: "USA", Amount: 18, SecondVal: 8, ThirdVal: 21, Impact: 0, Year: 0 }
         ];
+    }
+
+    getAllUserSymptoms(): Symptom[] {
+        return getMockedSymptoms;
     }
 }
