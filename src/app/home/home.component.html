@@ -1,14 +1,30 @@
 <GridLayout class="page appBackgroundColor">
+    <StackLayout class="home-panel">
+        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
+            <StackLayout class="home-panel">
+                <!-- Title does not have to be a part of the graph -->
+                <Label class="user-info-heading h2" text="Graph Title"></Label>
+            </StackLayout>
+        </CardView>
 
-    <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
-        <StackLayout class="home-panel">
-            <Label class="user-info-heading h2"  text="Graph Title" ></Label>
-            <RadCartesianChart tkExampleTitle tkToggleNavButton>
+        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
+            <StackLayout class="home-panel">
+
+                <!-- Graphing component -->
+                <!-- <RadCartesianChart tkExampleTitle tkToggleNavButton>
                 <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
                 <LinearAxis tkCartesianVerticalAxis></LinearAxis>
                 <LineSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="Country" valueProperty="Amount"></LineSeries>
-            </RadCartesianChart>
-        </StackLayout>
-    </CardView>
-    
+            </RadCartesianChart> -->
+                <RadCartesianChart tkExampleTitle tkToggleNavButton>
+                    <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
+                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+                    <LineSeries tkCartesianSeries [items]="data" categoryProperty="day" valueProperty="num">
+                    </LineSeries>
+                    <LineSeries tkCartesianSeries [items]="data2" categoryProperty="day" valueProperty="num">
+                    </LineSeries>
+                </RadCartesianChart>
+            </StackLayout>
+        </CardView>
+    </StackLayout>
 </GridLayout>

@@ -24,6 +24,7 @@ let getApathyMap = new Map([
     ['2019,7,8,10,33,15', 2],
     ['2019,7,8,10,33,15', 1] 
 ]);
+
 // Symptom
 export class Symptom {
     Name: string;
@@ -51,8 +52,6 @@ let getMockedSymptoms: Symptom[] =
         }
     ];
 
-
-
 @Injectable({
     providedIn: 'root',
 })
@@ -69,7 +68,6 @@ export class DataService {
     }
 
     getAllUserSymptoms(): Symptom[] {
-        console.log(getFatigueMap.values);
         return getMockedSymptoms;
     }
 }
