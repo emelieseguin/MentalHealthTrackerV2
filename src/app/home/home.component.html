@@ -1,29 +1,38 @@
 <GridLayout class="page appBackgroundColor">
     <StackLayout class="home-panel">
-        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
+        <Label class="last-updated" text="Last updated: mm/dd/yyyy"></Label>
+        <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
             <StackLayout class="home-panel">
                 <!-- Title does not have to be a part of the graph -->
-                <Label class="user-info-heading h2" text="Graph Title"></Label>
+                <Label class="card-title" text="Significant Trends"></Label>
+                <!-- <image #image src="../images/Candy.jpg" stretch="aspectFit"></image>     -->
             </StackLayout>
         </CardView>
 
-        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
+        <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
             <StackLayout class="home-panel">
+                  <Label class="card-title" text="Weekly Overview"></Label>
 
-                <!-- Graphing component -->
-                <!-- <RadCartesianChart tkExampleTitle tkToggleNavButton>
-                <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
-                <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                <LineSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="Country" valueProperty="Amount"></LineSeries>
-            </RadCartesianChart> -->
-                <RadCartesianChart tkExampleTitle tkToggleNavButton>
-                    <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>
-                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                    <LineSeries tkCartesianSeries [items]="data" categoryProperty="day" valueProperty="num">
-                    </LineSeries>
-                    <LineSeries tkCartesianSeries [items]="data2" categoryProperty="day" valueProperty="num">
-                    </LineSeries>
+                <RadCartesianChart tkExampleTitle tkToggleNavButton height="250" >
+                    
+                    <CategoricalAxis tkCartesianHorizontalAxis lineThickness = "1" labelTextColor="#A2A0A0" labelMargin = "40"></CategoricalAxis>
+                    <LinearAxis tkCartesianVerticalAxis MajorGridLinesVisibility="Visible" labelFormat="%.0f" labelTextColor="#A2A0A0" minimum="0" maximum="10" majorStep = "2" lineThickness = "1" labelMargin = "20" ></LinearAxis>
+                    <SplineSeries tkCartesianSeries legendTitle = "data" selectionMode ="Series" seriesName = "data" [items]="data" categoryProperty="day" valueProperty="num" >
+                            <Palette tkCartesianPalette seriesName="data">
+                                    <PaletteEntry tkCartesianPaletteEntry fillColor="#F57439" strokeColor="#F57439"></PaletteEntry>
+                            </Palette>
+                    </SplineSeries>
+                    <SplineSeries tkCartesianSeries legendTitle = "data2" selectionMode ="Series" seriesName = "data2" [items]="data2" categoryProperty="day" valueProperty="num">
+                            <Palette tkCartesianPalette seriesName="data2">
+                                    <PaletteEntry tkCartesianPaletteEntry fillColor="#56D9FE" strokeColor="#56D9FE"></PaletteEntry>
+                            </Palette>
+                    </SplineSeries>
+                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true">  </RadCartesianChartGrid>
+                    <RadLegendView tkCartesianLegend enableSelection = true title = "Legend" ></RadLegendView>
+                    
+                        
                 </RadCartesianChart>
+                
             </StackLayout>
         </CardView>
     </StackLayout>

@@ -1,6 +1,12 @@
 <StackLayout class="home-panel">
-    <Label class="user-info-heading h2"  text="Edit Profile" ></Label>
-    <Button class="btn btn-primary" text="Back" (tap)="goBack()"></Button>
-    <Button class="btn btn-primary" text="Treatments" [nsRouterLink]="['./treatments']"></Button>
-    <Button class="btn btn-primary" text="Diagnoses" [nsRouterLink]="['./diagnoses']"></Button>
+    <DockLayout stretchLastChild="false" margin="10">
+        <Button dock="left"  width="80" class="back-button" text="<" (tap)="goBack()"></Button>
+    </DockLayout>
+    <Label class="edit-info-heading"  text="Name" ></Label>
+    <Label class="edit-info-heading"  text="Age" ></Label>
+    <Label class="edit-info-heading"  text="Sex" ></Label>
+    <Label class="edit-info-heading"  text="Email" ></Label>
+    <Label class="edit-info-heading"  text="More" ></Label>
+    <Button class="button" text="Treatments" [nsRouterLink]="['./treatments']"></Button>
+    <Button class="button" text="Diagnoses" [nsRouterLink]="['./diagnoses']"></Button>
 </StackLayout>

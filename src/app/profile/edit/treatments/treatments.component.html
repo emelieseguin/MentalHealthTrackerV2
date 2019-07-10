@@ -1,4 +1,6 @@
 <StackLayout class="home-panel">
-    <Label class="user-info-heading h2"  text="Treatments" ></Label>
-    <Button class="btn btn-primary" text="Back" (tap)="goBack()"></Button>
+        <DockLayout stretchLastChild="false" margin="10">
+                <Button dock="left"  width="80" class="back-button" text="<" (tap)="goBack()"></Button>
+        </DockLayout>
+        <Label class="user-info-heading h2"  text="Treatments" ></Label>
 </StackLayout>

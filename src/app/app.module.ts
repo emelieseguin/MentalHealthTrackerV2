@@ -29,6 +29,7 @@ import { LoginComponent } from "./login/login.component";
         NativeScriptModule,
         AppRoutingModule,
         NativeScriptUIChartModule,
+        
     ],
     declarations: [
         AppComponent,

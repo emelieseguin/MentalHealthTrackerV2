@@ -1,0 +1,23 @@
+.back-button{
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    background-color: rgb(173, 173, 173);
+}
+.button{
+    width: 500px;
+    max-width: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    outline-color: black;
+}
+.edit-info-heading{
+    margin-top: 5;
+    margin-bottom: 2;
+    margin-left: 30;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+}

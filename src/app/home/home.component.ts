@@ -3,6 +3,7 @@ import { isAndroid, Page } from "tns-core-modules/ui/page/page";
 import { Country, DataService, Symptom } from '../services/data.service';
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { RadCartesianChart } from "nativescript-ui-chart";
+import { Image } from "tns-core-modules/ui/image";
 
 export class TestGraph {
     day: string
@@ -13,6 +14,7 @@ export class TestGraph {
 @Component({
     selector: "Home",
     templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.css"],
     providers: [DataService]
 })
 export class HomeComponent implements OnInit {
@@ -22,23 +24,23 @@ export class HomeComponent implements OnInit {
 
     // Probably the right mock object to actually use
     private data: TestGraph[] = [
-        {day: 'mon', num: 2},
-        {day: 'tues', num: 3},
-        {day: 'wed', num: 4},
-        {day: 'thu', num: 5},
-        {day: 'fri', num: 6},
-        {day: 'sat', num: 7},
-        {day: 'sun', num: 8}
+        {day: 'S', num: 3},
+        {day: 'M', num: 1},
+        {day: 'T', num: 3},
+        {day: 'W', num: 6},
+        {day: 'Th', num: 6},
+        {day: 'F', num: 7},
+        {day: 'Su', num: 8}
     ]
 
     private data2: TestGraph[] = [
-        {day: 'mon', num: 2},
-        {day: 'tues', num: 3},
-        {day: 'wed', num: 4},
-        {day: 'thu', num: 5},
-        {day: 'fri', num: 8},
-        {day: 'sat', num: 9},
-        {day: 'sun', num: 10}
+        {day: 'S', num: 2},
+        {day: 'M', num: 3},
+        {day: 'T', num: 4},
+        {day: 'W', num: 5},
+        {day: 'Th', num: 8},
+        {day: 'F', num: 9},
+        {day: 'Su', num: 10}
     ]
 
     // Mock values to plot
