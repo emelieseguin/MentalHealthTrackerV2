@@ -4,6 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { TextField } from "tns-core-modules/ui/text-field";
 
 
+
 export class User {
     name: string;
     age: number;

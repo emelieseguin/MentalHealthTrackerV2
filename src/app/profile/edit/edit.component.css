@@ -1,8 +1,15 @@
+.saveButton{
+    margin: 10;
+    background-color: rgb(133, 221, 245);
+    border-radius:10; 
+    }
+    
 .back-button{
     font-size: 18px;
     font-weight: bold;
     color: black;
-    background-color: rgb(173, 173, 173);
+    /* background-color: rgb(173, 173, 173); */
+    background-color: rgb(133, 221, 245);
 }
 .button{
     width: 500px;
@@ -12,11 +19,14 @@
     color: black;
     background-color: white;
     outline-color: black;
+    border-radius: 10;
+    /* margin-top: -5;
+    margin-bottom: -5; */
 }
 .edit-info-heading{
     margin-top: 5;
     margin-left: 15;
-    color: black;
+    color: white;
     font-size: 16px;
     font-weight: bold;
 }
@@ -24,26 +34,33 @@
     margin-top: 10;
     margin-bottom: 0;
     margin-left: 50;
-    color: black;
+    color: white;
     font-size: 26px;
+    font-weight: bold;
 }
 .More{
     margin-top: 5;
     margin-bottom: 2;
     margin-left: 15;
-    color: black;
+    color:white;
     font-size: 18px;
     font-weight: bold;
     text-decoration: underline;
 }
 
 .space{
-    font-size: 35px;
+    font-size: 24px;
 }
 .cardStyleProfile{
     margin-left: 30;
 }
 
-.textField{
-    margin-right: 20px;
+#sex{
+    font-size:14;
+}
+#age{
+    font-size:14;
+}
+#name{
+    font-size:14;
 }

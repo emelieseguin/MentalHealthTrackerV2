@@ -7,28 +7,35 @@
         <!-- Nate helppp idk how to make the number actually show up -->
         </AbsoluteLayout>
     </CardView>
+
+
     <Label class="journal1"  text="Did you exercise today?" ></Label>
-    <Label class="journal"  text="Did you meditate today?" ></Label>
-    <Label class="journal"  text="Rate the following symptoms:" ></Label>
+    <Label class="journal3"  text="Did you meditate today?" ></Label>
+
+        <AbsoluteLayout width="400" height="40">
+            <Label left="-7" top="10" class="journal"  text="Rate the following symptoms:" ></Label>
+            <Button  height = "40" width="60" color= "#23495F" left="325" top="0" class="button" text="Edit" [nsRouterLink]="['../login']"></Button>
+            <!-- not going to the right link for now -->
+        </AbsoluteLayout>
+
+
 <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
     <StackLayout>
-
-
-    <StackLayout>
+        <Scrollview height = "200">
         <ListView height="250" [items]="currentSymptom">
             <ng-template let-symptom="item" let-i="index" let-odd="odd" let-even="even">
+            
             <AbsoluteLayout width="350" height="210">
+                    
                 <Label left="10" top="10" width="125" textwrap="true" class="symptom" text="{{currentSymptom[i].Name}}"></Label>
                 <Slider left="140" top="10" width="180" class="slider" minValue="0" maxValue="10" value="{{currentSymptom[i].NewValue}}" (valueChange)="valueChange(currentSymptom[i].Name, $event)"></Slider>
-                <Label  left="320" top="18" width="90" class="symptom" text="{{currentSymptom[i].NewValue}}"></Label>
-                                            
-            </AbsoluteLayout>
+                <Label  left="320" top="18" width="90" class="symptom" text="{{currentSymptom[i].NewValue}}"></Label>                                   
+        </AbsoluteLayout>
             </ng-template>
         </ListView>
-    </StackLayout>
-    
+    </Scrollview>
 </StackLayout>
 </CardView>
+<Button  height = "50"   class="saveButton" text="Save Changes" [nsRouterLink]="['../login']"></Button>
 
-<Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['../login']"></Button>
 </StackLayout>

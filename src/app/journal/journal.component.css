@@ -1,3 +1,9 @@
+.saveButton{
+margin: 10;
+background-color: rgb(133, 221, 245);
+border-radius:10; 
+}
+
 .heading{
     margin-top: 10;
     margin-bottom: 20;
@@ -7,7 +13,12 @@
     color: black;
     font-size: 26px;
 }
-
+.button{
+    border-radius:30; 
+    font-size: 13;
+    font-weight: bold;
+    background-color: rgb(133, 221, 245)
+}
 .journal{
     color: white;
     margin-left: 20;
@@ -20,6 +31,7 @@
     font-weight: bold;
     font-size: 16;
     margin-top:-20;
+    margin-bottom:20;
 }
 .journal2{
     color: white;
@@ -28,6 +40,13 @@
     margin-bottom:-35;
     font-weight: bold;
     font-size: 16;
+}
+.journal3{
+    color: white;
+    margin-left: 20;
+    font-weight: bold;
+    font-size: 16;
+    margin-bottom:20;
 }
 .symptom{
     color: black;

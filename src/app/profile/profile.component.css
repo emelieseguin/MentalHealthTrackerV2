@@ -46,14 +46,17 @@
 .space{
     font-size: 20px;
 }
+.space2{
+    font-size: 8px;
+}
 
 .edit-button{
-    width: 500px;
-    max-width: 100%;
+    width: 600px;
+    border-radius: 10;
     font-size: 12px;
     font-weight: bold;
     color: black;
-    background-color: rgb(173, 173, 173);
+    background-color: rgb(133, 221, 245);
     float: right;
     position: relative;
 }

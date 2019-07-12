@@ -1,32 +1,31 @@
 <StackLayout class="profile-panel appBackgroundColor">
-    <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
+       
+        <AbsoluteLayout height="80">
+            <Button   left="10" top="10" width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
+            <Label left="70" top="25" class="heading"  text="Edit Information"></Label>
+        </AbsoluteLayout>
     <StackLayout>
-        <StackLayout orientation="horizontal">
-            <Button   width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
-            <Label class="heading"  text="Edit Information"></Label>
-        </StackLayout>
-    <Label class="space" text=""></Label>
-    <Label class="edit-info-heading"  text="Name" ></Label>
-        <DockLayout stretchLastChild="false">
-            <TextField [text]="currentUser.name" (returnPress)="saveNameValue($event)" (blur)="saveNameValue($event)"></TextField>
-        </DockLayout>
-    <Label class="edit-info-heading"  text="Age" ></Label>
-        <DockLayout stretchLastChild="false">
-             <TextField [text]="currentUser.age" (returnPress)="saveAgeValue($event)" (blur)="saveAgeValue($event)"></TextField>
-        </DockLayout>
-    <Label class="edit-info-heading"  text="Sex" ></Label>
-        <DockLayout stretchLastChild="false">
+    <Label class="edit-info-heading"  text="Name:" ></Label>
+            <CardView class="cardStyleProfile" margin="15" elevation="40" radius="0" >
+            <TextField  id="name" [text]="currentUser.name" (returnPress)="saveNameValue($event)" (blur)="saveNameValue($event)"></TextField>
+            </CardView>
+    <Label class="edit-info-heading"  text="Age:" ></Label>
+            <CardView class="cardStyleProfile" margin="15" elevation="40" radius="0" >
+             <TextField id="age" class="text" [text]="currentUser.age" (returnPress)="saveAgeValue($event)" (blur)="saveAgeValue($event)"></TextField>
+             </CardView>
+        <Label class="edit-info-heading"  text="Sex:" ></Label>
                 <!-- hint="Enter text..." -->
-            <TextField [text]="currentUser.sex" (returnPress)="saveSexValue($event)" (blur)="saveSexValue($event)" ></TextField>
-        </DockLayout>
-    <Label class="space" text=""></Label>
-    <Label class="More"  text="More" ></Label>
-    <DockLayout stretchLastChild="false" margin="5">
-            <Button dock="left"  width="400" height="50" class="button" backgroundColor="#adadad" text="Treatments                                                                                      >" [nsRouterLink]="['./treatments']"></Button>
-    </DockLayout>
-    <DockLayout stretchLastChild="false" margin="5">
-            <Button dock="left"  width="400" height="50" class="button" backgroundColor="#adadad" text="Diagnoses                                                                                       >" [nsRouterLink]="['./diagnoses']"></Button>
-    </DockLayout>
+                <CardView class="cardStyleProfile" margin="15" elevation="40" radius="0" >
+                <TextField   id="sex" [text]="currentUser.sex" (returnPress)="saveSexValue($event)" (blur)="saveSexValue($event)" ></TextField>
+                </CardView>
 </StackLayout>
-</CardView>
+<Label class="space" text=""></Label>  
+<Label class="More"  text="More" ></Label>
+<DockLayout width = "350" stretchLastChild="false" margin="15">
+        <Button dock="left"  width="150" height="40" class="button"  text="Treatments          >" [nsRouterLink]="['./treatments']"></Button>
+        <Button dock="right"  width="150" height="40" class="button"  text="Diagnoses           >" [nsRouterLink]="['./diagnoses']"></Button>
+</DockLayout>
+        
+<Label class="space" text=""></Label>  
+<Button  height = "50"   class="saveButton" text="Save Changes" [nsRouterLink]="['../login']"></Button>
 </StackLayout>

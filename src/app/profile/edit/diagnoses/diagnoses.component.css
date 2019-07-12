@@ -2,7 +2,7 @@
     font-size: 18px;
     font-weight: bold;
     color: black;
-    background-color: rgb(173, 173, 173);
+    background-color: rgb(133, 221, 245);
 }
 
 .heading{
@@ -18,3 +18,8 @@
     margin-top: 6;
     margin-bottom: 6;
 }
+.saveButton{
+    margin: 10;
+    background-color: rgb(133, 221, 245);
+    border-radius:10; 
+    }

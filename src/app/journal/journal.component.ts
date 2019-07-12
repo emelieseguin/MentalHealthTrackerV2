@@ -50,7 +50,7 @@ export class JournalComponent implements OnInit {
             NewValue: 5,
         },
         {
-            Name: 'Inability to cope with daily problems',
+            Name: 'Apathy',
             Values: getApathyMap,
             Active: true,
             NewValue: 5,

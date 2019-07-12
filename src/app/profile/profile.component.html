@@ -31,6 +31,7 @@
                 </ScrollView>
                 <!-- <Label class="user-info2" *ngFor="let diag of currentUser.diagnoses" text="   - {{diag}}"></Label> -->
                 <!-- Treatments List -->
+                <Label class="space" text="" ></Label>
                 <Label class="diagnoses-treatments" verticalAlignment="top" text="Treatments:" ></Label> 
                 <ScrollView id="scroll" orientation="horizontal">
                     <StackLayout>
@@ -42,9 +43,8 @@
                     </StackLayout>
                 </ScrollView>
                 <Label class="space" text="" ></Label>
-                <Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['./edit']"></Button>
             </StackLayout> 
       </CardView>
-    
-
+      <Label class="space2" text="" ></Label>
+      <Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['./edit']"></Button>
 </StackLayout>

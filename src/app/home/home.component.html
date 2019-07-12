@@ -1,5 +1,7 @@
 <GridLayout class="page appBackgroundColor">
+    <Scrollview>
     <StackLayout class="home-panel">
+    
         <Label class="last-updated" text="Last updated: mm/dd/yyyy"></Label>
         <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
             <StackLayout class="home-panel">
@@ -29,11 +31,10 @@
                     </SplineSeries>
                     <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true">  </RadCartesianChartGrid>
                     <RadLegendView tkCartesianLegend enableSelection = true title = "Legend" ></RadLegendView>
-                    
                         
                 </RadCartesianChart>
-                
             </StackLayout>
         </CardView>
     </StackLayout>
+    </Scrollview>
 </GridLayout>
