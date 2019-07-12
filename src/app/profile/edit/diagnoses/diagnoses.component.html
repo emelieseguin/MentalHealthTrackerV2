@@ -1,6 +1,26 @@
-<StackLayout class="home-panel">
-        <DockLayout stretchLastChild="false" margin="10">
-                <Button dock="left"  width="80" class="back-button" text="<" (tap)="goBack()"></Button>
-        </DockLayout>
-        <Label class="user-info-heading h2"  text="Diagnoses"></Label>
+<StackLayout class="profile-panel appBackgroundColor">
+        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
+        <StackLayout>
+                
+                <!-- <DockLayout stretchLastChild="false" margin-left="2" margin-top="2">
+                <Button dock="left"  width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
+                </DockLayout> -->
+                <StackLayout orientation="horizontal">
+                <Button   width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
+                <Label class="heading"  text="Diagnoses"></Label>
+                </StackLayout>
+                <Label class="diagnoses" text="No formal diagnosis" ></Label>
+                <Label class="diagnoses" text="Generalized Anxiety Disorder (GAD)" ></Label>           
+                <Label class="diagnoses" text="Panic Disorder" ></Label>     
+                <Label class="diagnoses" text="Social Anxiety Disorder" ></Label>      
+                <Label class="diagnoses" text="Specific Phobias" ></Label> 
+                <Label class="diagnoses" text="Post-Traumatic Stress Disorder (PTSD)" ></Label> 
+                <Label class="diagnoses" text="Major Depression" ></Label>    
+                <Label class="diagnoses" text="Seasonal Affective Disorder (SAD)" ></Label>        
+                <Label class="diagnoses" text="Peripartum (Postpartum) Depression" ></Label>              
+                <Label class="diagnoses" text="Premenstrual Dysphoric Disorder (PMDD)" ></Label>  
+                <Label class="diagnoses" text="Atypical Depression" ></Label>    
+                <Label class="diagnoses" text="Persistent Depressive Disorder" ></Label>       
+        </StackLayout>
+        </CardView>
 </StackLayout>

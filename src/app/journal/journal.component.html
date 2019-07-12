@@ -1,4 +1,17 @@
 <StackLayout class="home-panel appBackgroundColor">
     <Label class="user-info-heading h2"  text="Journal" ></Label>
+
+    <StackLayout>
+        <ListView height="250" [items]="currentSymptom">
+            <ng-template let-symptom="item" let-i="index" let-odd="odd" let-even="even">
+                <StackLayout>
+                    <Label class="user-info2" text="   - {{currentSymptom[i].Name}}"></Label>
+                    <Slider minValue="0" maxValue="10" value="{{currentSymptom[i].NewValue}}" (valueChange)="valueChange(currentSymptom[i].Name, $event)"></Slider>
+                    <Button text="{{currentSymptom[i].NewValue}}"></Button>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+    </StackLayout>
+    
     <Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['../login']"></Button>
 </StackLayout>

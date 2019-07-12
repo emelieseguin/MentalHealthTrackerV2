@@ -4,6 +4,7 @@ import { Country, DataService, Symptom } from '../services/data.service';
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { RadCartesianChart } from "nativescript-ui-chart";
 import { Image } from "tns-core-modules/ui/image";
+import { StatAnalysisService } from "../services/stat-analysis.service";
 
 export class TestGraph {
     day: string
@@ -50,11 +51,16 @@ export class HomeComponent implements OnInit {
     private valuesHeadache: number[] = [1, 2, 3, 4, 5, 6, 7];
     private showHeadache = false;
 
-    constructor(private page: Page, private dataService: DataService) {
+    constructor(private page: Page, private dataService: DataService,
+        private stats: StatAnalysisService) {
         
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
+
+
+        console.log(this.stats.doStats());
+        console.log(this.stats.otherStats());
     }
 
     get categoricalSource(): ObservableArray<Country> {

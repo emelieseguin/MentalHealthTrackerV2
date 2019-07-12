@@ -11,9 +11,11 @@ import { ProfileEditComponent } from "./profile/edit/edit.component";
 import { DiagnosesComponent } from "./profile/edit/diagnoses/diagnoses.component";
 import { TreatmentsComponent } from "./profile/edit/treatments/treatments.component";
 import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
+import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 
 import { BackendService, FirebaseService, UtilsService } from "./services";
 import { LoginComponent } from "./login/login.component";
+import { StatAnalysisService } from "./services/stat-analysis.service";
 
 
 @NgModule({
@@ -24,11 +26,13 @@ import { LoginComponent } from "./login/login.component";
         BackendService,
         FirebaseService,
         UtilsService,
+        StatAnalysisService
     ],
     imports: [
         NativeScriptModule,
         AppRoutingModule,
         NativeScriptUIChartModule,
+        NativeScriptUIDataFormModule
         
     ],
     declarations: [

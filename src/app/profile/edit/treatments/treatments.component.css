@@ -4,3 +4,16 @@
     color: black;
     background-color: rgb(173, 173, 173);
 }
+.heading{
+    margin-top: 10;
+    margin-bottom: 0;
+    margin-left: 80;
+    color: black;
+    font-size: 26px;
+}
+.treatments{
+    color:black;
+    font-size:13;
+    margin-top: 6;
+    margin-bottom: 6;
+}
