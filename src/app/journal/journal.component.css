@@ -1,0 +1,44 @@
+.heading{
+    margin-top: 10;
+    margin-bottom: 20;
+    margin-left: 0;
+    text-align: center;
+    /* vertical-align: middle; */
+    color: black;
+    font-size: 26px;
+}
+
+.journal{
+    color: white;
+    margin-left: 20;
+    font-weight: bold;
+    font-size: 16;
+}
+.journal1{
+    color: white;
+    margin-left: 20;
+    font-weight: bold;
+    font-size: 16;
+    margin-top:-20;
+}
+.journal2{
+    color: white;
+    margin-left: 20;
+    margin-top:50;
+    margin-bottom:-35;
+    font-weight: bold;
+    font-size: 16;
+}
+.symptom{
+    color: black;
+    margin-left: 15;
+    margin-top: 10;
+    margin-bottom: 10;
+    font-size: 14;
+}
+.slider{
+    color: rgb(39, 94, 143);
+    background-color: rgb(39, 94, 143);
+    
+
+}

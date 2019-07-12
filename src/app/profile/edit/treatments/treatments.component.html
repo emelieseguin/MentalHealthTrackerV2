@@ -1,30 +1,44 @@
 <StackLayout class="profile-panel appBackgroundColor">
-                <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
+        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
                 <StackLayout>
-                        
+
                         <StackLayout orientation="horizontal">
-                        <Button   width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
-                        <Label class="heading"  text="Treatments"></Label>
+                                <Button width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
+                                <Label class="heading" text="Treatments"></Label>
                         </StackLayout>
 
                         <StackLayout>
-                        <RadDataForm [source]="treatmentCheckboxes">
-                                <TKEntityProperty tkDataFormProperty name="checkbox1" displayName="Treatment 1"></TKEntityProperty>
-                                <TKEntityProperty tkDataFormProperty name="checkbox2" displayName="Treatment 2"></TKEntityProperty>
-                        </RadDataForm>
-                        </StackLayout>
+                                <ListView height="300" [items]="userTreatments">
+                                        <ng-template let-treatment="item" let-i="index" let-odd="odd" let-even="even">
+                                                <StackLayout>
+                                                        <RadDataForm [source]="userTreatments[i]">
+                                                                <TKEntityProperty tkDataFormProperty name="undergoing" displayName="{{userTreatments[i].thing}}"></TKEntityProperty>
+                                                        </RadDataForm>
+                                                </StackLayout>
+                                        </ng-template>
+                                </ListView>
+
                         
-                        <Label class="treatments" text="None" ></Label>
-                        <Label class="treatments" text="Cognitive Behavioural Therapy (CBT)" ></Label>           
-                        <Label class="treatments" text="Mindfulness Meditation" ></Label>     
-                        <Label class="treatments" text="Interpersonal Therapy (IPT)" ></Label>      
-                        <Label class="treatments" text="Counselling" ></Label> 
-                        <Label class="treatments" text="Buspirone" ></Label> 
-                        <Label class="treatments" text="Selective Serotonin Reuptake Inhibitors (SSRIs)" ></Label>    
-                        <Label class="treatments" text="Serotonin and Norepinephrine Reuptake Inhibitors (SNRIs)" ></Label>        
-                        <Label class="treatments" text="Irreversible Monoamine Oxidase Inhibitors" ></Label>              
-                        <Label class="treatments" text="Benzodiazepines" ></Label>  
-                        <Label class="treatments" text="Tricyclics (TCAs)" ></Label>    
+
+                        </StackLayout>
+                        <RadDataForm [source]="userTreatments[1]">
+                                        <TKEntityProperty tkDataFormProperty name="undergoing" displayName="{{userTreatments[1].thing}}">
+                                        </TKEntityProperty>
+                        </RadDataForm>
+
+
+                        <!-- <Label class="treatments" text="None"></Label>
+                        <Label class="treatments" text="Cognitive Behavioural Therapy (CBT)"></Label>
+                        <Label class="treatments" text="Mindfulness Meditation"></Label>
+                        <Label class="treatments" text="Interpersonal Therapy (IPT)"></Label>
+                        <Label class="treatments" text="Counselling"></Label>
+                        <Label class="treatments" text="Buspirone"></Label>
+                        <Label class="treatments" text="Selective Serotonin Reuptake Inhibitors (SSRIs)"></Label>
+                        <Label class="treatments"
+                                text="Serotonin and Norepinephrine Reuptake Inhibitors (SNRIs)"></Label>
+                        <Label class="treatments" text="Irreversible Monoamine Oxidase Inhibitors"></Label>
+                        <Label class="treatments" text="Benzodiazepines"></Label>
+                        <Label class="treatments" text="Tricyclics (TCAs)"></Label> -->
                 </StackLayout>
-                </CardView>
-        </StackLayout>
+        </CardView>
+</StackLayout>

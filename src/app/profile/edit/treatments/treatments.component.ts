@@ -7,6 +7,28 @@ interface Checkbox {
     checkbox2: boolean
 }
 
+const Treatments : Treatment[] = [
+    {undergoing: true, thing: "None"},
+    {undergoing: true, thing: "Cognitive Behavioural Therapy (CBT)"},
+    {undergoing: true, thing: "Mindfulness Meditation"},
+    {undergoing: true, thing: "Interpersonal Therapy (IPT)"},
+    
+// TODO: Em do this
+
+    // "Counselling",
+    // "Buspirone",
+    // "Selective Serotonin Reuptake Inhibitors (SSRIs)",
+    // "Serotonin and Norepinephrine Reuptake Inhibitors (SNRIs)",
+    // "Irreversible Monoamine Oxidase Inhibitors",
+    // "Benzodiazepines",
+    // "Tricyclics (TCAs)"
+];
+
+class Treatment {
+    undergoing: boolean;
+    thing: string;
+}
+
 
 @Component({
     selector: "treatments",
@@ -16,6 +38,7 @@ interface Checkbox {
 export class TreatmentsComponent implements OnInit {
 
     private treatmentCheckboxes: Checkbox;
+    userTreatments = Treatments;
 
     constructor(private page: Page, private routerExtensions: RouterExtensions) {
         if (isAndroid) {

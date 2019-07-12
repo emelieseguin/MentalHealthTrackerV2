@@ -1,17 +1,34 @@
 <StackLayout class="home-panel appBackgroundColor">
-    <Label class="user-info-heading h2"  text="Journal" ></Label>
+    <Label class="journal2"  text="How many hours of sleep did you get last night?" ></Label>
+    <CardView class="cardStyleProfile" margin="50" height ="60" elevation="40" radius="40">
+        <AbsoluteLayout width="350" height="60">
+        <Slider left="10" top="0" width="220" class="slider" minValue="0" maxValue="16" value="0"></Slider> 
+        <Label  left ="250" top="8" class="symptom" text="#?"></Label>
+        <!-- Nate helppp idk how to make the number actually show up -->
+        </AbsoluteLayout>
+    </CardView>
+    <Label class="journal1"  text="Did you exercise today?" ></Label>
+    <Label class="journal"  text="Did you meditate today?" ></Label>
+    <Label class="journal"  text="Rate the following symptoms:" ></Label>
+<CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
+    <StackLayout>
+
 
     <StackLayout>
         <ListView height="250" [items]="currentSymptom">
             <ng-template let-symptom="item" let-i="index" let-odd="odd" let-even="even">
-                <StackLayout>
-                    <Label class="user-info2" text="   - {{currentSymptom[i].Name}}"></Label>
-                    <Slider minValue="0" maxValue="10" value="{{currentSymptom[i].NewValue}}" (valueChange)="valueChange(currentSymptom[i].Name, $event)"></Slider>
-                    <Button text="{{currentSymptom[i].NewValue}}"></Button>
-                </StackLayout>
+            <AbsoluteLayout width="350" height="210">
+                <Label left="10" top="10" width="125" textwrap="true" class="symptom" text="{{currentSymptom[i].Name}}"></Label>
+                <Slider left="140" top="10" width="180" class="slider" minValue="0" maxValue="10" value="{{currentSymptom[i].NewValue}}" (valueChange)="valueChange(currentSymptom[i].Name, $event)"></Slider>
+                <Label  left="320" top="18" width="90" class="symptom" text="{{currentSymptom[i].NewValue}}"></Label>
+                                            
+            </AbsoluteLayout>
             </ng-template>
         </ListView>
     </StackLayout>
     
-    <Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['../login']"></Button>
+</StackLayout>
+</CardView>
+
+<Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['../login']"></Button>
 </StackLayout>

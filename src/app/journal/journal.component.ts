@@ -24,6 +24,7 @@ export class Symptom {
     Name: string;
     Values?: Map<string, number>;
     Active: boolean;
+    GraphActive?: boolean;
     NewValue: number;
 }
 
@@ -49,7 +50,7 @@ export class JournalComponent implements OnInit {
             NewValue: 5,
         },
         {
-            Name: 'Apathy',
+            Name: 'Inability to cope with daily problems',
             Values: getApathyMap,
             Active: true,
             NewValue: 5,
