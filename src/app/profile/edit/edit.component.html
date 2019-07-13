@@ -5,9 +5,13 @@
             <Label left="40" top="25" class="heading"  text="Edit Information"></Label>
         </AbsoluteLayout>
     <StackLayout>
-    <Label class="edit-info-heading"  text="Name:" ></Label>
+    <Label class="edit-info-heading"  text="First Name:" ></Label>
             <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
-            <TextField  id="name" [text]="currentUser.name" (returnPress)="saveNameValue($event)" (blur)="saveNameValue($event)"></TextField>
+            <TextField  id="firstName" [text]="currentUser.firstName" (returnPress)="saveFirstNameValue($event)" (blur)="saveFirstNameValue($event)"></TextField>
+            </CardView>
+        <Label class="edit-info-heading"  text="Last Name:" ></Label>
+            <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
+            <TextField  id="lastName" [text]="currentUser.lastName" (returnPress)="saveLastNameValue($event)" (blur)="saveLastNameValue($event)"></TextField>
             </CardView>
     <Label class="edit-info-heading"  text="Age:" ></Label>
             <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
@@ -19,7 +23,7 @@
                 <TextField   id="sex" [text]="currentUser.sex" (returnPress)="saveSexValue($event)" (blur)="saveSexValue($event)" ></TextField>
                 </CardView>
 </StackLayout>
-<Label class="space" text=""></Label>  
+<!-- <Label class="space" text=""></Label>   -->
 <Label class="More"  text="More" ></Label>
 <DockLayout width = "330" stretchLastChild="false" margin="15">
         <Button dock="left"  width="150" height="40" class="button"  text="Treatments          >" [nsRouterLink]="['./treatments']"></Button>
@@ -27,5 +31,5 @@
 </DockLayout>
         
 <Label class="space1" text=""></Label>  
-<Button  height = "50"   class="saveButton" text="Save Changes" [nsRouterLink]="['../login']"></Button>
+<Button  height = "50"   class="saveButton" text="Save Changes" (tap)="saveToAppStore()" [nsRouterLink]="['../login']"></Button>
 </StackLayout>

@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { isAndroid, Page } from "tns-core-modules/ui/page/page";
 import { RouterExtensions } from "nativescript-angular/router";
 import { TextField } from "tns-core-modules/ui/text-field";
+import { AppStoreService } from "~/app/services/app-store.service";
+import { UserInfo } from "~/app/models/user-info.model";
 
 
 
@@ -20,16 +22,15 @@ export class User {
 export class ProfileEditComponent implements OnInit {
 
     textFieldValue: string = "test";
-    currentUser : User = {
-        name: 'test',
-        age: 22,
-        sex: 'unknown'
-    }
+    currentUser : UserInfo;
     
-    constructor(private page: Page, private routerExtensions: RouterExtensions) {
+    constructor(private page: Page, private routerExtensions: RouterExtensions,
+        private appStore: AppStoreService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
+
+        this.currentUser = appStore.userInfo
     }
 
     goBack(): void {
@@ -39,11 +40,18 @@ export class ProfileEditComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    saveNameValue(args): void {
+    saveFirstNameValue(args): void {
         let textField = <TextField>args.object;
 
-        console.log(`Old Name:  ${this.currentUser.name}   New Name: ${textField.text}`);
-        this.currentUser.name = textField.text;
+        console.log(`Old Name:  ${this.currentUser.firstName}   New Name: ${textField.text}`);
+        this.currentUser.firstName = textField.text;
+    }
+
+    saveLastNameValue(args): void {
+        let textField = <TextField>args.object;
+
+        console.log(`Old Name:  ${this.currentUser.lastName}   New Name: ${textField.text}`);
+        this.currentUser.lastName = textField.text;
     }
 
     saveAgeValue(args): void {
@@ -59,4 +67,14 @@ export class ProfileEditComponent implements OnInit {
         console.log(`Old Sex:  ${this.currentUser.sex}   New User: ${textField.text}`);
         this.currentUser.sex = textField.text;
     }
+
+    //TODO: this will also have to save to the database
+    // saveToAppStore() {
+    //     this.appStore.userInfoMap.firstName = this.currentUser.firstName;
+    //     this.appStore.userInfoMap.lastName = this.currentUser.lastName;
+    //     this.appStore.userInfoMap.sex = this.currentUser.sex;
+    //     this.appStore.userInfoMap.age = this.currentUser.age;
+
+    //     this.goBack();
+    // }
 }

@@ -5,6 +5,8 @@ import { FirebaseService } from '../services/firebase.service';
 import { prompt } from "tns-core-modules/ui/dialogs";
 import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 import { Page, isAndroid } from 'tns-core-modules/ui/page/page';
+import { AppStoreService } from '../services/app-store.service';
+import { DefaultUserService } from '../services/default-user.service';
 
 @Component({
   selector: 'login',
@@ -15,21 +17,31 @@ export class LoginComponent {
   user: User;
   isLoggingIn = true;
   isAuthenticating = false;
-
   
-  constructor(private firebaseService: FirebaseService, private page: Page, private routerExtensions: RouterExtensions) {
-            if (isAndroid) {
-                this.page.actionBarHidden = true;
-            }
-              this.user = new User();
-              this.user.email = "emelieseguin@gmail.com";
-              this.user.password = "password";
-              this.user.passwordOptions = new PasswordOptions();
-              this.user.passwordOptions.email = "emelieseguin@gmail.com";
-              this.user.passwordOptions.password = "password";
+  constructor(private firebaseService: FirebaseService, private page: Page, 
+    private routerExtensions: RouterExtensions, private appStore: AppStoreService,
+    private defaultUser: DefaultUserService) {
+  
+    if (isAndroid) {
+      this.page.actionBarHidden = true;
+    }
 
-              console.log('back to login');
-            }
+    this.appStore.userInfo = defaultUser.getNewUserInfo();
+    this.user = new User();
+
+    // TODO: read this from the input boxes, seems like this is actually needed for a weird reason
+    this.user.email = "emelieseguin@gmail.com";
+    this.user.password = "password";
+    this.user.passwordOptions = {
+      email: "emelieseguin@gmail.com",
+      password: "password"
+    };
+
+    this.appStore.userInfo.email = this.user.email;
+
+    // Set the user email from the loggin
+    console.log('back to login');
+  }
 
  
  submit() {
@@ -45,7 +57,6 @@ export class LoginComponent {
      this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = false;
-        console.log('done this...')
         this.routerExtensions.navigate(["/main/default"], { clearHistory: true } );
 
       })
@@ -66,25 +77,25 @@ export class LoginComponent {
       });
   }
 
-  forgotPassword() {
+//   forgotPassword() {
 
-    // prompt({
-    //   title: "Forgot Password",
-    //   message: "Enter the email address you used to register for Giftler to reset your password.",
-    //   defaultText: "",
-    //   okButtonText: "Ok",
-    //   cancelButtonText: "Cancel"
-    // }).then((data) => {
-    //   if (data.result) {
-    //     this.firebaseService.resetPassword(data.text.trim())
-    //       .then((result:any) => {
-    //         if(result){
-    //           alert(result);
-    //         }
-    //      });
-    //   }
-    // }); 
- }
+//     prompt({
+//       title: "Forgot Password",
+//       message: "Enter the email address you used to register for Giftler to reset your password.",
+//       defaultText: "",
+//       okButtonText: "Ok",
+//       cancelButtonText: "Cancel"
+//     }).then((data) => {
+//       if (data.result) {
+//         this.firebaseService.resetPassword(data.text.trim())
+//           .then((result:any) => {
+//             if(result){
+//               alert(result);
+//             }
+//          });
+//       }
+//     }); 
+//  }
   
 toggleDisplay() {
     this.isLoggingIn = !this.isLoggingIn;

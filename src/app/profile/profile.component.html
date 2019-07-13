@@ -22,9 +22,9 @@
                 <Label class="diagnoses-treatments" verticalAlignment="top" text="Diagnoses:" ></Label>
                 <ScrollView id="scroll" orientation="horizontal" >
                     <StackLayout>
-                        <ListView height="90" [items]="currentUser.diagnoses">
-                            <ng-template let-diag="item" let-i="index" let-odd="odd" let-even="even">
-                                <Label class="user-info2" text="   - {{currentUser.diagnoses[i]}}"></Label>
+                        <ListView height="90" [items]="currentUser.diagnoses" [itemTemplateSelector]="diagnosisSelector">
+                            <ng-template nsTemplateKey='true' let-diag="item">
+                                <Label class="user-info2" text="   - {{diag.name}}"></Label>
                             </ng-template>
                         </ListView>
                     </StackLayout>
@@ -35,10 +35,17 @@
                 <Label class="diagnoses-treatments" verticalAlignment="top" text="Treatments:" ></Label> 
                 <ScrollView id="scroll" orientation="horizontal">
                     <StackLayout>
-                        <ListView height="90" [items]="currentUser.treatments">
-                            <ng-template let-treatment="item" let-i="index" let-odd="odd" let-even="even">
-                                <Label class="user-info2" text="   - {{currentUser.treatments[i]}}"></Label>
-                            </ng-template>
+                        <ListView height="90" seperatorColor="transparent" [items]="currentUser.treatments" [itemTemplateSelector]="treatmentSelector">
+                                <ng-template nsTemplateKey='true' let-treatment="item">
+                                    <StackLayout>
+                                            <Label  class="user-info2" text="   - {{treatment.name}}"></Label>
+                                    </StackLayout>
+                                </ng-template> 
+                                <ng-template nsTemplateKey='false' let-treatment="item">
+                                    <StackLayout>
+                                            <Label  class="invisible" text=""></Label>
+                                    </StackLayout> 
+                                </ng-template> 
                         </ListView>
                     </StackLayout>
                 </ScrollView>
