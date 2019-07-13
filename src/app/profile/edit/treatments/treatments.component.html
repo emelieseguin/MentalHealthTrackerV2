@@ -1,46 +1,22 @@
 <StackLayout class="profile-panel appBackgroundColor">
+        <AbsoluteLayout height="80">
+                <Button   left="10" top="10" width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
+                <Label left="70" top="25" class="heading"  text="Treatments"></Label>
+        </AbsoluteLayout>
         <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
                 <StackLayout>
-
-                        <StackLayout orientation="horizontal">
-                                <Button width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
-                                <Label class="heading" text="Treatments"></Label>
-                        </StackLayout>
-
                         <StackLayout>
-                                <ListView height="300" [items]="userTreatments">
-                                        <ng-template let-treatment="item" let-i="index" let-odd="odd" let-even="even">
-                                                <StackLayout>
-                                                        <RadDataForm [source]="userTreatments[i]">
-                                                                <TKEntityProperty tkDataFormProperty name="undergoing" displayName="{{userTreatments[i].thing}}"></TKEntityProperty>
-                                                        </RadDataForm>
-                                                </StackLayout>
+                                <ListView height="400" [items]="userTreatments">
+                                        <ng-template let-treatment="item">
+                                                <AbsoluteLayout height="100" width="370">
+                                                        <!-- I think this works may need the index notation if it doesn't -->
+                                                        <Switch checked="{{treatment.undergoing}}" (checkedChange)="onCheckedChange(treatment.name,$event)" class="m-15"></Switch>
+                                                        <Label textwrap="true" left="50" top="10" width="300" class= "treatmentHeading" text="{{treatment.name}}"></Label>
+                                                </AbsoluteLayout>
                                         </ng-template>
                                 </ListView>
-
-                        
-
                         </StackLayout>
-                        <RadDataForm [source]="userTreatments[1]">
-                                        <TKEntityProperty tkDataFormProperty name="undergoing" displayName="{{userTreatments[1].thing}}">
-                                        </TKEntityProperty>
-                        </RadDataForm>
-
-
-                        <!-- <Label class="treatments" text="None"></Label>
-                        <Label class="treatments" text="Cognitive Behavioural Therapy (CBT)"></Label>
-                        <Label class="treatments" text="Mindfulness Meditation"></Label>
-                        <Label class="treatments" text="Interpersonal Therapy (IPT)"></Label>
-                        <Label class="treatments" text="Counselling"></Label>
-                        <Label class="treatments" text="Buspirone"></Label>
-                        <Label class="treatments" text="Selective Serotonin Reuptake Inhibitors (SSRIs)"></Label>
-                        <Label class="treatments"
-                                text="Serotonin and Norepinephrine Reuptake Inhibitors (SNRIs)"></Label>
-                        <Label class="treatments" text="Irreversible Monoamine Oxidase Inhibitors"></Label>
-                        <Label class="treatments" text="Benzodiazepines"></Label>
-                        <Label class="treatments" text="Tricyclics (TCAs)"></Label> -->
                 </StackLayout>
         </CardView>
         <Button  height = "50"   class="saveButton" text="Save Changes" [nsRouterLink]="[]"></Button>
-
 </StackLayout>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { isAndroid, Page } from "tns-core-modules/ui/page/page";
 import { RouterExtensions } from "nativescript-angular/router";
+import { Switch } from "tns-core-modules/ui/switch";
+import { EventData } from "tns-core-modules/data/observable";
 
 interface Checkbox {
     checkbox1: boolean
@@ -8,25 +10,22 @@ interface Checkbox {
 }
 
 const Treatments : Treatment[] = [
-    {undergoing: true, thing: "None"},
-    {undergoing: true, thing: "Cognitive Behavioural Therapy (CBT)"},
-    {undergoing: true, thing: "Mindfulness Meditation"},
-    {undergoing: true, thing: "Interpersonal Therapy (IPT)"},
-    
-// TODO: Em do this
-
-    // "Counselling",
-    // "Buspirone",
-    // "Selective Serotonin Reuptake Inhibitors (SSRIs)",
-    // "Serotonin and Norepinephrine Reuptake Inhibitors (SNRIs)",
-    // "Irreversible Monoamine Oxidase Inhibitors",
-    // "Benzodiazepines",
-    // "Tricyclics (TCAs)"
+    {undergoing: true, name: "None"},
+    {undergoing: false, name: "Cognitive Behavioural Therapy (CBT)"},
+    {undergoing: false, name: "Mindfulness Meditation"},
+    {undergoing: false, name: "Interpersonal Therapy (IPT)"},
+    {undergoing: false, name: "Counselling"},
+    {undergoing: false, name: "Buspirone"},
+    {undergoing: false, name: "Selective Serotonin Reuptake Inhibitors (SSRIs)"},
+    {undergoing: false, name: "Serotonin and Norepinephrine Reuptake Inhibitors (SNRIs)"},
+    {undergoing: false, name: "Irreversible Monoamine Oxidase Inhibitors"},
+    {undergoing: false, name: "Benzodiazepines"},
+    {undergoing: false, name: "Tricyclics (TCAs)"},
 ];
 
 class Treatment {
     undergoing: boolean;
-    thing: string;
+    name: string;
 }
 
 
@@ -56,5 +55,19 @@ export class TreatmentsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+    }
+
+    onCheckedChange(toggledTreatmentName:string, args: EventData): void {
+        let mySwitch = args.object as Switch;
+
+        this.userTreatments.forEach(element => {
+            if(element.name == toggledTreatmentName){
+                element.undergoing = mySwitch.checked;
+
+                console.log(`Name: ${element.name}  Undergoing: ${element.undergoing}`);
+            }
+        });
+
+        
     }
 }

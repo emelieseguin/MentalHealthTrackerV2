@@ -8,10 +8,12 @@
 .heading{
     margin-top: 10;
     margin-bottom: 0;
-    margin-left: 80;
-    color: black;
+    margin-left: 50;
+    color: white;
     font-size: 26px;
+    font-weight: bold;
 }
+
 .diagnoses{
     color:black;
     font-size:13;
@@ -23,3 +25,17 @@
     background-color: rgb(133, 221, 245);
     border-radius:10; 
     }
+
+.diagnosisHeading{
+    color: black;
+    margin-left: 15;
+    margin-top: 10;
+    margin-bottom: 10;
+    font-size: 14;
+}
+.diagnoses{
+    color:black;
+    font-size:13;
+    margin-top: 6;
+    margin-bottom: 6;
+}

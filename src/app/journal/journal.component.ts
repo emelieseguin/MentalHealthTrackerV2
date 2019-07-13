@@ -28,6 +28,13 @@ export class Symptom {
     NewValue: number;
 }
 
+export class DailyRecord {
+    sleep: number;
+    exercise: boolean;
+    meditation: boolean;
+    dailySymptoms: Symptom[];
+}
+
 @Component({
     selector: "journal",
     templateUrl: "./journal.component.html",
@@ -36,7 +43,10 @@ export class Symptom {
 export class JournalComponent implements OnInit {
 
     public sliderValue5 = 5;
-    public currentSymptom: Symptom[] = [
+
+    // TODO: this will have to get generated based on the user every day from the known info... Which symptoms to actually log
+    // Active won't be useful here, will have to be stored somewhere else so that this list can be generated!!!
+    public dailySymptoms: Symptom[] = [
         {
             Name: 'Fatigue',
             Values: getFatigueMap,
@@ -56,7 +66,13 @@ export class JournalComponent implements OnInit {
             NewValue: 5,
         }
     ];
-
+    public dailyRecord: DailyRecord = {
+        sleep: 8,
+        exercise: false,
+        meditation: false,
+        dailySymptoms: this.dailySymptoms
+    }
+    
     constructor(private page: Page) {
         if (isAndroid) {
             this.page.actionBarHidden = true; 
@@ -69,13 +85,18 @@ export class JournalComponent implements OnInit {
     valueChange(name:string, args) {
         let slider = <Slider>args.object;
 
-        this.currentSymptom.forEach(element => {
+        this.dailyRecord.dailySymptoms.forEach(element => {
             if(element.Name == name){
                 element.NewValue = slider.value;
-                console.log(`Name: ${name}, Value: ${slider.value}`); 
+                console.log(`Name: ${name}, Value: ${element.NewValue}`); 
             }
         });
+    }
 
-         
+    sleepValueChange(args) {
+        let slider = <Slider>args.object;
+
+        this.dailyRecord.sleep = slider.value;
+        console.log(`Hours of Sleep: ${this.dailyRecord.sleep }`); 
     }
 }

@@ -1,27 +1,22 @@
 <StackLayout class="profile-panel appBackgroundColor">
-        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
-        <StackLayout>
-                
-                <!-- <DockLayout stretchLastChild="false" margin-left="2" margin-top="2">
-                <Button dock="left"  width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
-                </DockLayout> -->
-                <StackLayout orientation="horizontal">
-                <Button   width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
-                <Label class="heading"  text="Diagnoses"></Label>
+        <AbsoluteLayout height="80">
+                <Button   left="10" top="10" width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
+                <Label left="70" top="25" class="heading"  text="Diagnoses"></Label>
+        </AbsoluteLayout>
+        <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
+                <StackLayout>
+                        <StackLayout>
+                                <ListView height="400" [items]="userDiagnoses">
+                                        <ng-template let-diagnosis="item">
+                                                <AbsoluteLayout height="100" width="370">
+                                                        <!-- I think this works may need the index notation if it doesn't -->
+                                                        <Switch checked="{{diagnosis.diagnosed}}" (checkedChange)="onCheckedChange(diagnosis.name,$event)" class="m-15"></Switch>
+                                                        <Label textwrap="true" left="50" top="10" width="300" class= "diagnosisHeading" text="{{diagnosis.name}}"></Label>
+                                                </AbsoluteLayout>
+                                        </ng-template>
+                                </ListView>
+                        </StackLayout>
                 </StackLayout>
-                <Label class="diagnoses" text="No formal diagnosis" ></Label>
-                <Label class="diagnoses" text="Generalized Anxiety Disorder (GAD)" ></Label>           
-                <Label class="diagnoses" text="Panic Disorder" ></Label>     
-                <Label class="diagnoses" text="Social Anxiety Disorder" ></Label>      
-                <Label class="diagnoses" text="Specific Phobias" ></Label> 
-                <Label class="diagnoses" text="Post-Traumatic Stress Disorder (PTSD)" ></Label> 
-                <Label class="diagnoses" text="Major Depression" ></Label>    
-                <Label class="diagnoses" text="Seasonal Affective Disorder (SAD)" ></Label>        
-                <Label class="diagnoses" text="Peripartum (Postpartum) Depression" ></Label>              
-                <Label class="diagnoses" text="Premenstrual Dysphoric Disorder (PMDD)" ></Label>  
-                <Label class="diagnoses" text="Atypical Depression" ></Label>    
-                <Label class="diagnoses" text="Persistent Depressive Disorder" ></Label>       
-        </StackLayout>
         </CardView>
         <Button  height = "50"   class="saveButton" text="Save Changes" [nsRouterLink]="[]"></Button>
 </StackLayout>
