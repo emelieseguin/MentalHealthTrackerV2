@@ -1,9 +1,9 @@
-<ActionBar class="action-bar" title="Login Page"></ActionBar>
+<!-- <ActionBar class="action-bar" title="Login Page"></ActionBar> -->
     <StackLayout class="card">
         <StackLayout [class]="isLoggingIn ? 'form white' : 'form gold'">
-            <TextField #email class="input input-border" hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false"
-                autocapitalizationType="none"></TextField>
-            <TextField #password class="input input-border" hint="Password" secure="true" [(ngModel)]="user.password"></TextField>
+            <!-- <TextField #email class="input input-border" hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" -->
+                <!-- autocapitalizationType="none"></TextField> -->
+            <!-- <TextField #password class="input input-border" hint="Password" secure="true" [(ngModel)]="user.password"></TextField> -->
             <Button [text]="isLoggingIn ? 'Login' : 'Register'" class="btn btn-primary" (tap)="submit()"></Button>
             <Button [text]="isLoggingIn ? 'Register' : 'Back to login'" (tap)="toggleDisplay()" class="btn"></Button>
             <Button horizontalAlignment="center" class="btn" text="Forgot password" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0"></Button>

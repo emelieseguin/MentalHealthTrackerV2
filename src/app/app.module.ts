@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 
+
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
@@ -13,16 +14,17 @@ import { TreatmentsComponent } from "./profile/edit/treatments/treatments.compon
 import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular";
 import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 import { TNSCheckBoxModule } from 'nativescript-checkbox/angular';
-
+import { MainComponent} from './main/main.component'
 
 import { BackendService, FirebaseService, UtilsService } from "./services";
 import { LoginComponent } from "./login/login.component";
 import { StatAnalysisService } from "./services/stat-analysis.service";
-
+import { MainRoutingModule } from "./main/main-routing.module";
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 @NgModule({
     bootstrap: [
-        AppComponent
+        AppComponent 
     ],
     providers: [
         BackendService,
@@ -33,20 +35,10 @@ import { StatAnalysisService } from "./services/stat-analysis.service";
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativeScriptUIChartModule,
-        NativeScriptUIDataFormModule,
-        TNSCheckBoxModule
-        
     ],
     declarations: [
         AppComponent,
-        HomeComponent,
-        JournalComponent,
-        ProfileComponent,
-        ProfileEditComponent,
-        DiagnosesComponent,
-        TreatmentsComponent,
-        LoginComponent
+        LoginComponent,
     ],
     schemas: [
         NO_ERRORS_SCHEMA

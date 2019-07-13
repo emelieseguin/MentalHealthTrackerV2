@@ -106,9 +106,7 @@ export class AppComponent implements OnInit {
     //         );
     //   }
 
-    onSelectedIndexChanged(args: SelectedIndexChangedEventData): void {
-        console.log(`Selected index has changed ( Old index: ${args.oldIndex} New index: ${args.newIndex} )`);
-    }
+    
 
     // ngOnDestory(){
     //     firebase.

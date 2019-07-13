@@ -1,7 +1,1 @@
-<!-- <page-router-outlet></page-router-outlet> -->
-
-<TabView androidTabsPosition="top" selectedIndex="0" (selectedIndexChanged)="onSelectedIndexChanged($event)">
-    <page-router-outlet *tabItem="{title: 'Home'}" name="home"></page-router-outlet>
-    <page-router-outlet *tabItem="{title: 'Journal'}" name="journal"></page-router-outlet>
-    <page-router-outlet *tabItem="{title: 'Profile'}" name="profile"></page-router-outlet>
-</TabView>
+<page-router-outlet actionBarVisibility="never"></page-router-outlet>
