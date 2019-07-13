@@ -1,17 +1,18 @@
 <StackLayout class="home-panel appBackgroundColor">
     <Label class="journal2"  text="How many hours of sleep did you get last night?" ></Label>
-    <CardView class="cardStyleProfile" margin="20" height ="60" elevation="40" radius="40">
-        <AbsoluteLayout width="400" height="60">
-        <Slider left="10" top="0" width="300" class="slider" minValue="0" maxValue="16" value="{{dailyRecord.sleep}}" (valueChange)="sleepValueChange($event)"></Slider> 
-        <Label  left ="320" top="8" class="symptom" text="{{dailyRecord.sleep}}"></Label>
-        <!-- Nate helppp idk how to make the number actually show up -->
+    <CardView class="cardStyleProfile" height ="45" width="330" elevation="40" radius="40">
+        <AbsoluteLayout width="400" height="45">
+        <Slider left="10" top="-5" width="250" class="slider" minValue="0" maxValue="16" value="{{dailyRecord.sleep}}" (valueChange)="sleepValueChange($event)"></Slider> 
+        <Label  left ="270" top="3" class="symptom" text="{{dailyRecord.sleep}}"></Label>
         </AbsoluteLayout>
     </CardView>
 
     <Label class="space" text=""></Label>
+    <Label class="space" text=""></Label>
+
     <AbsoluteLayout height="50" width="420">
         <Label class="journal1" top="0" width="300" text="Did you exercise today?" ></Label>
-        <CardView left="270" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
+        <CardView left="225" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
             <StackLayout orientation="horizontal">
                 <Label class="no" text = " No"></Label>
                 <Switch  checked="false" (checkedChange)="onCheckedChange($event)"></Switch>
@@ -23,7 +24,7 @@
 
     <AbsoluteLayout height="50" width="420">
         <Label class="journal3" top="10" width="300" text="Did you meditate today?" ></Label>
-        <CardView left="270" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
+        <CardView left="225" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
             <StackLayout orientation="horizontal">
                 <Label class="no" text = " No"></Label>
                 <Switch  checked="false" (checkedChange)="onCheckedChange($event)"></Switch>
@@ -34,8 +35,8 @@
     <Label class="space" text=""></Label>
 
     <AbsoluteLayout width="400" height="40">
-        <Label left="-7" top="10" class="journal"  text="Rate the following symptoms:" ></Label>
-        <Button  height = "40" width="60" color= "#23495F" left="325" top="0" class="button" text="Edit" [nsRouterLink]="['../login']"></Button>
+        <Label left="0" top="10" class="journal"  text="Rate the following symptoms:" ></Label>
+        <Button  height = "40" width="60" color= "#23495F" left="290" top="0" class="button" text="Edit" [nsRouterLink]="['../login']"></Button>
         <!-- not going to the right link for now -->
     </AbsoluteLayout>
 
@@ -48,9 +49,9 @@
             
             <AbsoluteLayout width="350" height="210">
                     
-                <Label left="10" top="10" width="125" textwrap="true" class="symptom" text="{{symptom.Name}}"></Label>
-                <Slider left="140" top="10" width="180" class="slider" minValue="0" maxValue="10" value="{{symptom.NewValue}}" (valueChange)="valueChange(symptom.Name, $event)"></Slider>
-                <Label  left="320" top="18" width="90" class="symptom" text="{{symptom.NewValue}}"></Label>                                   
+                <Label left="0" top="5" width="125" textwrap="true" class="symptom" text="{{symptom.Name}}"></Label>
+                <Slider left="120" top="5" width="180" class="slider" minValue="0" maxValue="10" value="{{symptom.NewValue}}" (valueChange)="valueChange(symptom.Name, $event)"></Slider>
+                <Label  left="300" top="13" width="90" class="symptom" text="{{symptom.NewValue}}"></Label>                                   
         </AbsoluteLayout>
             </ng-template>
         </ListView>

@@ -5,17 +5,15 @@
         </AbsoluteLayout>
         <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
                 <StackLayout>
-                        <StackLayout>
-                                <ListView height="400" [items]="userTreatments">
-                                        <ng-template let-treatment="item">
-                                                <AbsoluteLayout height="100" width="370">
-                                                        <!-- I think this works may need the index notation if it doesn't -->
-                                                        <Switch checked="{{treatment.undergoing}}" (checkedChange)="onCheckedChange(treatment.name,$event)" class="m-15"></Switch>
-                                                        <Label textwrap="true" left="50" top="10" width="300" class= "treatmentHeading" text="{{treatment.name}}"></Label>
-                                                </AbsoluteLayout>
-                                        </ng-template>
-                                </ListView>
-                        </StackLayout>
+                        <ListView height="418" [items]="userTreatments">
+                                <ng-template let-treatment="item">
+                                        <AbsoluteLayout height="100" width="370">
+                                                <!-- I think this works may need the index notation if it doesn't -->
+                                                <Switch checked="{{treatment.undergoing}}" (checkedChange)="onCheckedChange(treatment.name,$event)" class="m-15"></Switch>
+                                                <Label textwrap="true" left="50" top="10" width="260" class= "treatmentHeading" text="{{treatment.name}}"></Label>
+                                        </AbsoluteLayout>
+                                </ng-template>
+                        </ListView>
                 </StackLayout>
         </CardView>
         <Button  height = "50"   class="saveButton" text="Save Changes" [nsRouterLink]="[]"></Button>

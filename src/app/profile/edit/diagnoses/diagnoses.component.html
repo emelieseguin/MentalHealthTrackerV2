@@ -6,12 +6,12 @@
         <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30">
                 <StackLayout>
                         <StackLayout>
-                                <ListView height="400" [items]="userDiagnoses">
+                                <ListView height="418" [items]="userDiagnoses">
                                         <ng-template let-diagnosis="item">
                                                 <AbsoluteLayout height="100" width="370">
                                                         <!-- I think this works may need the index notation if it doesn't -->
                                                         <Switch checked="{{diagnosis.diagnosed}}" (checkedChange)="onCheckedChange(diagnosis.name,$event)" class="m-15"></Switch>
-                                                        <Label textwrap="true" left="50" top="10" width="300" class= "diagnosisHeading" text="{{diagnosis.name}}"></Label>
+                                                        <Label textwrap="true" left="50" top="10" width="260" class= "diagnosisHeading" text="{{diagnosis.name}}"></Label>
                                                 </AbsoluteLayout>
                                         </ng-template>
                                 </ListView>
