@@ -1,11 +1,35 @@
 <!-- <ActionBar class="action-bar" title="Login Page"></ActionBar> -->
-    <StackLayout class="card">
+    <StackLayout class="appBackgroundColor2">
         <StackLayout [class]="isLoggingIn ? 'form white' : 'form gold'">
+            <Image src="~/app/images/background4.jpg" stratch="Fill" class="image"> </Image>
+            <Label horizontalAlignment= "center" text="Mental Health Tracker" class="title"></Label>
+            <Label text="A daily commitment to you and your well being." class="statement"></Label>
+
+            <AbsoluteLayout width="310">
+            <Label left="10" top="10" text="Email:" class="label"></Label>
+            <Cardview  left="90" margin="0" height= "35" class="textInput" width="250">
+                    <TextField class="loginText" text="Enter email here"></TextField> 
+            </Cardview>
+            </AbsoluteLayout>
+
+            <Label text=" " class="space2"></Label>
+
+            <AbsoluteLayout width="310">
+                <Label left="10" top="10" text="Password:" class="label"></Label>
+                <Cardview left="90"  margin="0" height= "35" class="textInput" width="250">
+                        <TextField class="loginText" text="Enter password here"></TextField> 
+                </Cardview>
+            </AbsoluteLayout>
+            <Label text=" " class="space"></Label>
+
+            
+            </StackLayout>
             <!-- <TextField #email class="input input-border" hint="Email Address" keyboardType="email" [(ngModel)]="user.email" autocorrect="false" -->
                 <!-- autocapitalizationType="none"></TextField> -->
             <!-- <TextField #password class="input input-border" hint="Password" secure="true" [(ngModel)]="user.password"></TextField> -->
-            <Button [text]="isLoggingIn ? 'Login' : 'Register'" class="btn btn-primary" (tap)="submit()"></Button>
-            <Button [text]="isLoggingIn ? 'Register' : 'Back to login'" (tap)="toggleDisplay()" class="btn"></Button>
-            <Button horizontalAlignment="center" class="btn" text="Forgot password" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0"></Button>
+            <Button width="250" [text]="isLoggingIn ? 'Login' : 'Register'" class="button" (tap)="submit()"></Button>
+            <AbsoluteLayout orientation=horizontal>
+                <Button left="20" height="35" width="155" [text]="isLoggingIn ? 'Register' : 'Back to login'" (tap)="toggleDisplay()" class="button2"></Button>
+                <Button left="185" height="35" width="155" class="button2" text="Forgot password?" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0"></Button>
+            </AbsoluteLayout>
         </StackLayout>
-   </StackLayout>

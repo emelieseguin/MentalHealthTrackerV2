@@ -1,0 +1,56 @@
+.image{
+    width: 400;
+}
+.title{
+    font-size:32;
+
+    /* margin-bottom: 30; */
+    margin-top:18;
+    color: #ffffff;
+    background-color: rgb(19,48,62);
+}
+.backgroundColor{
+    color: rgb(19,48,62);
+}
+.space{
+    font-size:16;
+}
+.space2{
+    font-size: 16;
+}
+.statement{
+    font-size: 14;
+    color: white;
+    margin-bottom: 50;
+    margin-left: 25;
+}
+.button{
+    color:  rgb(19,48,62);
+    background-color: #75B9C2;
+    margin-left: 20;
+    margin-right: 20;
+    margin-top: 20;
+    margin-bottom: 15;
+    border-radius: 15;
+    height: 40;
+}
+.button2{
+    color:  rgb(19,48,62);
+    background-color:  rgb(226, 246, 248);
+    border-radius: 15;
+    height: 40;
+    font-size: 12;
+    padding: 0;
+}
+
+.label{
+    font-size: 14;
+    color: white;
+    font-weight: bold;
+    /* margin-left: 25; */
+    margin-bottom: 5;
+}
+.loginText{
+    font-size: 14;
+    width: 218;
+}

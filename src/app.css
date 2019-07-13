@@ -20,5 +20,13 @@ components that have the btn class name.
 }
 
 .appBackgroundColor {
-    background-color: #23495F;
+    /* background-color: #23495F; */
+    background-color:rgb(19,48,62);
 }
+.appBackgroundColor2 {
+    background-color:rgb(19,48,62);
+}
+.textInput{
+    background-color:  rgb(226, 246, 248);
+}
+
