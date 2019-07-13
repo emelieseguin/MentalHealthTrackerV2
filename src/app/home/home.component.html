@@ -35,6 +35,21 @@
                 </RadCartesianChart>
             </StackLayout>
         </CardView>
+        <!-- <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
+            <StackLayout class="home-panel">
+                    <Label class="select" text="Select symptoms to plot above."></Label>
+                    <ListView height="400" [items]="userSymptoms">
+                            <ng-template let-symptom="item">
+                                    <AbsoluteLayout height="100" width="370">
+                                            This isn't working right now, need to add stuff to TS file
+                                            <Switch checked="{{symptom.dailySymptoms}}" (checkedChange)="onCheckedChange($event)" ></Switch>
+                                            <Label textwrap="true" left="50" top="10" width="300" text="{{symptom.dailySymptoms.seriesName}}"></Label>
+                                    </AbsoluteLayout>
+                            </ng-template>
+                    </ListView>
+            </StackLayout>
+        </CardView> -->
+
     </StackLayout>
     </Scrollview>
 </GridLayout>
