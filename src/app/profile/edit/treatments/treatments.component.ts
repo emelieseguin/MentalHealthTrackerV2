@@ -28,7 +28,7 @@ const Treatments : Treatment[] = [
 })
 export class TreatmentsComponent implements OnInit {
 
-    userTreatments = Treatments;
+    userTreatments : Treatment[];
 
     constructor(private page: Page, private routerExtensions: RouterExtensions,
         private appStore: AppStoreService) {
@@ -36,7 +36,7 @@ export class TreatmentsComponent implements OnInit {
             this.page.actionBarHidden = true;
         }
 
-        
+        this.userTreatments = this.appStore.userInfo.treatments;
     }
 
     goBack(): void {

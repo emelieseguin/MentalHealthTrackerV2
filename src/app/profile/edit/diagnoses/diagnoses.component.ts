@@ -4,6 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { Switch } from "tns-core-modules/ui/switch";
 import { EventData } from "tns-core-modules/data/observable";
 import { Diagnosis } from "~/app/models/user-info.model";
+import { AppStoreService } from "~/app/services/app-store.service";
 
 
 const Diagnoses : Diagnosis[] = [
@@ -32,10 +33,13 @@ export class DiagnosesComponent implements OnInit {
 
     userDiagnoses = Diagnoses;
 
-    constructor(private page: Page, private routerExtensions: RouterExtensions) {
+    constructor(private page: Page, private routerExtensions: RouterExtensions,
+        private appStore: AppStoreService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
+
+        this.userDiagnoses = this.appStore.userInfo.diagnoses;
     }
 
     goBack(): void {
@@ -53,8 +57,8 @@ export class DiagnosesComponent implements OnInit {
 
                 console.log(`Name: ${element.name}  Diagnosed: ${element.diagnosed}`);
             }
-        });
-
-        
+        });        
     }
+
+
 }
