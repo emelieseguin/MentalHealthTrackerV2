@@ -3,6 +3,8 @@ import { isAndroid, Page } from "tns-core-modules/ui/page/page";
 import { RouterExtensions } from "nativescript-angular/router";
 import { Switch } from "tns-core-modules/ui/switch";
 import { EventData } from "tns-core-modules/data/observable";
+import { Diagnosis } from "~/app/models/user-info.model";
+
 
 const Diagnoses : Diagnosis[] = [
     {diagnosed: true, name: "No formal diagnosis"},
@@ -19,10 +21,7 @@ const Diagnoses : Diagnosis[] = [
     {diagnosed: false, name: "Persistent Depressive Disorder"}
 ];
 
-class Diagnosis {
-    diagnosed: boolean;
-    name: string;
-}
+
 
 @Component({
     selector: "diagnoses",

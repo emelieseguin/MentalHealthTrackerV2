@@ -3,11 +3,9 @@ import { isAndroid, Page } from "tns-core-modules/ui/page/page";
 import { RouterExtensions } from "nativescript-angular/router";
 import { Switch } from "tns-core-modules/ui/switch";
 import { EventData } from "tns-core-modules/data/observable";
+import { Treatment } from "~/app/models/user-info.model";
+import { AppStoreService } from "~/app/services/app-store.service";
 
-interface Checkbox {
-    checkbox1: boolean
-    checkbox2: boolean
-}
 
 const Treatments : Treatment[] = [
     {undergoing: true, name: "None"},
@@ -23,12 +21,6 @@ const Treatments : Treatment[] = [
     {undergoing: false, name: "Tricyclics (TCAs)"},
 ];
 
-class Treatment {
-    undergoing: boolean;
-    name: string;
-}
-
-
 @Component({
     selector: "treatments",
     templateUrl: "./treatments.component.html",
@@ -36,18 +28,15 @@ class Treatment {
 })
 export class TreatmentsComponent implements OnInit {
 
-    private treatmentCheckboxes: Checkbox;
     userTreatments = Treatments;
 
-    constructor(private page: Page, private routerExtensions: RouterExtensions) {
+    constructor(private page: Page, private routerExtensions: RouterExtensions,
+        private appStore: AppStoreService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
 
-        this.treatmentCheckboxes = {
-            checkbox1: true,
-            checkbox2: true
-        };
+        
     }
 
     goBack(): void {

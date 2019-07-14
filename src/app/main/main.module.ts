@@ -14,6 +14,7 @@ import { NativeScriptRouterModule, NSEmptyOutletComponent } from "nativescript-a
 import { NativeScriptUIChartModule } from "nativescript-ui-chart/angular/chart-directives";
 import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular/dataform-directives";
 import { TNSCheckBoxModule } from "nativescript-checkbox/angular";
+import { DefaultUserService } from "../services/default-user.service";
 
 @NgModule({
     imports: [
@@ -54,6 +55,9 @@ import { TNSCheckBoxModule } from "nativescript-checkbox/angular";
     ],
     schemas: [
         NO_ERRORS_SCHEMA
+    ],
+    providers: [
+         
     ]
 })
 export class MainModule { }

@@ -11,20 +11,41 @@ import * as firebase from "nativescript-plugin-firebase";
 
 @Injectable()
 export class FirebaseService {
-  constructor(
-    private ngZone: NgZone,
-    private utils: UtilsService
-  ){}
-    
+
   items: BehaviorSubject<Array<Gift>> = new BehaviorSubject([]);
   
   private _allItems: Array<Gift> = [];
+
+  constructor(private ngZone: NgZone, private utils: UtilsService){ }
+ 
+  // Log the user in
+  login(user: User) {
+    return firebase.login({
+
+      type: firebase.LoginType.PASSWORD,
+      passwordOptions: user
+
+    }).then(
+      (result: any) => {
+        console.log("I am logged in");
+          BackendService.token = result.uid;
+          return JSON.stringify(result);
+      }, 
+      (errorMessage: any) => {
+        alert(errorMessage);
+      });
+  }
+
+  logout(){
+    BackendService.token = "";
+    firebase.logout();    
+  }
   
   register(user: User) {
     console.log('trying to actually register')
     return firebase.createUser({
-      email: user.email,
-      password: user.password
+      email: user.passwordOptions.email,
+      password: user.passwordOptions.password
     }).then(
           function (result:any) {       
             return JSON.stringify(result);
@@ -35,24 +56,7 @@ export class FirebaseService {
       )
   }
 
-  // Log the user in
-  login(user: User) {
-    return firebase.login({
-      type: firebase.LoginType.PASSWORD,
-      passwordOptions: user
-    }).then((result: any) => {
-        console.log("I am logged in");
-          BackendService.token = result.uid;
-          return JSON.stringify(result);
-      }, (errorMessage: any) => {
-        alert(errorMessage);
-      });
-  }
 
-  logout(){
-    BackendService.token = "";
-    firebase.logout();    
-  }
   
 //   resetPassword(email) {  /// will have to work on the reset password later!!
 //     return firebase.resetPassword({

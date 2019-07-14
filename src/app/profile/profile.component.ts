@@ -1,45 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { isAndroid, Page, EventData } from "tns-core-modules/ui/page/page";
-
-class PersonInfo {
-    firstName: string;
-    lastName: string;
-    age: number;
-    sex: string;
-    email: string;
-    diagnoses: string[];
-    treatments: string[];
-}
-
-const FakePerson: PersonInfo = {
-    firstName: 'John',
-    lastName: 'Smith',
-    age: 31,
-    sex: 'Male',
-    email: 'john.smith@email.com',
-    diagnoses: [
-        'Generalized Anxiety Disorder (GAD)',
-        'Seasonal Affective Disorder (SAD)',
-        'Generalized Anxiety Disorder (GAD)3',
-        'Generalized Anxiety Disorder (GAD)5',
-        'Generalized Anxiety Disorder (GAD)6',
-        'Generalized Anxiety Disorder (GAD)7',
-        'Generalized Anxiety Disorder (GAD)8',
-    ],
-    treatments: [
-        'Mindfulness Meditation',
-        'Counselling',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-        'Mindfulness Meditation',
-    ]
-}
+import { DefaultUserService } from "../services/default-user.service";
+import { AppStoreService } from "../services/app-store.service";
+import { UserInfo, Treatment } from "../models/user-info.model";
 
 @Component({
     selector: "profile",
@@ -47,15 +10,42 @@ const FakePerson: PersonInfo = {
     styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-    currentUser: PersonInfo;
+    currentUser: UserInfo;
+    currentActiveTreatments: string[];
 
-    constructor(private page: Page) {
+    constructor(private page: Page, private defaultUserService: DefaultUserService,
+        private appStore: AppStoreService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
-        this.currentUser = FakePerson;
+        this.currentUser = appStore.userInfo;
+    }
+
+    getActiveTreatments() {
+
+        this.currentUser.treatments.forEach(element => {
+            if(element.undergoing){
+                
+            }
+        });
+
+        // this.currentActiveTreatments = 
+    };
+
+    treatmentSelector(item: Treatment, index: number, items: Treatment[]){
+        console.log(item.name);
+        if(item.undergoing){
+            // console.log('here once');
+            return 'true';
+            
+        } else{
+            // console.log('i failed');
+            return 'false';
+            
+        }
     }
 
     ngOnInit(): void {
+
     }
 }
