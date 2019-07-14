@@ -6,21 +6,6 @@ import { EventData } from "tns-core-modules/data/observable";
 import { Treatment } from "~/app/models/user-info.model";
 import { AppStoreService } from "~/app/services/app-store.service";
 
-
-const Treatments : Treatment[] = [
-    {undergoing: true, name: "None"},
-    {undergoing: false, name: "Cognitive Behavioural Therapy (CBT)"},
-    {undergoing: false, name: "Mindfulness Meditation"},
-    {undergoing: false, name: "Interpersonal Therapy (IPT)"},
-    {undergoing: false, name: "Counselling"},
-    {undergoing: false, name: "Buspirone"},
-    {undergoing: false, name: "Selective Serotonin Reuptake Inhibitors (SSRIs)"},
-    {undergoing: false, name: "Serotonin and Norepinephrine Reuptake Inhibitors (SNRIs)"},
-    {undergoing: false, name: "Irreversible Monoamine Oxidase Inhibitors"},
-    {undergoing: false, name: "Benzodiazepines"},
-    {undergoing: false, name: "Tricyclics (TCAs)"},
-];
-
 @Component({
     selector: "treatments",
     templateUrl: "./treatments.component.html",
@@ -56,7 +41,5 @@ export class TreatmentsComponent implements OnInit {
                 console.log(`Name: ${element.name}  Undergoing: ${element.undergoing}`);
             }
         });
-
-        
     }
 }

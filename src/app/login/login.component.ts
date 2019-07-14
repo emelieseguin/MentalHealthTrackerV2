@@ -26,10 +26,22 @@ export class LoginComponent {
       this.page.actionBarHidden = true;
     }
 
-    this.appStore.userInfo = defaultUser.getNewUserInfo();
-    this.user = new User();
+    // TODO: here we can check whether the user has any sort of entries
+    // for this info.. If they don't use the defaults that have
+    // been made for them
 
+    console.log();
+    console.log();
+
+    // TODO: pull or just use the generic list of symptoms
+    this.appStore.symptoms = defaultUser.getDefaultSymptoms();
+
+    this.appStore.userInfo = defaultUser.getNewUserInfo();
+    this.appStore.journalEntries = defaultUser.getDefaultJournalEntries(this.appStore.symptoms);
+    
+    
     // TODO: read this from the input boxes, seems like this is actually needed for a weird reason
+    this.user = new User();
     this.user.email = "emelieseguin@gmail.com";
     this.user.password = "password";
     this.user.passwordOptions = {
@@ -38,7 +50,6 @@ export class LoginComponent {
     };
 
     this.appStore.userInfo.email = this.user.email;
-
     // Set the user email from the loggin
     console.log('back to login');
   }
