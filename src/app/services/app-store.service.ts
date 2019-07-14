@@ -1,9 +1,12 @@
 import { Injectable } from "@angular/core";
 import * as appSettings from "tns-core-modules/application-settings";
-import { UserInfo, UserInfoMap } from "../models/user-info.model";
+import { UserInfo } from "../models/user-info.model";
+import { JournalEntries } from "../models/journal.model";
 
 @Injectable()
 export class AppStoreService {
     
     userInfo: UserInfo;
+    journalEntries: JournalEntries;
+    symptoms: Map<string, number>;
 }

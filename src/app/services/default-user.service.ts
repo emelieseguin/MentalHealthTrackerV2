@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import * as appSettings from "tns-core-modules/application-settings";
 import { UserInfo } from "../models/user-info.model";
+import { JournalEntries, JournalEntry } from "../models/journal.model";
+import { UtilsService } from "./utils.service";
 
 const DefaultUserInfo: UserInfo = {
     firstName: 'n/a',
@@ -37,10 +39,50 @@ const DefaultUserInfo: UserInfo = {
     ]
 };
 
+let DefaultEntry: JournalEntry = {
+  hoursSleep: 8,
+  exercise: false,
+  meditate: false,
+  symptoms: new Map<string, number>()
+}
+
+let DefaultJournalEntries: JournalEntries = {
+  entries: new Map<string, JournalEntry>()
+}
+
 @Injectable()
 export class DefaultUserService {
+
+  constructor(private utils: UtilsService){
+  }
   
   getNewUserInfo(): UserInfo {
     return DefaultUserInfo;
+  }
+
+  getDefaultJournalEntry(userSymptoms: Map<string, number>): JournalEntry {
+    let entry = DefaultEntry;
+    // could also just pull this from the actual app store and not pass through
+    entry.symptoms = userSymptoms;
+    return 
+  }
+
+  // Pass in the list of user symptoms that are to be tracked
+  getDefaultJournalEntries(userSymptoms: Map<string, number>): JournalEntries {
+    DefaultEntry[this.utils.getCurrentDateKey()] = this.getDefaultJournalEntry(userSymptoms);
+    return DefaultJournalEntries;
+  }
+
+  getDefaultSymptoms(): Map<string, number> {
+    let symptoms = new Map<string, number>();
+        symptoms['Fatigue'] = 0;
+        symptoms['Feeling sad or down'] = 0;
+        symptoms['Inability to concentrate'] = 0;0
+        symptoms['Mood swings'] = 0;
+        symptoms['Irritability'] = 0;
+        symptoms['Headache'] = 0;
+        symptoms['Apathy'] = 0;
+        symptoms['Lack of motivation'] = 0;
+    return symptoms;
   }
 }
