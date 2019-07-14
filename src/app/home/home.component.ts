@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, EventEmitter } from "@angular/core";
 import { AsyncPipe } from "@angular/common";
 import { isAndroid, Page } from "tns-core-modules/ui/page/page";
 import { Country, DataService, Symptom } from '../services/data.service';
@@ -60,6 +60,18 @@ export class HomeComponent implements OnInit {
     public userJournalEntries: Map<string, JournalEntry>;
     public dataSeries: Array<DataSeries>;
 
+    // First series to plot
+    public series1Values: ObservableArray<GraphValuePair>;
+    public series1Name: string;
+
+    // Second series to plot
+    public series2Values: ObservableArray<GraphValuePair>;
+    public series2Name: string;
+
+    // Second series to plot
+    public series3Values: ObservableArray<GraphValuePair>;
+    public series3Name: string;
+
     constructor(private page: Page, private dataService: DataService, private routerExtensions: RouterExtensions,
         private stats: StatAnalysisService, private appStore: AppStoreService) {
         
@@ -70,6 +82,8 @@ export class HomeComponent implements OnInit {
         this.userJournalEntries = this.appStore.journalEntries.entries;
         this.userTrackedSymptoms = this.appStore.symptoms;
         this.userGraphedSymptoms = this.appStore.graphedSymptoms;
+
+        this.updateSeries();
 
         console.log(this.stats.doStats());
         console.log(this.stats.otherStats());
@@ -87,7 +101,8 @@ export class HomeComponent implements OnInit {
     onGraphedSymptomChange(symptomName: string, args) {
         let mySwitch = args.object as Switch;
         this.userGraphedSymptoms[symptomName] = mySwitch.checked;
-        this.dataSeries = this.updateGraphableSeries();
+        // this.dataSeries = this.updateGraphableSeries();
+        this.updateSeries();
         console.log(`Graphed Symptom value: ${symptomName}  ---- ${this.appStore.graphedSymptoms[symptomName]}`)
     }
 
@@ -139,6 +154,70 @@ export class HomeComponent implements OnInit {
          
         return graphValues
     }
+
+    updateSeries() {
+        let count = 0;
+        let seriesCount = 0;
+        
+        // Loop around the symptoms that are needed to be graphed
+        this.userTrackedSymptoms.forEach(symptomName => {
+            
+            // If this symptom is to be graphed
+            if(this.userGraphedSymptoms[symptomName] && seriesCount == 0){
+
+                console.log(`First symptom: ${symptomName}`)
+                this.series1Name = symptomName;
+                this.series1Values = new ObservableArray( this.getGraphValuesFromEntries(symptomName));
+                seriesCount++;
+            } else if(this.userGraphedSymptoms[symptomName] && seriesCount == 1){
+
+                console.log(`Second symptom: ${symptomName}`)
+                this.series2Name = symptomName;
+                this.series2Values = new ObservableArray( this.getGraphValuesFromEntries(symptomName));
+                seriesCount++;
+            } else if(this.userGraphedSymptoms[symptomName] && seriesCount == 2){
+
+                console.log(`Third symptom: ${symptomName}`)
+                this.series3Name = symptomName;
+                this.series3Values = new ObservableArray( this.getGraphValuesFromEntries(symptomName));
+                seriesCount++;
+            }
+            count++;
+        });
+
+        if(seriesCount == 0) {
+            this.series1Name = 'blank';
+            this.series1Values = new ObservableArray([
+                {day: 'F', 
+                num: 0},
+                {day: 'M', 
+                num: 0},
+            ]);
+        }
+
+        if(seriesCount == 1) {
+            this.series2Name = 'blank';
+            this.series2Values = new ObservableArray([
+                {day: 'F', 
+                num: 0},
+                {day: 'M', 
+                num: 0},
+            ]);
+        }
+
+        if(seriesCount == 2) {
+            this.series3Name = 'blank';
+            this.series3Values = new ObservableArray([
+                {day: 'F', 
+                num: 0},
+                {day: 'M', 
+                num: 0},
+            ]);
+        }
+
+        // this.series1Values.notifyPropertyChange('hi', 'hi');
+        // this.series2Values.notifyPropertyChange('hi', 'hi');
+    };
 
     // Creates the series from the symptoms that can actually be graphed in needed
     updateGraphableSeries(): DataSeries[]{

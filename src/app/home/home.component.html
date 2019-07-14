@@ -31,16 +31,30 @@
                 <RadCartesianChart tkExampleTitle tkToggleNavButton height="250" >
                         <CategoricalAxis tkCartesianHorizontalAxis lineThickness = "1" labelTextColor="#A2A0A0" labelMargin = "40"></CategoricalAxis>
                         <LinearAxis tkCartesianVerticalAxis MajorGridLinesVisibility="Visible" labelFormat="%.0f" labelTextColor="#A2A0A0" minimum="0" maximum="10" majorStep = "2" lineThickness = "1" labelMargin = "20" ></LinearAxis>
-                        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true">  </RadCartesianChartGrid>
+                        
                         
                         <!-- <ListView [items]="dataSeries"> -->
                                 <!-- <ng-template let-symptomSeries="item">  -->
-                        <SplineSeries tkCartesianSeries legendTitle="{{dataSeries[0].seriesName}}" seriesName = "dataSeries[0].seriesName" [items]="dataSeries[0].seriesValues" categoryProperty="day" valueProperty="num" >
-                                <Palette tkCartesianPalette>
-                                        <PaletteEntry tkCartesianPaletteEntry></PaletteEntry>
-                                </Palette>
-                        </SplineSeries>
-                        <SplineSeries *ngIf="dataSeries[1] != null" tkCartesianSeries legendTitle="{{dataSeries[1].seriesName}}" seriesName = "dataSeries[1].seriesName" [items]="dataSeries[1].seriesValues" categoryProperty="day" valueProperty="num" >
+                                
+                                <SplineSeries tkCartesianSeries legendTitle="{{series1Name}}" seriesName = "series1Name" [items]="series1Values" categoryProperty="day" valueProperty="num" >
+                                        <Palette tkCartesianPalette seriesName="{{series1Name}}">
+                                                <PaletteEntry tkCartesianPaletteEntry></PaletteEntry>
+                                        </Palette>
+                                </SplineSeries>
+                                <SplineSeries tkCartesianSeries legendTitle="{{series2Name}}" seriesName = "series2Name" [items]="series2Values" categoryProperty="day" valueProperty="num" >
+                                                <Palette tkCartesianPalette seriesName="{{series2Name}}">
+                                                        <PaletteEntry tkCartesianPaletteEntry fillColor="#56D9FE" strokeColor="#56D9FE"></PaletteEntry>
+                                                </Palette>
+                                </SplineSeries>
+                                <SplineSeries tkCartesianSeries legendTitle="{{series3Name}}" seriesName = "series3Name" [items]="series3Values" categoryProperty="day" valueProperty="num" >
+                                        <Palette tkCartesianPalette seriesName="{{series3Name}}">
+                                                <PaletteEntry tkCartesianPaletteEntry fillColor="#F57439" strokeColor="#F57439"></PaletteEntry>
+                                        </Palette>
+                                </SplineSeries>
+
+                                <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true">  </RadCartesianChartGrid>
+                        
+                        <!-- <SplineSeries *ngIf="dataSeries[1] != null" tkCartesianSeries legendTitle="{{dataSeries[1].seriesName}}" seriesName = "dataSeries[1].seriesName" [items]="dataSeries[1].seriesValues" categoryProperty="day" valueProperty="num" >
                                         <Palette tkCartesianPalette>
                                                 <PaletteEntry tkCartesianPaletteEntry></PaletteEntry>
                                         </Palette>
@@ -49,7 +63,7 @@
                                         <Palette tkCartesianPalette>
                                                 <PaletteEntry tkCartesianPaletteEntry></PaletteEntry> 
                                         </Palette>
-                        </SplineSeries>   
+                        </SplineSeries>    -->
                         <!-- <RadLegendView tkCartesianLegend enableSelection=true title = "Legend"></RadLegendView>                              -->
                                                 
                                 <!-- </ng-template> -->
