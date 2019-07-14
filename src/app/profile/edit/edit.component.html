@@ -4,8 +4,8 @@
             <Button   left="10" top="10" width="50" height="50" class="back-button" text="<" (tap)="goBack()"></Button>
             <Label left="40" top="25" class="heading"  text="Edit Information"></Label>
         </AbsoluteLayout>
-    <StackLayout>
-    <Label class="edit-info-heading"  text="First Name:" ></Label>
+        <StackLayout>
+        <Label class="edit-info-heading"  text="First Name:" ></Label>
             <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
             <TextField  id="firstName" [text]="currentUser.firstName" (returnPress)="saveFirstNameValue($event)" (blur)="saveFirstNameValue($event)"></TextField>
             </CardView>
@@ -13,7 +13,7 @@
             <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
             <TextField  id="lastName" [text]="currentUser.lastName" (returnPress)="saveLastNameValue($event)" (blur)="saveLastNameValue($event)"></TextField>
             </CardView>
-    <Label class="edit-info-heading"  text="Age:" ></Label>
+        <Label class="edit-info-heading"  text="Age:" ></Label>
             <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
              <TextField id="age" class="text" [text]="currentUser.age" (returnPress)="saveAgeValue($event)" (blur)="saveAgeValue($event)"></TextField>
              </CardView>
@@ -30,6 +30,6 @@
         <Button dock="right"  width="150" height="40" class="button"  text="Diagnoses           >" [nsRouterLink]="['./diagnoses']"></Button>
 </DockLayout>
         
-<Label class="space1" text=""></Label>  
+<!-- <Label class="space1" text=""></Label>   -->
 <Button  height = "50"   class="saveButton" text="Save Changes" (tap)="saveToAppStore()" [nsRouterLink]="['../login']"></Button>
 </StackLayout>
