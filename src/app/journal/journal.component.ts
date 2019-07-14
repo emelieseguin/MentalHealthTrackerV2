@@ -22,6 +22,7 @@ export class JournalComponent implements OnInit {
     public userTrackedSymptoms: string[];
     public todaysJournalEntry: JournalEntry;
     symptomNames: Array<any>;
+    dialogOpen: boolean;
     
     constructor(private page: Page, private utils: UtilsService,
         private appStore: AppStoreService) {
@@ -44,6 +45,15 @@ export class JournalComponent implements OnInit {
     } 
 
     ngOnInit(): void {
+    }
+    
+    showDialog() {
+        this.dialogOpen = true;
+        console.log("Edit pressed");
+    }
+
+    closeDialog() {
+        this.dialogOpen = false;
     }
 
     valueChange(name:string, args) {

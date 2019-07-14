@@ -1,9 +1,51 @@
-<StackLayout class="home-panel appBackgroundColor">
-    <Label class="journal2"  text="How many hours of sleep did you get last night?" ></Label>
+
+<StackLayout class="home-panel appBackgroundColor"  [class.dialogOpen]="dialogOpen"> 
+    <AbsoluteLayout height = "900" class="dialog-wrapper">
+        <StackLayout class="dialog">
+            <Label class="popUpTitle" textWrap="true" text="Select which symptoms you would like to track below:"></Label>
+            <AbsoluteLayout height = "900" class="dialog-wrapper">
+            <CardView left="5" class="cardStyleProfile"  height = "480" width="325" margin="15" elevation="40" radius="40">
+                <Scrollview>
+                <StackLayout>
+                    
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+
+                    <Button class="btn btn-outline" text="Close pop-up" (tap)="closeDialog()"></Button>
+                
+                </StackLayout>
+            </Scrollview>
+            </CardView>
+        </AbsoluteLayout>
+        </StackLayout>
+    </AbsoluteLayout>
+
+    <Label class="journal2"  text="How many hours of sleep did you get last night?" ></Label> 
+
     <CardView class="cardStyleProfile" height ="45" width="330" elevation="40" radius="40">
         <AbsoluteLayout width="400" height="45">
-        <Slider left="10" top="-5" width="250" class="slider" minValue="0" maxValue="16" value="{{todaysJournalEntry.hoursSleep}}" (valueChange)="sleepValueChange($event)"></Slider> 
-        <Label  left ="270" top="3" class="symptom" text="{{todaysJournalEntry.hoursSleep}}"></Label>
+            <Slider left="10" top="-5" width="250" class="slider" minValue="0" maxValue="16" value="{{todaysJournalEntry.hoursSleep}}" (valueChange)="sleepValueChange($event)"></Slider> 
+            <Label  left ="270" top="3" class="symptom" text="{{todaysJournalEntry.hoursSleep}}"></Label>
         </AbsoluteLayout>
     </CardView>
 
@@ -20,6 +62,7 @@
             </StackLayout>
         </CardView>
     </AbsoluteLayout>
+
     <Label class="space" text=""></Label>
 
     <AbsoluteLayout height="50" width="420">
@@ -32,21 +75,19 @@
             </StackLayout>
         </CardView>
     </AbsoluteLayout>
+
     <Label class="space" text=""></Label>
 
     <AbsoluteLayout width="400" height="40">
         <Label left="0" top="10" class="journal"  text="Rate the following symptoms:" ></Label>
-        <!-- TODO: put real action, either a popup or a new page -->
-        <Button  height = "40" width="60" color= "#23495F" left="290" top="0" class="button" text="Edit" [nsRouterLink]="['']"></Button>
+        <Button  height = "40" width="60" color= "#23495F" left="290" top="0" class="button" text="Edit" (tap)="showDialog()"></Button>
     </AbsoluteLayout>
-
 
 <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
     <StackLayout>
         <Scrollview height = "200">
         <ListView [items]="userTrackedSymptoms">
             <ng-template let-symptomName="item"> 
-        
                 <AbsoluteLayout width="350" height="210">
                     <Label left="0" top="5" width="125" textwrap="true" class="symptom" text="{{symptomName}}"></Label>
                     <Slider left="120" top="5" width="180" class="slider" minValue="0" maxValue="10" value="{{todaysJournalEntry.symptoms[symptomName]}}" (valueChange)="valueChange(symptomName, $event)"></Slider>
@@ -57,7 +98,6 @@
     </Scrollview>
 </StackLayout>
 </CardView>
-<!-- TODO: put real action on button press -->
-<Button  height = "50"   class="saveButton" text="Save Changes"></Button> 
-
+ <!-- TODO: put real action on button press -->
+<Button  height = "50"   class="saveButton" text="Save Changes"></Button>  -->
 </StackLayout> 
