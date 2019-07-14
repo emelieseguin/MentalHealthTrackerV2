@@ -34,7 +34,7 @@ export class LoginComponent {
     console.log();
 
     // TODO: pull or just use the generic list of symptoms
-    this.appStore.symptoms = defaultUser.getDefaultSymptoms();
+    this.appStore.symptoms = defaultUser.getDefaultSymptomsArray();
 
     this.appStore.userInfo = defaultUser.getNewUserInfo();
     this.appStore.journalEntries = defaultUser.getDefaultJournalEntries(this.appStore.symptoms);

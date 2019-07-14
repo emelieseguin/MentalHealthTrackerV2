@@ -3,6 +3,7 @@ import * as appSettings from "tns-core-modules/application-settings";
 import { UserInfo } from "../models/user-info.model";
 import { JournalEntries, JournalEntry } from "../models/journal.model";
 import { UtilsService } from "./utils.service";
+import { SelectMultipleControlValueAccessor } from "@angular/forms";
 
 const DefaultUserInfo: UserInfo = {
     firstName: 'n/a',
@@ -60,29 +61,55 @@ export class DefaultUserService {
     return DefaultUserInfo;
   }
 
-  getDefaultJournalEntry(userSymptoms: Map<string, number>): JournalEntry {
+  getDefaultJournalEntry(userSymptoms: string[]): JournalEntry {
     let entry = DefaultEntry;
     // could also just pull this from the actual app store and not pass through
-    entry.symptoms = userSymptoms;
-    return 
+    entry.symptoms = this.getSymptomsMapFromArray(userSymptoms);
+    return entry;
   }
 
   // Pass in the list of user symptoms that are to be tracked
-  getDefaultJournalEntries(userSymptoms: Map<string, number>): JournalEntries {
-    DefaultEntry[this.utils.getCurrentDateKey()] = this.getDefaultJournalEntry(userSymptoms);
+  getDefaultJournalEntries(userSymptoms: string[]): JournalEntries {
+    let thing = DefaultJournalEntries;
+    thing.entries[this.utils.getCurrentDateKey()] = this.getDefaultJournalEntry(userSymptoms);
+    console.log();
+    console.log('Object::');
+    console.log(JSON.stringify(thing))
     return DefaultJournalEntries;
   }
 
-  getDefaultSymptoms(): Map<string, number> {
-    let symptoms = new Map<string, number>();
-        symptoms['Fatigue'] = 0;
-        symptoms['Feeling sad or down'] = 0;
-        symptoms['Inability to concentrate'] = 0;0
-        symptoms['Mood swings'] = 0;
-        symptoms['Irritability'] = 0;
-        symptoms['Headache'] = 0;
-        symptoms['Apathy'] = 0;
-        symptoms['Lack of motivation'] = 0;
-    return symptoms;
+  getDefaultSymptomsArray(): string[] {
+    return ['Fatigue', 
+    'Feeling sad or down', 
+    'Inability to concentrate',
+    'Mood swings',
+    'Irritability',
+    'Headache',
+    'Apathy',
+    'Lack of motivation'
+    ];
+  }
+
+  getSymptomsMapFromArray(symptoms: string[]): Map<string, number> {
+
+    let symptomsMap = new Map<string, number>();
+
+    symptoms.forEach(element => {
+        console.log(element);
+        symptomsMap[element] = 0;
+    });
+
+    console.log('Creation of the map');
+    console.log(JSON.stringify(symptomsMap));
+    
+
+        // symptoms.set('Feeling sad or down', 0);
+        // symptoms.set('Inability to concentrate', 0);
+        // symptoms.set('Mood swings', 0);
+        // symptoms.set('Irritability', 0);
+        // symptoms.set('Headache', 0);
+        // symptoms.set('Apathy', 0);
+        // symptoms.set('Lack of motivation', 0);
+    return symptomsMap;
   }
 }

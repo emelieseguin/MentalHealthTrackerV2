@@ -8,5 +8,5 @@ export class AppStoreService {
     
     userInfo: UserInfo;
     journalEntries: JournalEntries;
-    symptoms: Map<string, number>;
+    symptoms: string[]; 
 }

@@ -16,7 +16,6 @@ export class UtilsService {
   public getCurrentDateKey(): string {
     let today = new Date();
     let dayKey = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()}`
-    console.log(dayKey);
     return dayKey;
   }
 }

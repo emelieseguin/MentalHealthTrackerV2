@@ -2,8 +2,8 @@
     <Label class="journal2"  text="How many hours of sleep did you get last night?" ></Label>
     <CardView class="cardStyleProfile" height ="45" width="330" elevation="40" radius="40">
         <AbsoluteLayout width="400" height="45">
-        <Slider left="10" top="-5" width="250" class="slider" minValue="0" maxValue="16" value="{{dailyRecord.sleep}}" (valueChange)="sleepValueChange($event)"></Slider> 
-        <Label  left ="270" top="3" class="symptom" text="{{dailyRecord.sleep}}"></Label>
+        <Slider left="10" top="-5" width="250" class="slider" minValue="0" maxValue="16" value="{{todaysJournalEntry.hoursSleep}}" (valueChange)="sleepValueChange($event)"></Slider> 
+        <Label  left ="270" top="3" class="symptom" text="{{todaysJournalEntry.hoursSleep}}"></Label>
         </AbsoluteLayout>
     </CardView>
 
@@ -15,7 +15,7 @@
         <CardView left="225" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
             <StackLayout orientation="horizontal">
                 <Label class="no" text = " No"></Label>
-                <Switch  checked="false" (checkedChange)="onCheckedChange($event)"></Switch>
+                <Switch  checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
                 <Label class="yes" text = "Yes"></Label>
             </StackLayout>
         </CardView>
@@ -27,7 +27,7 @@
         <CardView left="225" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
             <StackLayout orientation="horizontal">
                 <Label class="no" text = " No"></Label>
-                <Switch  checked="false" (checkedChange)="onCheckedChange($event)"></Switch>
+                <Switch  checked="false" (checkedChange)="onMeditateChange($event)"></Switch>
                 <Label class="yes" text = "Yes"></Label>
             </StackLayout>
         </CardView>
@@ -44,21 +44,20 @@
 <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
     <StackLayout>
         <Scrollview height = "200">
-        <ListView height="250" [items]="dailyRecord.dailySymptoms">
-            <ng-template let-symptom="item"> 
-            
-            <AbsoluteLayout width="350" height="210">
-                    
-                <Label left="0" top="5" width="125" textwrap="true" class="symptom" text="{{symptom.Name}}"></Label>
-                <Slider left="120" top="5" width="180" class="slider" minValue="0" maxValue="10" value="{{symptom.NewValue}}" (valueChange)="valueChange(symptom.Name, $event)"></Slider>
-                <Label  left="300" top="13" width="90" class="symptom" text="{{symptom.NewValue}}"></Label>                                   
-        </AbsoluteLayout>
+        <ListView [items]="userTrackedSymptoms">
+            <ng-template let-symptomName="item"> 
+        
+                <AbsoluteLayout width="350" height="210">
+                    <Label left="0" top="5" width="125" textwrap="true" class="symptom" text="{{symptomName}}"></Label>
+                    <Slider left="120" top="5" width="180" class="slider" minValue="0" maxValue="10" value="{{todaysJournalEntry.symptoms[symptomName]}}" (valueChange)="valueChange(symptomName, $event)"></Slider>
+                    <Label  left="300" top="13" width="90" class="symptom" text="{{todaysJournalEntry.symptoms[symptomName]}}"></Label>                                    
+                </AbsoluteLayout>
             </ng-template>
         </ListView>
     </Scrollview>
 </StackLayout>
 </CardView>
 <!-- TODO: put real action on button press -->
-<Button  height = "50"   class="saveButton" text="Save Changes"></Button>
+<Button  height = "50"   class="saveButton" text="Save Changes"></Button> 
 
-</StackLayout>
+</StackLayout> 
