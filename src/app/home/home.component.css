@@ -1,20 +1,33 @@
 .card-title{
     color: black;
     font-size: 18;
-    margin-bottom: 20;
-    margin-left: 0;
+    margin-bottom: 10;
+    margin-left: 15;
     margin-top: 10;
 }
-
+.card-title2{
+    color: black;
+    font-size: 18;
+    margin-bottom: 14;
+    margin-left: 25;
+    margin-top: 18;
+}
 .last-updated{
     color: white;
     font-weight: bold;
     margin-left: 25;
     margin-top: 15;
+    margin-bottom: 5;
 
 }
 
 .home-panel {
+    /* padding-left: 60px;
+    padding-right:60px;
+    padding-bottom: 40px;
+    padding-top: 40px; */
+}
+.home-panel1 {
     padding-left: 60px;
     padding-right:60px;
     padding-bottom: 40px;
@@ -26,3 +39,27 @@
     text-decoration: underline;
     font-size: 14;
 }
+
+.trendDownPercent{
+    font-size: 14;
+}
+.trendDownPercent{
+    font-size: 14;
+    font-weight:bold;
+    color: green;
+}
+.trendUpPercent{
+    font-size: 14;
+    font-weight:bold;
+    color: red;
+}
+.space{
+    font-size:6;
+}
+.space1{
+    font-size:10;
+}
+.space3{
+    font-size:4;
+}
+

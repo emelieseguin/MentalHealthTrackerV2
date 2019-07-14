@@ -1,8 +1,9 @@
 <StackLayout class="profile-panel appBackgroundColor">
+    
     <CardView class="cardStyleProfile" margin="15" elevation="40" radius="30" >
         <!-- TODO: Make card fill entire height of screen -->
         <!-- TODO: Round corners -->
-                <StackLayout>
+                 <StackLayout>
                 <Label class="user-name" verticalAlignment="top" text="{{currentUser.firstName}} {{currentUser.lastName}}"> </Label>
                     <FlexboxLayout flexDirection="row">        
                         <Label class="user-info-heading"  text="     Age:" ></Label>
@@ -22,7 +23,7 @@
                 <Label class="diagnoses-treatments" verticalAlignment="top" text="Diagnoses:" ></Label>
                 <ScrollView id="scroll" orientation="horizontal" >
                     <StackLayout>
-                        <ListView height="90" [items]="currentUser.diagnoses" [itemTemplateSelector]="diagnosisSelector">
+                        <ListView height="90" separatorColor="transparent" [items]="currentUser.diagnoses" [itemTemplateSelector]="diagnosisSelector">
                             <ng-template nsTemplateKey='true' let-diag="item">
                                 <StackLayout>
                                         <Label class="user-info2" text="   - {{diag.name}}"></Label>
@@ -30,7 +31,7 @@
                             </ng-template>
                             <ng-template nsTemplateKey='false' let-treatment="item">
                                     <StackLayout>
-                                            <Label  class="invisible" text=""></Label>
+                                            <!-- <Label  class="invisible" text=""></Label> -->
                                     </StackLayout> 
                             </ng-template> 
                         </ListView>
@@ -38,11 +39,11 @@
                 </ScrollView>
                 <!-- <Label class="user-info2" *ngFor="let diag of currentUser.diagnoses" text="   - {{diag}}"></Label> -->
                 <!-- Treatments List -->
-                <Label class="space" text="" ></Label>
+                <Label class="space2" text="" ></Label>
                 <Label class="diagnoses-treatments" verticalAlignment="top" text="Treatments:" ></Label> 
                 <ScrollView id="scroll" orientation="horizontal">
                     <StackLayout>
-                        <ListView height="90" [items]="currentUser.treatments" [itemTemplateSelector]="treatmentSelector">
+                        <ListView height="90" separatorColor="transparent" [items]="currentUser.treatments" [itemTemplateSelector]="treatmentSelector">
                                 <ng-template nsTemplateKey='true' let-treatment="item">
                                     <StackLayout>
                                             <Label  class="user-info2" text="   - {{treatment.name}}"></Label>
@@ -56,9 +57,12 @@
                         </ListView>
                     </StackLayout>
                 </ScrollView>
-                <Label class="space" text="" ></Label>
+                <Label class="space3" text="" ></Label>
+                <Label class="space3" text="" ></Label>
+                <Label class="space3" text="" ></Label>
             </StackLayout> 
+            
       </CardView>
-      <Label class="space2" text="" ></Label>
+      
       <Button class="btn edit-button" text="Edit Profile" [nsRouterLink]="['./edit']"></Button>
 </StackLayout>

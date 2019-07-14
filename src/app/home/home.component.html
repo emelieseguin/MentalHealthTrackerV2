@@ -1,18 +1,32 @@
 <GridLayout class="page appBackgroundColor">
     <Scrollview>
-    <StackLayout class="home-panel">
+    <StackLayout class="home-panel1">
     
         <Label class="last-updated" text="Last updated: mm/dd/yyyy"></Label>
-        <CardView class="cardStyleProfile" margin="5" elevation="40" radius="40">
+        <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
             <StackLayout class="home-panel">
-                <!-- Title does not have to be a part of the graph -->
-                <Label class="card-title" text="Significant Trends"></Label>
-                <!-- <image #image src="../images/Candy.jpg" stretch="aspectFit"></image>     -->
+                <Label class="card-title2" text="Significant Trends"></Label>
+                <AbsoluteLayout> 
+                        <Image left="5" src="~/app/images/trendDown.png" height="45" width="45" class="image"> </Image>
+                        <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Lack of motivation"></Label>
+                        <Label left="290" top="12" class="trendDownPercent" text="80%"></Label>
+                </AbsoluteLayout>
+                <AbsoluteLayout> 
+                        <Image left="5" src="~/app/images/trendUp.png" height="45" width="45" class="image"> </Image>
+                        <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Inability to cope with daily problems"></Label>
+                        <Label left="290" top="12" class="trendUpPercent" text="70%"></Label>
+                </AbsoluteLayout>
+                <AbsoluteLayout> 
+                        <Image left="5" src="~/app/images/noTrend.png" height="45" width="45" class="image"> </Image>
+                        <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="No significant trends"></Label>
+                </AbsoluteLayout>
+                <Label  class="space" text=""></Label>
             </StackLayout>
         </CardView>
+        <Label  class="space1" text=""></Label>
 
-        <CardView class="cardStyleProfile" margin="5" elevation="40" radius="40">
-            <StackLayout class="home-panel">
+        <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
+            <StackLayout class="home-panel1">
                   <Label class="card-title" text="Weekly Overview"></Label>
 
                 <RadCartesianChart tkExampleTitle tkToggleNavButton height="250" >
@@ -30,15 +44,17 @@
                             </Palette>
                     </SplineSeries>
                     <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true">  </RadCartesianChartGrid>
-                    <RadLegendView tkCartesianLegend enableSelection = true title = "Legend" ></RadLegendView>
+                    <RadLegendView tkCartesianLegend enableSelection = true title = "Legend"></RadLegendView>
                         
                 </RadCartesianChart>
             </StackLayout>
         </CardView>
-        <!-- <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
-            <StackLayout class="home-panel">
+        <Label  class="space1" text=""></Label>
+
+        <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
+            <StackLayout class="home-panel1">
                     <Label class="select" text="Select symptoms to plot above."></Label>
-                    <ListView height="400" [items]="userSymptoms">
+                    <!-- <ListView height="400" [items]="userSymptoms">
                             <ng-template let-symptom="item">
                                     <AbsoluteLayout height="100" width="370">
                                             This isn't working right now, need to add stuff to TS file
@@ -46,9 +62,9 @@
                                             <Label textwrap="true" left="50" top="10" width="300" text="{{symptom.dailySymptoms.seriesName}}"></Label>
                                     </AbsoluteLayout>
                             </ng-template>
-                    </ListView>
+                    </ListView> -->
             </StackLayout>
-        </CardView> -->
+        </CardView>
 
     </StackLayout>
     </Scrollview>

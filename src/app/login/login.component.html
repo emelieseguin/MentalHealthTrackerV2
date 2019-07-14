@@ -1,14 +1,14 @@
 <!-- <ActionBar class="action-bar" title="Login Page"></ActionBar> -->
     <StackLayout class="appBackgroundColor2">
         <StackLayout [class]="isLoggingIn ? 'form white' : 'form gold'">
-            <Image src="~/app/images/background4.jpg" stratch="Fill" class="image"> </Image>
+            <Image src="~/app/images/background4.jpg" class="image"> </Image>
             <Label horizontalAlignment= "center" text="Mental Health Tracker" class="title"></Label>
             <Label text="A daily commitment to you and your well being." class="statement"></Label>
 
             <AbsoluteLayout width="310">
             <Label left="10" top="10" text="Email:" class="label"></Label>
-            <Cardview  left="90" margin="0" height= "35" class="textInput" width="250">
-                    <TextField class="loginText" text="Enter email here"></TextField> 
+            <Cardview  left="90" height= "35" radius="30" class="textInput" width="210">
+                    <TextField width="208" class="loginText" hint="Enter email here"></TextField> 
             </Cardview>
             </AbsoluteLayout>
 
@@ -16,8 +16,8 @@
 
             <AbsoluteLayout width="310">
                 <Label left="10" top="10" text="Password:" class="label"></Label>
-                <Cardview left="90"  margin="0" height= "35" class="textInput" width="250">
-                        <TextField class="loginText" text="Enter password here"></TextField> 
+                <Cardview left="90" width="210" height= "35" radius="30" class="textInput" >
+                        <TextField  width="208" class="loginText" hint="Enter password here"></TextField> 
                 </Cardview>
             </AbsoluteLayout>
             <Label text=" " class="space"></Label>
