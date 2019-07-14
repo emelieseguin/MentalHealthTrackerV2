@@ -96,7 +96,7 @@ export class DefaultUserService {
 
     symptoms.forEach(element => {
         console.log(element);
-        symptomsMap[element] = 0;
+        symptomsMap[element] = 5;
     });
 
     console.log('Creation of the map');
@@ -111,5 +111,20 @@ export class DefaultUserService {
         // symptoms.set('Apathy', 0);
         // symptoms.set('Lack of motivation', 0);
     return symptomsMap;
+  }
+
+  getDefaultGraphedSymptoms(sypmtoms: string[]): Map<string, boolean> {
+    let symptomsGraphedMap = new Map<string, boolean>();
+        sypmtoms.forEach(element => {
+          
+          // By default only will graph the first users symptom
+          if(element == sypmtoms[0]){
+            symptomsGraphedMap[element] = true;
+          } else {
+            symptomsGraphedMap[element] = false;
+          } 
+      });
+
+      return symptomsGraphedMap;
   }
 }

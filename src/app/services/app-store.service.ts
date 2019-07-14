@@ -9,4 +9,5 @@ export class AppStoreService {
     userInfo: UserInfo;
     journalEntries: JournalEntries;
     symptoms: string[]; 
+    graphedSymptoms: Map<string, boolean>;
 }

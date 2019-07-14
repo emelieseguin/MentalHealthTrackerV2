@@ -1,7 +1,6 @@
 <GridLayout class="page appBackgroundColor">
     <Scrollview>
     <StackLayout class="home-panel1">
-    
         <Label class="last-updated" text="Last updated: mm/dd/yyyy"></Label>
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
             <StackLayout class="home-panel">
@@ -30,19 +29,26 @@
                   <Label class="card-title" text="Weekly Overview"></Label>
 
                 <RadCartesianChart tkExampleTitle tkToggleNavButton height="250" >
+                        <CategoricalAxis tkCartesianHorizontalAxis lineThickness = "1" labelTextColor="#A2A0A0" labelMargin = "40"></CategoricalAxis>
+                        <LinearAxis tkCartesianVerticalAxis MajorGridLinesVisibility="Visible" labelFormat="%.0f" labelTextColor="#A2A0A0" minimum="0" maximum="10" majorStep = "2" lineThickness = "1" labelMargin = "20" ></LinearAxis>
+                        <!-- <ListView [items]="dataSeries"> -->
+                                <!-- <ng-template let-symptomSeries="item">  -->
+                        <SplineSeries *ngFor="let series of dataSeries" tkCartesianSeries legendTitle="{{series.seriesName}}" seriesName = "series.seriesName" [items]="series.seriesValues" categoryProperty="day" valueProperty="num" >
+                                <Palette tkCartesianPalette>
+                                        <PaletteEntry tkCartesianPaletteEntry></PaletteEntry>
+                                </Palette>
+                        </SplineSeries>                                 
+                                                
+                                <!-- </ng-template> -->
+                        <!-- </ListView> -->
                     
-                    <CategoricalAxis tkCartesianHorizontalAxis lineThickness = "1" labelTextColor="#A2A0A0" labelMargin = "40"></CategoricalAxis>
-                    <LinearAxis tkCartesianVerticalAxis MajorGridLinesVisibility="Visible" labelFormat="%.0f" labelTextColor="#A2A0A0" minimum="0" maximum="10" majorStep = "2" lineThickness = "1" labelMargin = "20" ></LinearAxis>
-                    <SplineSeries tkCartesianSeries legendTitle = "data" selectionMode ="Series" seriesName = "data" [items]="data" categoryProperty="day" valueProperty="num" >
-                            <Palette tkCartesianPalette seriesName="data">
-                                    <PaletteEntry tkCartesianPaletteEntry fillColor="#F57439" strokeColor="#F57439"></PaletteEntry>
-                            </Palette>
-                    </SplineSeries>
-                    <SplineSeries tkCartesianSeries legendTitle = "data2" selectionMode ="Series" seriesName = "data2" [items]="data2" categoryProperty="day" valueProperty="num">
+                    
+                    
+                    <!-- <SplineSeries tkCartesianSeries legendTitle = "data2" selectionMode ="Series" seriesName = "data2" [items]="data2" categoryProperty="day" valueProperty="num">
                             <Palette tkCartesianPalette seriesName="data2">
                                     <PaletteEntry tkCartesianPaletteEntry fillColor="#56D9FE" strokeColor="#56D9FE"></PaletteEntry>
                             </Palette>
-                    </SplineSeries>
+                    </SplineSeries> -->
                     <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true">  </RadCartesianChartGrid>
                     <RadLegendView tkCartesianLegend enableSelection = true title = "Legend"></RadLegendView>
                         
@@ -54,6 +60,18 @@
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
             <StackLayout class="home-panel1">
                     <Label class="select" text="Select symptoms to plot above."></Label>
+                        <StackLayout>
+                                <Scrollview height = "400">
+                                        <ListView [items]="userTrackedSymptoms">
+                                        <ng-template let-symptomName="item"> 
+                                           <AbsoluteLayout width="350" height="210">
+                                                <Label left="0" top="5" width="125" textwrap="true" class="symptom" text="{{symptomName}}"></Label>
+                                                <Switch left="200" checked="{{userGraphedSymptoms[symptomName]}}" (checkedChange)="onGraphedSymptomChange(symptomName, $event)"></Switch>
+                                           </AbsoluteLayout>
+                                        </ng-template>
+                                        </ListView>
+                            </Scrollview>
+                        </StackLayout>
                     <!-- <ListView height="400" [items]="userSymptoms">
                             <ng-template let-symptom="item">
                                     <AbsoluteLayout height="100" width="370">
