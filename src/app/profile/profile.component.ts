@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { isAndroid, Page, EventData } from "tns-core-modules/ui/page/page";
 import { DefaultUserService } from "../services/default-user.service";
 import { AppStoreService } from "../services/app-store.service";
-import { UserInfo, Treatment } from "../models/user-info.model";
+import { UserInfo, Treatment, Diagnosis } from "../models/user-info.model";
 
 @Component({
     selector: "profile",
@@ -28,8 +28,6 @@ export class ProfileComponent implements OnInit {
                 
             }
         });
-
-        // this.currentActiveTreatments = 
     };
 
     treatmentSelector(item: Treatment, index: number, items: Treatment[]){
@@ -44,6 +42,20 @@ export class ProfileComponent implements OnInit {
             
         }
     }
+
+    diagnosisSelector(item: Diagnosis, index: number, items: Diagnosis[]){
+        console.log(item.name);
+        if(item.diagnosed){
+            // console.log('here once');
+            return 'true';
+            
+        } else{
+            // console.log('i failed');
+            return 'false';
+            
+        }
+    }
+
 
     ngOnInit(): void {
 
