@@ -1,3 +1,9 @@
+.saveButton{
+    margin: 10;
+    background-color: rgb(133, 221, 245);
+    border-radius:10; 
+    }
+    
 .card-title{
     color: black;
     font-size: 18;
@@ -32,6 +38,7 @@
     color:black;
     text-decoration: underline;
     font-size: 14;
+    margin-bottom: 10;
 }
 
 .trendDownPercent{

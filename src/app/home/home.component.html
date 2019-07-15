@@ -88,15 +88,17 @@
                     <Label class="select" text="Select symptoms to plot above."></Label>
                         <StackLayout>
                                 <Scrollview height = "400">
-                                        <ListView [items]="userTrackedSymptoms">
+                                        <ListView  [items]="userTrackedSymptoms">
                                         <ng-template let-symptomName="item"> 
                                            <AbsoluteLayout width="350" height="210">
-                                                <Label left="0" top="5" width="125" textwrap="true" class="symptom" text="{{symptomName}}"></Label>
-                                                <Switch left="200" checked="{{userGraphedSymptoms[symptomName]}}" (checkedChange)="onGraphedSymptomChange(symptomName, $event)"></Switch>
+                                                <Label height="30" left="65" top="12" width="350" textwrap="true" class="symptom" text="{{symptomName}}"></Label>
+                                                <Switch left="5" top="8" checked="{{userGraphedSymptoms[symptomName]}}" (checkedChange)="onGraphedSymptomChange(symptomName, $event)"></Switch>
                                            </AbsoluteLayout>
                                         </ng-template>
                                         </ListView>
                             </Scrollview>
+                            <Button  height = "50"   class="saveButton" text="Save Changes" (tap)="saveToAppStore()" ></Button>
+
                         </StackLayout>
                     <!-- <ListView height="400" [items]="userSymptoms">
                             <ng-template let-symptom="item">
@@ -109,9 +111,6 @@
                     </ListView> -->
             </StackLayout>
         </CardView>
-        <Button width="250" [text]="Update" class="button" (tap)="refresh()"></Button>
-
     </StackLayout>
-
     </Scrollview>
 </GridLayout>
