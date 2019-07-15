@@ -7,16 +7,16 @@
 .card-title{
     color: black;
     font-size: 18;
-    margin-bottom: 10;
-    margin-left: 15;
-    margin-top: 10;
+    margin-bottom: 5;
+    margin-left: 5;
+    margin-top: 5;
 }
 .card-title2{
     color: black;
     font-size: 18;
-    margin-bottom: 14;
-    margin-left: 25;
-    margin-top: 18;
+    margin-bottom: 12;
+    margin-left: 20;
+    margin-top: 13;
 }
 .last-updated{
     color: white;
@@ -55,12 +55,14 @@
     color: red;
 }
 .space{
-    font-size:6;
-}
-.space1{
-    font-size:10;
-}
-.space3{
     font-size:4;
 }
-
+.space1{
+    font-size:4;
+}
+.space3{
+    font-size:2;
+}
+.legend{
+    font-size:4;
+}

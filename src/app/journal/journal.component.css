@@ -83,12 +83,32 @@ border-radius:10;
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+.dialog .back-button{
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    /* background-color: rgb(173, 173, 173); */
+    background-color: rgb(133, 221, 245);
+}
+.dialog .textbox{
+    font-size:15;
+}
 .dialog .popUpTitle{
     color: white;
     font-weight: bold;
-    font-size: 15;
+    font-size: 16;
     margin-top: 30;
-    margin-left: 30;
+    margin-left: 25;
+    margin-bottom: -5;
+}
+.dialog .popUpTitle2{
+    color: white;
+    font-weight: bold;
+    font-size: 16;
+    margin-top: 20;
+    margin-left: 25;
+    margin-bottom: -10;
 }
 .dialogOpen .content {
     opacity: 0.2;
@@ -104,6 +124,20 @@ border-radius:10;
     opacity: 1;
 }
 
+ .cardStyleProfile .button2{
+    font-size: 14;
+    font-weight: bold;
+    border-radius: 5;
+    background-color:rgb(133, 221, 245);
+    color: rgb(19,48,62);
+
+}
+.dialogOpen .plus{
+    border-radius:15; 
+    font-size: 20;
+    font-weight: bold;
+    background-color:rgb(133, 221, 245);
+}
 .dialog {
     /* border-width: 1 0 1 0; */
     border-color: black;

@@ -2,32 +2,36 @@
 <StackLayout class="home-panel appBackgroundColor"  [class.dialogOpen]="dialogOpen"> 
     <AbsoluteLayout height = "900" class="dialog-wrapper">
         <StackLayout class="dialog">
+                <AbsoluteLayout height="60">
+                    <Button   left="10" top="10" width="50" height="50" class="back-button" text="<" (tap)="closeDialog()"></Button>
+                </AbsoluteLayout>
             <Label class="popUpTitle" textWrap="true" text="Select which symptoms you would like to track below:"></Label>
-            
-            <TextField  id="lastName" hint="Enter a new symptom here. "[text]="newTrackedSymptom" (returnPress)="updateNewSymptomValue($event)" (blur)="updateNewSymptomValue($event)"></TextField>
-            <Button text="+" (tap)="saveNewSymptomValue()" class="m-15"></Button>
+            <AbsoluteLayout>
+            <Cardview radius="30" left="10" width="270" margin="10">
+                    <TextField  width="260" id="lastName" class="textbox" hint="Enter a new symptom here. "[text]="newTrackedSymptom" (returnPress)="updateNewSymptomValue($event)" (blur)="updateNewSymptomValue($event)"></TextField>
+            </Cardview>
+            <Button width="45" height="45" top="10" left="298" text="+" (tap)="saveNewSymptomValue()" class="plus"></Button>
+            </AbsoluteLayout>
             <AbsoluteLayout height = "900" class="dialog-wrapper">
-            <CardView left="5" class="cardStyleProfile"  height = "480" width="325" margin="15" elevation="40" radius="40">
+            <StackLayout>
+            <Label class="popUpTitle2" textWrap="true" text="Remove symptoms below:"></Label>
+            <CardView left="5" class="cardStyleProfile"  height = "320" width="325" margin="15" elevation="40" radius="40">
                 <Scrollview>
                 <StackLayout>
                     <StackLayout>
-                          
-                        <ListView height="418" [items]="journalTrackedSymptoms">
+                        <ListView height="800" [items]="journalTrackedSymptoms">
                             <ng-template let-symptom="item">
-                                    <AbsoluteLayout height="100" width="370">
-                                            <!-- TODO: EM you need to style this like you want -->
-                                            <!-- TODO: EM you need to make the button press do the deletion.. Calls the onTrackSymptomChange(symptom, $event) on button press ( X )-->
-                                            <Button text="X" (tap)="onTrackSymptomChange(symptom, $event)" class="m-15"></Button>
-                                            <Label textwrap="true" left="50" top="10" width="260" class= "diagnosisHeading" text="{{symptom}}"></Label> 
+                                    <AbsoluteLayout height="40" width="370">
+                                            <Button left="10" top="6" width="35" height="35" text="x" class="button2" (tap)="onTrackSymptomChange(symptom, $event)" ></Button>
+                                            <Label left="50" top="12" textwrap="true" width="260" class= "diagnosisHeading" text="{{symptom}}"></Label> 
                                     </AbsoluteLayout>
                             </ng-template>
                         </ListView>
                     </StackLayout>  
-                    <Button class="btn btn-outline" text="Close pop-up" (tap)="closeDialog()"></Button>
-                
                 </StackLayout>
             </Scrollview>
             </CardView>
+            </StackLayout>
         </AbsoluteLayout>
         </StackLayout>
     </AbsoluteLayout>
