@@ -5,6 +5,7 @@ import { AppStoreService } from "../services/app-store.service";
 import { JournalEntry, JournalEntries } from "../models/journal.model";
 import { UtilsService } from "../services";
 import { Switch } from "tns-core-modules/ui/switch/switch";
+import { TextField } from "tns-core-modules/ui/text-field/text-field";
 
 class Symptom {
     name: string
@@ -23,6 +24,7 @@ export class JournalComponent implements OnInit {
     public todaysJournalEntry: JournalEntry;
     public userGraphedSymptoms: Map<string, boolean>;
     dialogOpen: boolean;
+    newTrackedSymptom: string = '';
     
     constructor(private page: Page, private utils: UtilsService,
         private appStore: AppStoreService) {
@@ -54,7 +56,7 @@ export class JournalComponent implements OnInit {
     
     showDialog() {
         this.dialogOpen = true;
-        console.log("Edit pressed");
+        // console.log("Edit pressed");
     }
 
     closeDialog() {
@@ -74,6 +76,23 @@ export class JournalComponent implements OnInit {
     onMeditateChange(args) {
         let mySwitch = args.object as Switch;
         this.todaysJournalEntry.meditate = mySwitch.checked;
+    }
+
+    updateNewSymptomValue(args) {
+        let textField = <TextField>args.object;
+
+        console.log(`Old Name:  ${this.newTrackedSymptom}   New Name: ${textField.text}`);
+        this.newTrackedSymptom = textField.text;
+    }
+
+    saveNewSymptomValue() {
+        if(this.newTrackedSymptom != ''){
+            this.journalTrackedSymptoms.push(this.newTrackedSymptom);
+            this.userGraphedSymptoms[this.newTrackedSymptom] = false;
+        }
+
+        // refresh the field as it has already been added
+        this.newTrackedSymptom = '';
     }
 
     sleepValueChange(args) {
@@ -99,20 +118,5 @@ export class JournalComponent implements OnInit {
 
         console.log(`Array after removin; ${this.journalTrackedSymptoms}`);
         console.log(`In the store; ${this.appStore.symptoms}`);
-    }
-
-    findIndex(array: string[], symptom: string): number {
-
-        console.log('got in here');
-        let count = 0;
-        array.forEach(element => {
-
-            if(element == symptom){
-                return count;
-            }
-            
-            count++;
-        });
-        return -1;
     }
 }
