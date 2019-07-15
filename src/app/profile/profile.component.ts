@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     };
 
     treatmentSelector(item: Treatment, index: number, items: Treatment[]){
-        console.log(item.name);
+        
         if(item.undergoing){
             // console.log('here once');
             return 'true';
@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
     }
 
     diagnosisSelector(item: Diagnosis, index: number, items: Diagnosis[]){
-        console.log(item.name);
+        
         if(item.diagnosed){
             // console.log('here once');
             return 'true';

@@ -5,6 +5,7 @@ import { AppStoreService } from "../services/app-store.service";
 import { JournalEntry, JournalEntries } from "../models/journal.model";
 import { UtilsService } from "../services";
 import { Switch } from "tns-core-modules/ui/switch/switch";
+import { TextField } from "tns-core-modules/ui/text-field/text-field";
 
 class Symptom {
     name: string
@@ -19,10 +20,11 @@ class Symptom {
 export class JournalComponent implements OnInit {
 
     public userJournalEntries: JournalEntries;
-    public userTrackedSymptoms: string[];
+    public journalTrackedSymptoms: Array<string>;
     public todaysJournalEntry: JournalEntry;
-    symptomNames: Array<any>;
+    public userGraphedSymptoms: Map<string, boolean>;
     dialogOpen: boolean;
+    newTrackedSymptom: string = '';
     
     constructor(private page: Page, private utils: UtilsService,
         private appStore: AppStoreService) {
@@ -30,18 +32,23 @@ export class JournalComponent implements OnInit {
             this.page.actionBarHidden = true; 
         }
        
-        this.userTrackedSymptoms = this.appStore.symptoms;
+        this.journalTrackedSymptoms = this.appStore.symptoms;
         this.userJournalEntries = this.appStore.journalEntries;
         this.todaysJournalEntry = this.appStore.journalEntries.entries[utils.getCurrentDateKey()];
-        
+        this.userGraphedSymptoms = this.appStore.graphedSymptoms;
+
         console.log();
         console.log('Journal Components');
         console.log('JSON of the Symptoms');
-        console.log(JSON.stringify(this.userTrackedSymptoms));
+        console.log(JSON.stringify(this.journalTrackedSymptoms));
         console.log('All Journal Entries:');
         console.log(JSON.stringify(this.userJournalEntries));
         console.log('Todays Journal Entry:');
         console.log(JSON.stringify(this.todaysJournalEntry));
+        console.log('Todays Graphed Symptoms:');
+        console.log(JSON.stringify(this.userGraphedSymptoms));
+
+        console.log(this.userGraphedSymptoms['Fatigue']);
     } 
 
     ngOnInit(): void {
@@ -49,7 +56,7 @@ export class JournalComponent implements OnInit {
     
     showDialog() {
         this.dialogOpen = true;
-        console.log("Edit pressed");
+        // console.log("Edit pressed");
     }
 
     closeDialog() {
@@ -71,67 +78,45 @@ export class JournalComponent implements OnInit {
         this.todaysJournalEntry.meditate = mySwitch.checked;
     }
 
+    updateNewSymptomValue(args) {
+        let textField = <TextField>args.object;
+
+        console.log(`Old Name:  ${this.newTrackedSymptom}   New Name: ${textField.text}`);
+        this.newTrackedSymptom = textField.text;
+    }
+
+    saveNewSymptomValue() {
+        if(this.newTrackedSymptom != ''){
+            this.journalTrackedSymptoms.push(this.newTrackedSymptom);
+            this.userGraphedSymptoms[this.newTrackedSymptom] = false;
+        }
+
+        // refresh the field as it has already been added
+        this.newTrackedSymptom = '';
+    }
+
     sleepValueChange(args) {
         let slider = <Slider>args.object;
         this.todaysJournalEntry.hoursSleep = slider.value;
         console.log(`Hours of Sleep: ${ this.todaysJournalEntry.hoursSleep }`); 
     }
+
+    onTrackSymptomChange(symptom: string, arg) {
+        let mySwitch = arg.object as Switch;
+
+        console.log();
+        console.log(symptom);
+        console.log(`Array before removing: ${this.journalTrackedSymptoms}`);
+
+        // remove the element the user selected
+        let index = this.journalTrackedSymptoms.indexOf(symptom);
+        console.log('Some index: '+ index);
+        if(index > -1){
+            this.journalTrackedSymptoms.splice(index, 1);
+        }
+
+
+        console.log(`Array after removin; ${this.journalTrackedSymptoms}`);
+        console.log(`In the store; ${this.appStore.symptoms}`);
+    }
 }
-
-
-        // this.symptomNames = new Array(this.appStore.symptoms.size);
-        // for(let i = 0; i < this.appStore.symptoms.size; i++){
-        //     this.symptomNames[i] = this.appStore.symptoms[i];
-        // }
-        // console.log('Foreach of symptoms ' + this.appStore.symptoms.size);
-
-        // for(let entry in this.appStore.symptoms.entries){
-        //     console.log(entry.toString); 
-        // }
-
-        // this.appStore.symptoms.forEach((k,v) => {
-        //     console.log('key: =' + k.toString);
-        //     this.symptomNames.push(k);
-        // })
-        // console.log('Array of symptoms');
-        // console.log(this.symptomNames);      
-
-        // console.log('Journal Entries For Today Stuff:');
-        // console.log(JSON.stringify(this.userJournalEntries.entries[utils.getCurrentDateKey()]));
-
-        // console.log('Journal Entries For Today Symptoms:');
-        // console.log(JSON.stringify(this.userJournalEntries.entries[utils.getCurrentDateKey()].symptoms));
-
-        // let elements: Symptom[] = JSON.parse(JSON.stringify(this.userJournalEntries.entries[utils.getCurrentDateKey()].symptoms))
-        
-        // console.log();console.log();
-        // console.log(this.userTrackedSymptoms['Fatigue']);
-        // this.userTrackedSymptoms['Fatigue'] = 4;
-        // console.log(this.userTrackedSymptoms['Fatigue']);
-        // console.log(this.userTrackedSymptoms.get('Fatigue'));
-
-
-        // console.log('The actual array');
-        // console.log(elements);
-
-        // console.log(elements[0].name)
-        // elements[1].value = 8;
-        // elements[2].value = 8;
-        // elements[3].value = 8;
-        // elements[4].value = 8;
-
-        // console.log('The final array');
-        // console.log(elements);
-
-        // console.log('Back to the map if possible');
-
-        // this.userJournalEntries.entries[utils.getCurrentDateKey()].symptoms[elements[0].name] = elements[0].value;
-        // console.log(JSON.stringify(this.userJournalEntries.entries[utils.getCurrentDateKey()].symptoms));
-
-
-
-        // console.log(utils.getCurrentDateKey());
-        // console.log(this.appStore.journalEntries.entries);
-        // this.todaysJournalEntry = this.appStore.journalEntries.entries.get(utils.getCurrentDateKey());
-        // console.log(this.todaysJournalEntry);
-        // this.symptomNames = Array.from(this.todaysJournalEntry.symptoms.keys());

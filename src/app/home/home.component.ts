@@ -1,17 +1,13 @@
 import { Component, OnInit, EventEmitter } from "@angular/core";
-import { AsyncPipe } from "@angular/common";
 import { isAndroid, Page } from "tns-core-modules/ui/page/page";
 import { Country, DataService, Symptom } from '../services/data.service';
 import { ObservableArray } from "tns-core-modules/data/observable-array";
-import { RadCartesianChart } from "nativescript-ui-chart";
-import { Image } from "tns-core-modules/ui/image";
 import { StatAnalysisService } from "../services/stat-analysis.service";
 import { AppStoreService } from "../services/app-store.service";
 import { Switch } from "tns-core-modules/ui/switch/switch";
 import { JournalEntries, JournalEntry } from "../models/journal.model";
-import { Data } from "@angular/router"; 
-import { Observable } from "rxjs";
 import { RouterExtensions } from "nativescript-angular/router";
+import { UtilsService } from "../services";
 export class GraphValuePair {
     day: string
     num: number
@@ -32,29 +28,8 @@ export class DataSeries {
 export class HomeComponent implements OnInit {
 
     private _categoricalSource: ObservableArray<Country>;
-    // private userSymptoms: Symptom[];
 
-    // Probably the right mock object to actually use
-    private data: GraphValuePair[] = [
-        {day: 'S', num: 3},
-        {day: 'M', num: 1},
-        {day: 'T', num: 3},
-        {day: 'W', num: 6},
-        {day: 'Th', num: 6},
-        {day: 'F', num: 7},
-        {day: 'Su', num: 8}
-    ]
-
-    private data2: GraphValuePair[] = [
-        {day: 'S', num: 2},
-        {day: 'M', num: 3},
-        {day: 'T', num: 4},
-        {day: 'W', num: 5},
-        {day: 'Th', num: 8},
-        {day: 'F', num: 9},
-        {day: 'Su', num: 10}
-    ]
-
+    public month = this.utils.getMonth();
     public userTrackedSymptoms: string[];
     public userGraphedSymptoms: Map<string, boolean>;
     public userJournalEntries: Map<string, JournalEntry>;
@@ -73,7 +48,7 @@ export class HomeComponent implements OnInit {
     public series3Name: string;
 
     constructor(private page: Page, private dataService: DataService, private routerExtensions: RouterExtensions,
-        private stats: StatAnalysisService, private appStore: AppStoreService) {
+        private stats: StatAnalysisService, private appStore: AppStoreService, private utils: UtilsService) {
         
         if (isAndroid) {
             this.page.actionBarHidden = true;

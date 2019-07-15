@@ -3,34 +3,26 @@
     <AbsoluteLayout height = "900" class="dialog-wrapper">
         <StackLayout class="dialog">
             <Label class="popUpTitle" textWrap="true" text="Select which symptoms you would like to track below:"></Label>
+            
+            <TextField  id="lastName" hint="Enter a new symptom here. "[text]="newTrackedSymptom" (returnPress)="updateNewSymptomValue($event)" (blur)="updateNewSymptomValue($event)"></TextField>
+            <Button text="+" (tap)="saveNewSymptomValue()" class="m-15"></Button>
             <AbsoluteLayout height = "900" class="dialog-wrapper">
             <CardView left="5" class="cardStyleProfile"  height = "480" width="325" margin="15" elevation="40" radius="40">
                 <Scrollview>
                 <StackLayout>
-                    
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-                    <Switch checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
-
+                    <StackLayout>
+                          
+                        <ListView height="418" [items]="journalTrackedSymptoms">
+                            <ng-template let-symptom="item">
+                                    <AbsoluteLayout height="100" width="370">
+                                            <!-- TODO: EM you need to style this like you want -->
+                                            <!-- TODO: EM you need to make the button press do the deletion.. Calls the onTrackSymptomChange(symptom, $event) on button press ( X )-->
+                                            <Button text="X" (tap)="onTrackSymptomChange(symptom, $event)" class="m-15"></Button>
+                                            <Label textwrap="true" left="50" top="10" width="260" class= "diagnosisHeading" text="{{symptom}}"></Label> 
+                                    </AbsoluteLayout>
+                            </ng-template>
+                        </ListView>
+                    </StackLayout>  
                     <Button class="btn btn-outline" text="Close pop-up" (tap)="closeDialog()"></Button>
                 
                 </StackLayout>
@@ -86,7 +78,7 @@
 <CardView class="cardStyleProfile" margin="10" elevation="40" radius="40">
     <StackLayout>
         <Scrollview height = "200">
-        <ListView [items]="userTrackedSymptoms">
+        <ListView [items]="journalTrackedSymptoms">
             <ng-template let-symptomName="item"> 
                 <AbsoluteLayout width="350" height="210">
                     <Label left="0" top="5" width="125" textwrap="true" class="symptom" text="{{symptomName}}"></Label>
