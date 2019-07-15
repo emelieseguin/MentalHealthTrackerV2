@@ -186,7 +186,7 @@ export class HomeComponent implements OnInit {
         });
 
         if(seriesCount == 0) {
-            this.series1Name = 'blank';
+            this.series1Name = 'N/A';
             this.series1Values = new ObservableArray([
                 {day: 'F', 
                 num: 0},
@@ -196,7 +196,7 @@ export class HomeComponent implements OnInit {
         }
 
         if(seriesCount == 1) {
-            this.series2Name = 'blank';
+            this.series2Name = 'N/A';
             this.series2Values = new ObservableArray([
                 {day: 'F', 
                 num: 0},
@@ -206,7 +206,7 @@ export class HomeComponent implements OnInit {
         }
 
         if(seriesCount == 2) {
-            this.series3Name = 'blank';
+            this.series3Name = 'N/A';
             this.series3Values = new ObservableArray([
                 {day: 'F', 
                 num: 0},

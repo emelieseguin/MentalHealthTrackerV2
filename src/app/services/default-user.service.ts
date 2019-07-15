@@ -118,7 +118,7 @@ export class DefaultUserService {
         sypmtoms.forEach(element => {
           
           // By default only will graph the first users symptom
-          if(element == sypmtoms[0]){
+          if(element == sypmtoms[0] || element == sypmtoms[1]){
             symptomsGraphedMap[element] = true;
           } else {
             symptomsGraphedMap[element] = false;
