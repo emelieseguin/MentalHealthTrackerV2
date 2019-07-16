@@ -44,20 +44,17 @@ export class StatAnalysisService {
         let definedEntries = new Map<string, JournalEntry>();
         definedEntries.entries[this.utils.getSpecificDateKey(0)] = journalEntry1;
 
-        // definedEntries.entries[this.utils.getSpecificDateKey(0)] = journalEntry2;
+        // definedEntries.entries[this.utils.getSpecificDateKey(1)] = journalEntry2;
 
         return {entries: definedEntries };
     }
 }
 
 // Journal Entry 1
-// Symptoms
 let symptoms1 = new Map<string, number>();
 symptoms1['Fatigue'] = 4
 symptoms1['Feeling sad or down'] = 7;
 symptoms1['Inability to concentrate'] = 8;
-
-// Each Journal Entry
 let journalEntry1: JournalEntry = {
     hoursSleep: 8,
     exercise: true,
