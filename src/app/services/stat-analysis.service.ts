@@ -3,6 +3,7 @@ import * as appSettings from "tns-core-modules/application-settings";
 import { getComputedCssValues } from "tns-core-modules/ui/page/page";
 import { JournalEntries, JournalEntry } from "../models/journal.model";
 import { UtilsService } from "./utils.service";
+import { AppStoreService } from "./app-store.service";
 
 
 
@@ -11,7 +12,7 @@ import { UtilsService } from "./utils.service";
 @Injectable()
 export class StatAnalysisService {
 
-    constructor(private utils: UtilsService) {
+    constructor(private utils: UtilsService, private appStore: AppStoreService) {
 
     }
   
@@ -19,60 +20,89 @@ export class StatAnalysisService {
     private values = [1,2,3,4,5,6,7,8,9,10,6,7,8,2,5,6,7,8,9,2,4,6,7,8,2,4,6,3,6,8,9,3,6,7,8,3,2,5];
     private arraySum = 0;
 
-    doStats() : string {
+    getTrend(symptomName: string): string {
 
-        this.arraySum = this.values.reduce((a, b) => a + b, 0)
-        console.log(this.arraySum);
-
-        // Stats stuff
-        this.values.forEach(element => {
-            
-
-        });
-        return 'stats stuff......';
+        return 'Your Trend';
     }
 
+    getPercentage(symptomName: string): number {
 
-    otherStats() : string {
+        // This is the array to use for your sum of last 30 days 
+        let sumMonthArray = this.getSymptomValuesMonth(symptomName);
+        let sumMonthAverage = sumMonthArray.reduce((a, b) => a + b, 0)/30;
+        console.log(`Average: ${symptomName} -- ${sumMonthAverage}`);
 
-        return 'other stats stuff.....';
+        // This is the array to use for your sum of last 7 days 
+        let sumWeekArray = this.getSymptomValuesWeek(symptomName);
+        let sumWeekAverage = sumWeekArray.reduce((a, b) => a + b, 0)/7;
+        console.log(`Average: ${symptomName} -- ${sumWeekAverage}`);
+        return 999;
+    }
+
+    getSymptomValuesMonth(symptomName: string): number[] {
+
+        let entryMap = this.appStore.journalEntries.entries;
+        let tempArray = new Array<number>();
+
+        for(let i = 0; i < 30; i++){
+            let journal = entryMap[this.utils.getSpecificDateKey(i)];
+
+            tempArray.push(journal.symptoms[symptomName])
+        }
+
+        console.log(`Month of: ${symptomName}  --- ${tempArray}`)
+        return tempArray;
+    }
+
+    getSymptomValuesWeek(symptomName: string): number[] {
+
+        let entryMap = this.appStore.journalEntries.entries;
+        let tempArray = new Array<number>();
+
+        for(let i = 0; i < 7; i++){
+            let journal = entryMap[this.utils.getSpecificDateKey(i)];
+
+            tempArray.push(journal.symptoms[symptomName])
+        }
+
+        console.log(`Week of: ${symptomName}  --- ${tempArray}`)
+        return tempArray;
     }
 
     getData(): JournalEntries {
 
         // Big entry where everything exists
         let definedEntries = new Map<string, JournalEntry>();
-        definedEntries.entries[this.utils.getSpecificDateKey(0)] = journalEntry1;
-        definedEntries.entries[this.utils.getSpecificDateKey(1)] = journalEntry2;
-        definedEntries.entries[this.utils.getSpecificDateKey(2)] = journalEntry3;
-        definedEntries.entries[this.utils.getSpecificDateKey(3)] = journalEntry4;
-        definedEntries.entries[this.utils.getSpecificDateKey(4)] = journalEntry5;
-        definedEntries.entries[this.utils.getSpecificDateKey(5)] = journalEntry6;
-        definedEntries.entries[this.utils.getSpecificDateKey(6)] = journalEntry7;
-        definedEntries.entries[this.utils.getSpecificDateKey(7)] = journalEntry8;
-        definedEntries.entries[this.utils.getSpecificDateKey(8)] = journalEntry9;
-        definedEntries.entries[this.utils.getSpecificDateKey(9)] = journalEntry10;
-        definedEntries.entries[this.utils.getSpecificDateKey(10)] = journalEntry11;
-        definedEntries.entries[this.utils.getSpecificDateKey(11)] = journalEntry12;
-        definedEntries.entries[this.utils.getSpecificDateKey(12)] = journalEntry13;
-        definedEntries.entries[this.utils.getSpecificDateKey(13)] = journalEntry14;
-        definedEntries.entries[this.utils.getSpecificDateKey(14)] = journalEntry15;
-        definedEntries.entries[this.utils.getSpecificDateKey(15)] = journalEntry16;
-        definedEntries.entries[this.utils.getSpecificDateKey(16)] = journalEntry17;
-        definedEntries.entries[this.utils.getSpecificDateKey(17)] = journalEntry18;
-        definedEntries.entries[this.utils.getSpecificDateKey(18)] = journalEntry19;
-        definedEntries.entries[this.utils.getSpecificDateKey(19)] = journalEntry20;
-        definedEntries.entries[this.utils.getSpecificDateKey(20)] = journalEntry21;
-        definedEntries.entries[this.utils.getSpecificDateKey(21)] = journalEntry22;
-        definedEntries.entries[this.utils.getSpecificDateKey(22)] = journalEntry23;
-        definedEntries.entries[this.utils.getSpecificDateKey(23)] = journalEntry24;
-        definedEntries.entries[this.utils.getSpecificDateKey(24)] = journalEntry25;
-        definedEntries.entries[this.utils.getSpecificDateKey(25)] = journalEntry26;
-        definedEntries.entries[this.utils.getSpecificDateKey(26)] = journalEntry27;
-        definedEntries.entries[this.utils.getSpecificDateKey(27)] = journalEntry28;
-        definedEntries.entries[this.utils.getSpecificDateKey(28)] = journalEntry29;
-        definedEntries.entries[this.utils.getSpecificDateKey(29)] = journalEntry30;
-
+        definedEntries[this.utils.getSpecificDateKey(0)] = journalEntry1;
+        definedEntries[this.utils.getSpecificDateKey(1)] = journalEntry2;
+        definedEntries[this.utils.getSpecificDateKey(2)] = journalEntry3;
+        definedEntries[this.utils.getSpecificDateKey(3)] = journalEntry4;
+        definedEntries[this.utils.getSpecificDateKey(4)] = journalEntry5;
+        definedEntries[this.utils.getSpecificDateKey(5)] = journalEntry6;
+        definedEntries[this.utils.getSpecificDateKey(6)] = journalEntry7;
+        definedEntries[this.utils.getSpecificDateKey(7)] = journalEntry8;
+        definedEntries[this.utils.getSpecificDateKey(8)] = journalEntry9;
+        definedEntries[this.utils.getSpecificDateKey(9)] = journalEntry10;
+        definedEntries[this.utils.getSpecificDateKey(10)] = journalEntry11;
+        definedEntries[this.utils.getSpecificDateKey(11)] = journalEntry12;
+        definedEntries[this.utils.getSpecificDateKey(12)] = journalEntry13;
+        definedEntries[this.utils.getSpecificDateKey(13)] = journalEntry14;
+        definedEntries[this.utils.getSpecificDateKey(14)] = journalEntry15;
+        definedEntries[this.utils.getSpecificDateKey(15)] = journalEntry16;
+        definedEntries[this.utils.getSpecificDateKey(16)] = journalEntry17;
+        definedEntries[this.utils.getSpecificDateKey(17)] = journalEntry18;
+        definedEntries[this.utils.getSpecificDateKey(18)] = journalEntry19;
+        definedEntries[this.utils.getSpecificDateKey(19)] = journalEntry20;
+        definedEntries[this.utils.getSpecificDateKey(20)] = journalEntry21;
+        definedEntries[this.utils.getSpecificDateKey(21)] = journalEntry22;
+        definedEntries[this.utils.getSpecificDateKey(22)] = journalEntry23;
+        definedEntries[this.utils.getSpecificDateKey(23)] = journalEntry24;
+        definedEntries[this.utils.getSpecificDateKey(24)] = journalEntry25;
+        definedEntries[this.utils.getSpecificDateKey(25)] = journalEntry26;
+        definedEntries[this.utils.getSpecificDateKey(26)] = journalEntry27;
+        definedEntries[this.utils.getSpecificDateKey(27)] = journalEntry28;
+        definedEntries[this.utils.getSpecificDateKey(28)] = journalEntry29;
+        definedEntries[this.utils.getSpecificDateKey(29)] = journalEntry30;
 
         return {entries: definedEntries };
     }

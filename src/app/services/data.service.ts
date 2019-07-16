@@ -12,7 +12,7 @@ import { StatAnalysisService } from './stat-analysis.service';
 
 const FolderName = 'files';
 const GraphedSymptomsFile: string = 'graphed-symptoms.json';
-const JournalEntriesFile: string = 'journalentires.json';
+const JournalEntriesFile: string = 'journalentries.json';
 const SymptomsFile: string = 'symptoms.json';
 const UserInfoFile: string = 'userinfo.json';
 const RootEmail: string = 'emelieseguin@gmail.com';
@@ -69,7 +69,6 @@ export class DataService {
     pullUserInfo(email: string) {
 
         if(email == RootEmail) {
-
             console.log(`User is: ${RootEmail}`);
 
             this.userInfoFile.readText()

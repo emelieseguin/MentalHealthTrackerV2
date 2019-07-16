@@ -61,8 +61,19 @@ export class HomeComponent implements OnInit {
 
         this.updateSeries();
 
-        console.log(this.stats.doStats());
-        console.log(this.stats.otherStats());
+        console.log('');
+        console.log('');
+        console.log('');
+        console.log(this.stats.getPercentage('Fatigue'));
+        console.log(this.stats.getPercentage('Feeling sad or down'));
+        console.log(this.stats.getPercentage('Inability to concentrate'));
+
+        console.log(this.stats.getTrend('Fatigue'));
+        console.log(this.stats.getTrend('Feeling sad or down'));
+        console.log(this.stats.getTrend('Inability to concentrate'));
+        console.log('');
+        console.log('');
+        console.log('');
     } 
 
     ngOnInit(): void {
