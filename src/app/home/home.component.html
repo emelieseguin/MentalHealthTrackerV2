@@ -1,24 +1,20 @@
 <GridLayout class="page appBackgroundColor">
     <StackLayout class="home-panel1">
                 <Label class="card-title" text="Significant Trends"></Label>
+                <Button width="45" height="45" top="10" left="298" text="+" (tap)="updateTrends()" class="plus"></Button>
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
             <StackLayout class="home-panel">
-                        
         <Scrollview height="100">
         <StackLayout>
                 <AbsoluteLayout> 
-                        <Image left="5" src="~/app/images/trendUp.png" height="40" width="40" class="image"> </Image>
+                        <Image left="5" src="{{fatigueImage}}" height="40" width="40" class="image"> </Image>
                         <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Fatigue"></Label>
-                        <Label left="288" top="12" class="trendUpPercent" text="113%"></Label>
+                        <Label left="288" top="12" class="trendUpPercent" text="{{fatigueValue}}%"></Label>
                 </AbsoluteLayout>
                 <AbsoluteLayout> 
-                        <Image left="5" src="~/app/images/trendDown.png" height="40" width="40" class="image"> </Image>
+                        <Image left="5" src="{{feelingSadImage}}" height="40" width="40" class="image"> </Image>
                         <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Feeling sad or down"></Label>
-                        <Label left="288" top="12" class="trendDownPercent" text="70%"></Label>
-                </AbsoluteLayout>
-                <AbsoluteLayout> 
-                        <Image left="5" src="~/app/images/noTrend.png" height="40" width="40" class="image"> </Image>
-                        <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="No significant trends"></Label>
+                        <Label left="288" top="12" class="trendDownPercent" text="{{feelingSadValue}}%"></Label>
                 </AbsoluteLayout>
                 <Label  class="space" text=""></Label>
         </StackLayout>

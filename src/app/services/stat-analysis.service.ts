@@ -1,28 +1,20 @@
 import { Injectable } from "@angular/core";
 import * as appSettings from "tns-core-modules/application-settings";
-import { getComputedCssValues } from "tns-core-modules/ui/page/page";
 import { JournalEntries, JournalEntry } from "../models/journal.model";
 import { UtilsService } from "./utils.service";
 import { AppStoreService } from "./app-store.service";
 
-
-
-
+const NoTrend = 'No Trend';
+const TrendUp = 'Trend Up';
+const TrendDown = 'Trend Down';
 
 @Injectable()
 export class StatAnalysisService {
 
     constructor(private utils: UtilsService, private appStore: AppStoreService) {
-
     }
-  
-    private numberOfRecentPointsToCompare = 30;
-    private values = [1,2,3,4,5,6,7,8,9,10,6,7,8,2,5,6,7,8,9,2,4,6,7,8,2,4,6,3,6,8,9,3,6,7,8,3,2,5];
-    private arraySum = 0;
 
-     
-
-    getNoTrend(symptomName: string): boolean {
+    getTrend(symptomName: string): string {
         // This is the array to use for the sum of last 30 days 
         let sumMonthArray = this.getSymptomValuesMonth(symptomName);
         let sumMonthAverage = sumMonthArray.reduce((a, b) => a + b, 0)/30;
@@ -44,54 +36,19 @@ export class StatAnalysisService {
         let B7 = Math.pow((sumWeekArray[6]-sumWeekAverage),2);
         let C = B1+B2+B3+B4+B5+B6+B7;
         let stdDev = Math.sqrt((C/6));
-        let To = Math.abs((sumWeekAverage-sumMonthAverage)/(stdDev/(Math.sqrt(7))));
-        console.log(`to: ${To}`);
+        let to = Math.abs((sumWeekAverage-sumMonthAverage)/(stdDev/(Math.sqrt(7))));
+        console.log(`to: ${to}`);
 
-        let NoTrend = false;
+        if (to >= 1.943) {
 
-    //    (thing=="your first string")? ((thing2=='your string')? true: false): false
-    
-        if (To < 1.943) {
-            console.log("got here hi");
-            return NoTrend = true;
+            if (sumWeekAverage < sumMonthAverage) {
+                return TrendDown;
+            }
+            else { 
+                return TrendUp;
+            } 
         }
         return NoTrend;
-    }
-
-    getTrend(symptomName: string): boolean {
-        // This is the array to use for the sum of last 30 days 
-        let sumMonthArray = this.getSymptomValuesMonth(symptomName);
-        let sumMonthAverage = sumMonthArray.reduce((a, b) => a + b, 0)/30;
-        console.log(`Average: ${symptomName} -- ${sumMonthAverage}`);
-
-        // This is the array to use for the sum of last 7 days 
-        let sumWeekArray = this.getSymptomValuesWeek(symptomName);
-        let sumWeekAverage = sumWeekArray.reduce((a, b) => a + b, 0)/7;
-        console.log(`Average: ${symptomName} -- ${sumWeekAverage}`);
-        
-        let A = sumWeekArray[0];
-        console.log(`A: ${symptomName} -- ${A}`);
-        let B1 = Math.pow((sumWeekArray[0]-sumWeekAverage),2);
-        let B2 = Math.pow((sumWeekArray[1]-sumWeekAverage),2);
-        let B3 = Math.pow((sumWeekArray[2]-sumWeekAverage),2);
-        let B4 = Math.pow((sumWeekArray[3]-sumWeekAverage),2);
-        let B5 = Math.pow((sumWeekArray[4]-sumWeekAverage),2);
-        let B6 = Math.pow((sumWeekArray[5]-sumWeekAverage),2);
-        let B7 = Math.pow((sumWeekArray[6]-sumWeekAverage),2);
-        let C = B1+B2+B3+B4+B5+B6+B7;
-        let stdDev = Math.sqrt((C/6));
-        let To = Math.abs((sumWeekAverage-sumMonthAverage)/(stdDev/(Math.sqrt(7))));
-        console.log(`to: ${To}`);
-
-        let TrendUp = null;
-    
-        if (To >= 1.943) {
-            if (sumWeekAverage < sumMonthAverage)
-            {return TrendUp = false;}
-            else 
-            {return TrendUp = true;}  
-        }
-        return TrendUp;
     }
     getPercentage(symptomName: string): number {
 
@@ -107,7 +64,6 @@ export class StatAnalysisService {
     
         let prePercentage = Math.abs(((sumWeekAverage-sumMonthAverage)/sumMonthAverage)*100);
         let percentage = Math.round(prePercentage);
-
         return percentage;
     }
     
@@ -545,3 +501,37 @@ let journalEntry30: JournalEntry = {
     meditate: false,
     symptoms: symptoms30
 };
+
+
+    // getNoTrend(symptomName: string): boolean {
+    //     // This is the array to use for the sum of last 30 days 
+    //     let sumMonthArray = this.getSymptomValuesMonth(symptomName);
+    //     let sumMonthAverage = sumMonthArray.reduce((a, b) => a + b, 0)/30;
+    //     console.log(`Average: ${symptomName} -- ${sumMonthAverage}`);
+
+    //     // This is the array to use for the sum of last 7 days 
+    //     let sumWeekArray = this.getSymptomValuesWeek(symptomName);
+    //     let sumWeekAverage = sumWeekArray.reduce((a, b) => a + b, 0)/7;
+    //     console.log(`Average: ${symptomName} -- ${sumWeekAverage}`);
+        
+    //     let A = sumWeekArray[0];
+    //     console.log(`A: ${symptomName} -- ${A}`);
+    //     let B1 = Math.pow((sumWeekArray[0]-sumWeekAverage),2);
+    //     let B2 = Math.pow((sumWeekArray[1]-sumWeekAverage),2);
+    //     let B3 = Math.pow((sumWeekArray[2]-sumWeekAverage),2);
+    //     let B4 = Math.pow((sumWeekArray[3]-sumWeekAverage),2);
+    //     let B5 = Math.pow((sumWeekArray[4]-sumWeekAverage),2);
+    //     let B6 = Math.pow((sumWeekArray[5]-sumWeekAverage),2);
+    //     let B7 = Math.pow((sumWeekArray[6]-sumWeekAverage),2);
+    //     let C = B1+B2+B3+B4+B5+B6+B7;
+    //     let stdDev = Math.sqrt((C/6));
+    //     let To = Math.abs((sumWeekAverage-sumMonthAverage)/(stdDev/(Math.sqrt(7))));
+    //     console.log(`to: ${To}`);
+
+    //     let NoTrend = false;
+
+    // //    (thing=="your first string")? ((thing2=='your string')? true: false): false
+    
+        
+    //     return NoTrend;
+    // }

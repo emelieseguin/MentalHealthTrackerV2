@@ -19,6 +19,13 @@ export class DataSeries {
     seriesName: string
 }
 
+const NoTrend = 'No Trend';
+const TrendUp = 'Trend Up';
+const TrendDown = 'Trend Down';
+
+const TrendUpPic = '~/app/images/trendUp.png';
+const TrendDownPic = '~/app/images/trendDown.png';
+const NoTrendPic = '~/app/images/noTrend.png';
 
 @Component({
     selector: "home",
@@ -33,6 +40,12 @@ export class HomeComponent implements OnInit {
     public userGraphedSymptoms: Map<string, boolean>;
     public userJournalEntries: Map<string, JournalEntry>;
     public dataSeries: Array<DataSeries>;
+
+    // 3 Trend Variables
+    fatigueImage = NoTrendPic;
+    public fatigueValue = '';    
+    public feelingSadImage = NoTrendPic; 
+    public feelingSadValue = '';
 
     // First series to plot
     public series1Values: ObservableArray<GraphValuePair>;
@@ -61,23 +74,10 @@ export class HomeComponent implements OnInit {
 
         this.updateSeries();
 
-        console.log('');
-        console.log('');
-        console.log('');
-        console.log(this.stats.getPercentage('Fatigue'));
-        console.log(this.stats.getPercentage('Feeling sad or down'));
-        console.log(this.stats.getPercentage('Inability to concentrate'));
-        
-        console.log(this.stats.getNoTrend('Fatigue'));
-        console.log(this.stats.getNoTrend('Feeling sad or down'));
-        console.log(this.stats.getNoTrend('Inability to concentrate'));
-        
-        console.log(this.stats.getTrend('Fatigue'));
-        console.log(this.stats.getTrend('Feeling sad or down'));
-        console.log(this.stats.getTrend('Inability to concentrate'));
-        console.log('');
-        console.log('');
-        console.log('');
+        this.fatigueValue = this.stats.getPercentage('Fatigue').toString();
+        this.feelingSadValue = this.stats.getPercentage('Feeling sad or down').toString();
+
+        this.setImages();
     } 
 
     ngOnInit(): void {
@@ -200,9 +200,6 @@ export class HomeComponent implements OnInit {
                 num: 0},
             ]);
         }
-
-        // this.series1Values.notifyPropertyChange('hi', 'hi');
-        // this.series2Values.notifyPropertyChange('hi', 'hi');
     };
 
     // Creates the series from the symptoms that can actually be graphed in needed
@@ -210,10 +207,6 @@ export class HomeComponent implements OnInit {
         
         this.dataSeries = null;
         let count = 0;
-        // console.log(JSON.stringify(this.dataSeries));
-        // console.log(JSON.stringify(this.dataSeries));
-        // this.dataSeries = new ObservableArray();
-        // console.log(JSON.stringify(this.dataSeries));
         let dataArray = new Array<DataSeries>();
 
         // Loop around the symptoms that are needed to be graphed
@@ -234,5 +227,32 @@ export class HomeComponent implements OnInit {
         });
         console.log(`Graph Values: ${JSON.stringify(dataArray)}`);
         return dataArray;
+    }
+
+    setImages() {
+        let fatigue = this.stats.getTrend('Fatigue');
+        if(fatigue == TrendUp) {
+            this.fatigueImage = TrendUpPic;
+        } else if(fatigue == TrendDown) {
+            this.fatigueImage = TrendDownPic;
+        } else if(fatigue == NoTrend) {
+            this.fatigueImage = NoTrendPic;
+        }
+
+        let sad = this.stats.getTrend('Feeling sad or down');
+        if(sad == TrendUp) {
+            this.feelingSadImage = TrendUpPic;
+        } else if(sad == TrendDown) {
+            this.feelingSadImage = TrendDownPic;
+        } else if(sad == NoTrend) {
+            this.feelingSadImage = NoTrendPic;
+        }
+    }
+
+    updateTrends(){
+        this.fatigueValue = this.stats.getPercentage('Fatigue').toString();
+        this.feelingSadValue = this.stats.getPercentage('Feeling sad or down').toString();
+
+        this.setImages();
     }
 }
