@@ -1,37 +1,40 @@
 <GridLayout class="page appBackgroundColor">
     <StackLayout class="home-panel1">
+                <Label class="card-title" text="Significant Trends"></Label>
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
             <StackLayout class="home-panel">
-                        <Label class="card-title2" text="Significant Trends"></Label>
-                <Scrollview height="100">
-                                <StackLayout>
+                        
+        <Scrollview height="100">
+        <StackLayout>
                 <AbsoluteLayout> 
-                        <Image left="5" src="~/app/images/trendDown.png" height="45" width="45" class="image"> </Image>
+                        <Image left="5" src="~/app/images/trendDown.png" height="40" width="40" class="image"> </Image>
                         <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Lack of motivation"></Label>
                         <Label left="290" top="12" class="trendDownPercent" text="80%"></Label>
                 </AbsoluteLayout>
                 <AbsoluteLayout> 
-                        <Image left="5" src="~/app/images/trendUp.png" height="45" width="45" class="image"> </Image>
+                        <Image left="5" src="~/app/images/trendUp.png" height="40" width="40" class="image"> </Image>
                         <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Inability to cope with daily problems"></Label>
                         <Label left="290" top="12" class="trendUpPercent" text="70%"></Label>
                 </AbsoluteLayout>
                 <AbsoluteLayout> 
-                        <Image left="5" src="~/app/images/noTrend.png" height="45" width="45" class="image"> </Image>
+                        <Image left="5" src="~/app/images/noTrend.png" height="40" width="40" class="image"> </Image>
                         <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="No significant trends"></Label>
                 </AbsoluteLayout>
                 <Label  class="space" text=""></Label>
         </StackLayout>
         </Scrollview>
             </StackLayout>
-        
+         
         </CardView>
-        <Label  class="space1" text=""></Label>
+        <!-- <Label  class="space1" text=""></Label> -->
+        <Label class="card-title2" text="Weekly Overview - {{month}}"></Label>
 
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40"> 
             <StackLayout class="home-panel1">
-                  <Label class="card-title" text="Weekly Overview - {{month}}"></Label>
+                <Scrollview height="225">
+                <StackLayout>
 
-                <RadCartesianChart tkExampleTitle tkToggleNavButton height="200" >
+                <RadCartesianChart tkExampleTitle tkToggleNavButton height="220" >
                         <CategoricalAxis tkCartesianHorizontalAxis lineThickness = "1" labelTextColor="#A2A0A0" labelMargin = "40"></CategoricalAxis>
                         <LinearAxis tkCartesianVerticalAxis MajorGridLinesVisibility="Visible" labelFormat="%.0f" labelTextColor="#A2A0A0" minimum="0" maximum="10" majorStep = "2" lineThickness = "1" labelMargin = "20" ></LinearAxis>
                         
@@ -46,7 +49,7 @@
                                         <PaletteEntry tkCartesianPaletteEntry></PaletteEntry>
                                 </Palette>
                                 <Palette tkCartesianPalette seriesName="series2Name">
-                                        <PaletteEntry tkCartesianPaletteEntry fillColor="red" strokeColor="red"></PaletteEntry>
+                                        <PaletteEntry tkCartesianPaletteEntry fillColor="lightgreen" strokeColor="lightgreen"></PaletteEntry>
                                 </Palette>
                                 <Palette tkCartesianPalette seriesName="series3Name">
                                         <PaletteEntry tkCartesianPaletteEntry fillColor="gray" strokeColor="gray"></PaletteEntry>
@@ -63,7 +66,7 @@
                                                 <PaletteEntry tkCartesianPaletteEntry></PaletteEntry> 
                                         </Palette>
                         </SplineSeries>    -->
-                        <RadLegendView tkCartesianLegend class="legend" enableSelection=true ></RadLegendView>                             
+                        <RadLegendView tkCartesianLegend enableSelection=false ></RadLegendView>                             
                                                 
                                 <!-- </ng-template> -->
                         <!-- </ListView> -->
@@ -79,6 +82,8 @@
 
                         
                 </RadCartesianChart>
+                </StackLayout>
+                </Scrollview>  
             </StackLayout>
         </CardView>
         <Label  class="space1" text=""></Label>

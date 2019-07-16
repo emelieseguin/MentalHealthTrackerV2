@@ -29,10 +29,10 @@ export class LoginComponent {
 
     // TODO: read this from the input boxes, seems like this is actually needed for a weird reason
     this.user = new User();
-    this.user.email = "emelseguin@gmail.com";
+    this.user.email = "emelieseguin@gmail.com";
     this.user.password = "password";
     this.user.passwordOptions = {
-      email: "emelseguin@gmail.com",
+      email: "emelieseguin@gmail.com",
       password: "password"
     };
 
