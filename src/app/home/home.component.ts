@@ -67,7 +67,11 @@ export class HomeComponent implements OnInit {
         console.log(this.stats.getPercentage('Fatigue'));
         console.log(this.stats.getPercentage('Feeling sad or down'));
         console.log(this.stats.getPercentage('Inability to concentrate'));
-
+        
+        console.log(this.stats.getNoTrend('Fatigue'));
+        console.log(this.stats.getNoTrend('Feeling sad or down'));
+        console.log(this.stats.getNoTrend('Inability to concentrate'));
+        
         console.log(this.stats.getTrend('Fatigue'));
         console.log(this.stats.getTrend('Feeling sad or down'));
         console.log(this.stats.getTrend('Inability to concentrate'));
