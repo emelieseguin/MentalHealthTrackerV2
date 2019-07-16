@@ -4,6 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { TextField } from "tns-core-modules/ui/text-field";
 import { AppStoreService } from "~/app/services/app-store.service";
 import { UserInfo } from "~/app/models/user-info.model";
+import { DataService } from "~/app/services/data.service";
 
 
 
@@ -25,7 +26,7 @@ export class ProfileEditComponent implements OnInit {
     currentUser : UserInfo;
     
     constructor(private page: Page, private routerExtensions: RouterExtensions,
-        private appStore: AppStoreService) {
+        private appStore: AppStoreService, private dataService: DataService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -66,6 +67,11 @@ export class ProfileEditComponent implements OnInit {
 
         console.log(`Old Sex:  ${this.currentUser.sex}   New User: ${textField.text}`);
         this.currentUser.sex = textField.text;
+    }
+
+    saveToDatabase() {
+        console.log('got here'); 
+        this.dataService.storeUserInfo(this.appStore.userInfo);
     }
 
     //TODO: this will also have to save to the database

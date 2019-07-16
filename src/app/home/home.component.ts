@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from "@angular/core";
 import { isAndroid, Page } from "tns-core-modules/ui/page/page";
-import { Country, DataService, Symptom } from '../services/data.service';
+import { DataService } from '../services/data.service';
 import { ObservableArray } from "tns-core-modules/data/observable-array";
 import { StatAnalysisService } from "../services/stat-analysis.service";
 import { AppStoreService } from "../services/app-store.service";
@@ -26,8 +26,6 @@ export class DataSeries {
     providers: [DataService]
 })
 export class HomeComponent implements OnInit {
-
-    private _categoricalSource: ObservableArray<Country>;
 
     public month = this.utils.getMonth();
     public userTrackedSymptoms: string[];
@@ -62,10 +60,6 @@ export class HomeComponent implements OnInit {
 
         console.log(this.stats.doStats());
         console.log(this.stats.otherStats());
-    }
-
-    get categoricalSource(): ObservableArray<Country> {
-        return this._categoricalSource;
     } 
 
     ngOnInit(): void {

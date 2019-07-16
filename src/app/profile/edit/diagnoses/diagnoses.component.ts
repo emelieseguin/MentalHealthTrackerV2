@@ -5,6 +5,7 @@ import { Switch } from "tns-core-modules/ui/switch";
 import { EventData } from "tns-core-modules/data/observable";
 import { Diagnosis } from "~/app/models/user-info.model";
 import { AppStoreService } from "~/app/services/app-store.service";
+import { DataService } from "~/app/services/data.service";
 
 
 const Diagnoses : Diagnosis[] = [
@@ -34,7 +35,7 @@ export class DiagnosesComponent implements OnInit {
     userDiagnoses = Diagnoses;
 
     constructor(private page: Page, private routerExtensions: RouterExtensions,
-        private appStore: AppStoreService) {
+        private appStore: AppStoreService, private dataService: DataService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -58,6 +59,11 @@ export class DiagnosesComponent implements OnInit {
                 console.log(`Name: ${element.name}  Diagnosed: ${element.diagnosed}`);
             }
         });        
+    }
+
+    saveToDatabase() {
+        console.log('got here'); 
+        this.dataService.storeUserInfo(this.appStore.userInfo);
     }
 
 

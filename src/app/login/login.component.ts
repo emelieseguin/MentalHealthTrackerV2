@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, wtfStartTimeRange} from '@angular/core';
 import {Observable} from 'rxjs';
 import {User, PasswordOptions} from '../models/user.model';
 import { FirebaseService } from '../services/firebase.service';
@@ -7,6 +7,7 @@ import { RouterExtensions } from 'nativescript-angular/router/router-extensions'
 import { Page, isAndroid } from 'tns-core-modules/ui/page/page';
 import { AppStoreService } from '../services/app-store.service';
 import { DefaultUserService } from '../services/default-user.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'login',
@@ -20,11 +21,20 @@ export class LoginComponent {
   
   constructor(private firebaseService: FirebaseService, private page: Page, 
     private routerExtensions: RouterExtensions, private appStore: AppStoreService,
-    private defaultUser: DefaultUserService) {
+    private defaultUser: DefaultUserService, private dataService: DataService) {
   
     if (isAndroid) {
       this.page.actionBarHidden = true;
     }
+
+    // TODO: read this from the input boxes, seems like this is actually needed for a weird reason
+    this.user = new User();
+    this.user.email = "emelseguin@gmail.com";
+    this.user.password = "password";
+    this.user.passwordOptions = {
+      email: "emelseguin@gmail.com",
+      password: "password"
+    };
 
     // TODO: here we can check whether the user has any sort of entries
     // for this info.. If they don't use the defaults that have
@@ -32,6 +42,7 @@ export class LoginComponent {
 
     console.log();
     console.log();
+    
 
     // TODO: pull or just use the generic list of symptoms
     this.appStore.symptoms = defaultUser.getDefaultSymptomsArray();
@@ -39,20 +50,13 @@ export class LoginComponent {
     // Create the graphed symptoms from this as well
     this.appStore.graphedSymptoms = defaultUser.getDefaultGraphedSymptoms(this.appStore.symptoms);
 
-    this.appStore.userInfo = defaultUser.getNewUserInfo();
+    
     this.appStore.journalEntries = defaultUser.getDefaultJournalEntries(this.appStore.symptoms);
     
     
-    // TODO: read this from the input boxes, seems like this is actually needed for a weird reason
-    this.user = new User();
-    this.user.email = "emelieseguin@gmail.com";
-    this.user.password = "password";
-    this.user.passwordOptions = {
-      email: "emelieseguin@gmail.com",
-      password: "password"
-    };
+    
 
-    this.appStore.userInfo.email = this.user.email;
+    // this.appStore.userInfo.email = this.user.email; 
     // Set the user email from the loggin
     console.log('back to login');
   }
@@ -71,6 +75,13 @@ export class LoginComponent {
      this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = false;
+
+        this.dataService.pullUserInfo(this.user.email);
+
+
+      // console.log(JSON.stringify(this.appStore.userInfo));
+
+
         this.routerExtensions.navigate(["/main/default"], { clearHistory: true } );
 
       })

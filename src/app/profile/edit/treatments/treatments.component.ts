@@ -5,6 +5,7 @@ import { Switch } from "tns-core-modules/ui/switch";
 import { EventData } from "tns-core-modules/data/observable";
 import { Treatment } from "~/app/models/user-info.model";
 import { AppStoreService } from "~/app/services/app-store.service";
+import { DataService } from "~/app/services/data.service";
 
 @Component({
     selector: "treatments",
@@ -16,7 +17,7 @@ export class TreatmentsComponent implements OnInit {
     userTreatments : Treatment[];
 
     constructor(private page: Page, private routerExtensions: RouterExtensions,
-        private appStore: AppStoreService) {
+        private appStore: AppStoreService, private dataService: DataService) {
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
@@ -41,5 +42,10 @@ export class TreatmentsComponent implements OnInit {
                 console.log(`Name: ${element.name}  Undergoing: ${element.undergoing}`);
             }
         });
+    }
+
+    saveToDatabase() {
+        console.log('got here'); 
+        this.dataService.storeUserInfo(this.appStore.userInfo);
     }
 }

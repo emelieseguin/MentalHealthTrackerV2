@@ -1,73 +1,102 @@
 import { Injectable } from '@angular/core';
+import { UserInfo } from "../models/user-info.model";
+import { knownFolders, File, Folder } from "tns-core-modules/file-system";
+import { JournalEntries } from "../models/journal.model";
+import { User } from '../profile/edit/edit.component';
+import { JsonPipe } from '@angular/common';
+import { AppStoreService } from './app-store.service';
+import { DefaultUserService } from './default-user.service';
 
-// Create a Country Object
-export class Country {
 
-    constructor(public Country?: string, public Amount?: number,
-        public SecondVal?: number, public ThirdVal?: number, public Impact?: number, public Year?: number) {
-    }
-}
-let getFatigueMap = new Map([
-    ['2019,7,9,10,33,15', 6],
-    ['2019,7,8,10,33,15', 4],
-    ['2019,7,8,10,33,15', 8] 
-]);
+const FolderName = 'files';
+const GraphedSymptomsFile: string = 'graphed-symptoms.json';
+const JournalEntriesFile: string = 'journal-entires.json';
+const SymptomsFile: string = 'symptoms.json';
+const UserInfoFile: string = 'user-info.json';
+const RootEmail: string = 'emelieseguin@gmail.com';
 
-let getHeadacheMap = new Map([
-    ['2019,7,9,10,33,15', 1],
-    ['2019,7,8,10,33,15', 8],
-    ['2019,7,8,10,33,15', 10] 
-]);
 
-let getApathyMap = new Map([
-    ['2019,7,9,10,33,15', 9],
-    ['2019,7,8,10,33,15', 2],
-    ['2019,7,8,10,33,15', 1] 
-]);
-
-// Symptom
-export class Symptom {
-    Name: string;
-    Values?: Map<string, number>;
-    Active: boolean;
-}
-
-// Mock of all symptoms a user has
-let getMockedSymptoms: Symptom[] =
-    [
-        {
-            Name: 'Fatigue',
-            Values: getFatigueMap,
-            Active: true
-        },
-        {
-            Name: 'Headache',
-            Values: getHeadacheMap,
-            Active: true
-        },
-        {
-            Name: 'Apathy',
-            Values: getApathyMap,
-            Active: true
-        }
-    ];
+// ----- From the AppStore Itself
+// @Injectable()
+// export class AppStoreService {
+    
+//     userInfo: UserInfo;
+//     journalEntries: JournalEntries;
+//     symptoms: string[]; 
+//     graphedSymptoms: Map<string, boolean>;
+// }
 
 @Injectable({
     providedIn: 'root',
 })
 export class DataService {
 
-    getCategoricalSource(): Country[] {
-        return [
-            { Country: "Germany", Amount: 15, SecondVal: 14, ThirdVal: 24, Impact: 0, Year: 0 },
-            { Country: "France", Amount: 13, SecondVal: 23, ThirdVal: 25, Impact: 0, Year: 0 },
-            { Country: "Bulgaria", Amount: 24, SecondVal: 17, ThirdVal: 23, Impact: 0, Year: 0 },
-            { Country: "Spain", Amount: 11, SecondVal: 19, ThirdVal: 24, Impact: 0, Year: 0 },
-            { Country: "USA", Amount: 18, SecondVal: 8, ThirdVal: 21, Impact: 0, Year: 0 }
-        ];
+    public documents = knownFolders.documents();
+    public folder = this.documents.getFolder(FolderName);
+    public symptomFile = this.folder.getFile(UserInfoFile);
+
+    constructor(private appStore: AppStoreService, 
+        private defaultUser: DefaultUserService){
+
     }
 
-    getAllUserSymptoms(): Symptom[] {
-        return getMockedSymptoms;
+    // Store User Info
+    storeUserInfo(userInfo: UserInfo){
+
+        if(userInfo.email != RootEmail)
+        {
+            return;
+        }
+
+        console.log(JSON.stringify(userInfo));
+        this.symptomFile.writeText(JSON.stringify(userInfo))
+            .then(result => {
+                console.log('Updated User info in database.');
+            }
+                
+                ).catch(err => {
+                    console.log('Could not update info.');
+                });
+    }
+
+    // Store User Info
+    pullUserInfo(email: string) {
+
+        if(email == RootEmail) {
+
+            console.log(`User is: ${RootEmail}`);
+
+            this.symptomFile.readText()
+            .then(result => {
+                console.log('Pulled data from database.');
+                console.log(result);
+                // If the user exists -- the return their info TODO
+                let user: UserInfo = JSON.parse(result);
+                console.log('Parsed.');
+                console.log(JSON.stringify(user));
+
+                let actualUser: UserInfo = {
+                    email: RootEmail,
+                    firstName: user.firstName,
+                    lastName:  user.lastName,
+                    sex: user.sex,
+                    age: user.age,
+                    diagnoses: user.diagnoses,
+                    treatments: user.treatments
+                    
+                };
+
+
+                if(user.email == RootEmail){
+                    this.appStore.userInfo = actualUser;
+                }
+            }
+                ).catch(err => {
+                    console.log('Could read info from database.');
+                });
+        }
+        
+        this.appStore.userInfo = this.defaultUser.getNewUserInfo();
+        this.appStore.userInfo.email = email;
     }
 }

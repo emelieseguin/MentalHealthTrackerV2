@@ -6,10 +6,10 @@ import { UtilsService } from "./utils.service";
 import { SelectMultipleControlValueAccessor } from "@angular/forms";
 
 const DefaultUserInfo: UserInfo = {
-    firstName: 'n/a',
-    lastName: 'n/a',
+    firstName: 'User',
+    lastName: 'Name',
     age: 0,
-    sex: 'unknwon',
+    sex: 'unknown',
     email: 'unknown@email.com',
     diagnoses: [
         {diagnosed: true, name: "No formal diagnosis"},
@@ -72,9 +72,9 @@ export class DefaultUserService {
   getDefaultJournalEntries(userSymptoms: string[]): JournalEntries {
     let thing = DefaultJournalEntries;
     thing.entries[this.utils.getCurrentDateKey()] = this.getDefaultJournalEntry(userSymptoms);
-    console.log();
-    console.log('Object::');
-    console.log(JSON.stringify(thing))
+    // console.log();
+    // console.log('Object::');
+    // console.log(JSON.stringify(thing))
     return DefaultJournalEntries;
   }
 
@@ -95,14 +95,13 @@ export class DefaultUserService {
     let symptomsMap = new Map<string, number>();
 
     symptoms.forEach(element => {
-        console.log(element);
+        // console.log(element);
         symptomsMap[element] = 5;
     });
 
-    console.log('Creation of the map');
-    console.log(JSON.stringify(symptomsMap));
+    // console.log('Creation of the map');
+    // console.log(JSON.stringify(symptomsMap));
     
-
         // symptoms.set('Feeling sad or down', 0);
         // symptoms.set('Inability to concentrate', 0);
         // symptoms.set('Mood swings', 0);
