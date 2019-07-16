@@ -26,6 +26,7 @@ import { DefaultUserService } from "./services/default-user.service";
     ],
     imports: [
         NativeScriptModule,
+        NativeScriptFormsModule,
         AppRoutingModule,
     ],
     declarations: [

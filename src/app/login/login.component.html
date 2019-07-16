@@ -8,7 +8,7 @@
             <AbsoluteLayout width="310">
             <Label left="10" top="10" text="Email:" class="label"></Label>
             <Cardview  left="90" height= "35" radius="30" class="textInput" width="210">
-                    <TextField #email keyboardType="email" width="208" class="loginText" (blur)="saveEmail($event)" hint="Enter email here"></TextField> 
+                    <TextField #email keyboardType="email" width="208" class="loginText" [(ngModel)]="user.email" hint="Enter email here"></TextField> 
             </Cardview>
             </AbsoluteLayout>
 
@@ -17,7 +17,7 @@
             <AbsoluteLayout width="310">
                 <Label left="10" top="10" text="Password:" class="label"></Label>
                 <Cardview left="90" width="210" height= "35" radius="30" class="textInput" >
-                        <TextField #password secure="true" width="208" class="loginText"  (blur)="savePassword($event)" hint="Enter password here"></TextField> 
+                        <TextField #password secure="true" width="208" class="loginText" [(ngModel)]="user.password" hint="Enter password here"></TextField> 
                 </Cardview>
             </AbsoluteLayout>
             <Label text=" " class="space"></Label>

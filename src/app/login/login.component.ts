@@ -8,6 +8,7 @@ import { Page, isAndroid } from 'tns-core-modules/ui/page/page';
 import { AppStoreService } from '../services/app-store.service';
 import { DefaultUserService } from '../services/default-user.service';
 import { DataService } from '../services/data.service';
+import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 @Component({
   selector: 'login',
@@ -29,8 +30,8 @@ export class LoginComponent {
 
     // TODO: read this from the input boxes, seems like this is actually needed for a weird reason
     this.user = new User();
-    this.user.email = "none";
-    this.user.password = "password";
+    this.user.email = "";
+    this.user.password = "";
     // this.user.email = "emelieseguin@gmail.com";
     // this.user.password = "password";
     // this.user.passwordOptions = {
@@ -73,7 +74,7 @@ export class LoginComponent {
   }
 
   saveEmail(args){
-    
+
   }
 
   signUp() {
