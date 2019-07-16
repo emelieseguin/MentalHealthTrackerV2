@@ -29,20 +29,22 @@ export class LoginComponent {
 
     // TODO: read this from the input boxes, seems like this is actually needed for a weird reason
     this.user = new User();
-    this.user.email = "emelieseguin@gmail.com";
+    this.user.email = "none";
     this.user.password = "password";
-    this.user.passwordOptions = {
-      email: "emelieseguin@gmail.com",
-      password: "password"
-    };
+    // this.user.email = "emelieseguin@gmail.com";
+    // this.user.password = "password";
+    // this.user.passwordOptions = {
+      // email: "emelieseguin@gmail.com",
+      // password: "password"
+    // };
     
     // this.appStore.userInfo.email = this.user.email; 
     // Set the user email from the loggin
-    console.log('back to login');
   }
 
  
  submit() {
+   console.log(`${this.user.email} + ${this.user.password}`);
     this.isAuthenticating = true;
     if (this.isLoggingIn) {
       this.login();
@@ -65,8 +67,13 @@ export class LoginComponent {
 
       })
       .catch((message:any) => {
+        this.routerExtensions.navigate(["/login"], { clearHistory: true } );
         this.isAuthenticating = false;
       });
+  }
+
+  saveEmail(args){
+    
   }
 
   signUp() {
