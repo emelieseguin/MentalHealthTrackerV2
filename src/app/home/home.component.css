@@ -70,3 +70,9 @@
 .legend{
     font-size:4;
 }
+.update{
+    border-radius:15; 
+    font-size: 10;
+    font-weight: bold;
+    background-color:rgb(133, 221, 245);
+}

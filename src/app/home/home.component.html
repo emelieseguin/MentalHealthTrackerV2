@@ -1,20 +1,22 @@
 <GridLayout class="page appBackgroundColor">
     <StackLayout class="home-panel1">
+            <AbsoluteLayout>
                 <Label class="card-title" text="Significant Trends"></Label>
-                <Button width="45" height="45" top="10" left="298" text="+" (tap)="updateTrends()" class="plus"></Button>
+                <Button left="255" width="70" height="34" text="Update" (tap)="updateTrends()" class="update"></Button>\
+        </AbsoluteLayout>
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
             <StackLayout class="home-panel">
-        <Scrollview height="100">
-        <StackLayout>
+        <Scrollview height="90">
+        <StackLayout padding="5">
                 <AbsoluteLayout> 
                         <Image left="5" src="{{fatigueImage}}" height="40" width="40" class="image"> </Image>
                         <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Fatigue"></Label>
-                        <Label left="288" top="12" class="trendUpPercent" text="{{fatigueValue}}%"></Label>
+                        <Label left="280" top="12" class="trendUpPercent" text="{{fatigueValue}}%"></Label>
                 </AbsoluteLayout>
                 <AbsoluteLayout> 
                         <Image left="5" src="{{feelingSadImage}}" height="40" width="40" class="image"> </Image>
                         <Label left="55" width="230" top="12" class="trendSymptom" textWrap="true" text="Feeling sad or down"></Label>
-                        <Label left="288" top="12" class="trendDownPercent" text="{{feelingSadValue}}%"></Label>
+                        <Label left="280" top="12" class="trendDownPercent" text="{{feelingSadValue}}%"></Label>
                 </AbsoluteLayout>
                 <Label  class="space" text=""></Label>
         </StackLayout>
@@ -27,12 +29,12 @@
 
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40"> 
             <StackLayout class="home-panel1">
-                <Scrollview height="225">
+                <Scrollview height="250">
                 <StackLayout>
 
-                <RadCartesianChart tkExampleTitle tkToggleNavButton height="220" >
-                        <CategoricalAxis tkCartesianHorizontalAxis lineThickness = "1" labelTextColor="#A2A0A0" labelMargin = "40"></CategoricalAxis>
-                        <LinearAxis tkCartesianVerticalAxis MajorGridLinesVisibility="Visible" labelFormat="%.0f" labelTextColor="#A2A0A0" minimum="0" maximum="10" majorStep = "2" lineThickness = "1" labelMargin = "20" ></LinearAxis>
+                <RadCartesianChart tkExampleTitle tkToggleNavButton height="245" >
+                        <CategoricalAxis tkCartesianHorizontalAxis lineThickness = "1" labelTextColor="#A2A0A0" labelMargin = "40" allowPan="true" allowZoom="true"></CategoricalAxis>
+                        <LinearAxis tkCartesianVerticalAxis MajorGridLinesVisibility="Visible" labelFormat="%.0f" labelTextColor="#A2A0A0" minimum="0" maximum="10" majorStep = "2" lineThickness = "1" labelMargin = "20" allowPan="true" allowZoom="true" ></LinearAxis>
                         
                         
                         <!-- <ListView [items]="dataSeries"> -->
@@ -51,6 +53,7 @@
                                         <PaletteEntry tkCartesianPaletteEntry fillColor="gray" strokeColor="gray"></PaletteEntry>
                                 </Palette>
                                 <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true">  </RadCartesianChartGrid>
+                                
                         
                         <!-- <SplineSeries *ngIf="dataSeries[1] != null" tkCartesianSeries legendTitle="{{dataSeries[1].seriesName}}" seriesName = "dataSeries[1].seriesName" [items]="dataSeries[1].seriesValues" categoryProperty="day" valueProperty="num" >
                                         <Palette tkCartesianPalette>
@@ -86,7 +89,7 @@
 
         <CardView class="cardStyleProfile" margin="3" elevation="40" radius="40">
             <StackLayout class="home-panel1">
-                    <Label class="select" text="Select symptoms to plot above."></Label>
+                    <Label class="select" text="Select up to 3 symptoms to plot above."></Label>
                         <StackLayout>
                                 <Scrollview height = "250">
                                         <ListView  [items]="userTrackedSymptoms">
