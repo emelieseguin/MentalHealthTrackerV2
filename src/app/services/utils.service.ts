@@ -19,6 +19,12 @@ export class UtilsService {
     return dayKey;
   }
 
+  public getSpecificDayString(howFarBackInDays: number): string {
+    let today = new Date();
+    today.setDate(today.getDate() - howFarBackInDays);
+    return `${today.getDate()}`;
+  }
+
   public getSpecificDateKey(howFarBackInDays: number): string {
     let today = new Date();
     today.setDate(today.getDate() - howFarBackInDays);

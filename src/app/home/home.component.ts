@@ -59,6 +59,15 @@ export class HomeComponent implements OnInit {
     public series3Values: ObservableArray<GraphValuePair>;
     public series3Name: string;
 
+    private currentDay = '';
+    private oneDayAgo = '';
+    private twoDaysAgo = '';
+    private threeDaysAgo = '';
+    private fourDaysAgo = '';
+    private fiveDaysAgo = '';
+    private sixDaysAgo = '';
+
+
     constructor(private page: Page, private dataService: DataService, private routerExtensions: RouterExtensions,
         private stats: StatAnalysisService, private appStore: AppStoreService, private utils: UtilsService, 
         private defaultData: DefaultUserService) {
@@ -78,66 +87,55 @@ export class HomeComponent implements OnInit {
         this.feelingSadValue = this.stats.getPercentage('Feeling sad or down').toString();
 
         this.setImages();
+
+        this.currentDay = utils.getSpecificDayString(0);
+        this.oneDayAgo = utils.getSpecificDayString(1);
+        this.twoDaysAgo = utils.getSpecificDayString(2);
+        this.threeDaysAgo = utils.getSpecificDayString(3);
+        this.fourDaysAgo = utils.getSpecificDayString(4);
+        this.fiveDaysAgo = utils.getSpecificDayString(5);
+        this.sixDaysAgo = utils.getSpecificDayString(6);
     } 
 
     ngOnInit(): void {
-        console.log('home load up')
     }
 
     onGraphedSymptomChange(symptomName: string, args) {
         let mySwitch = args.object as Switch;
         this.userGraphedSymptoms[symptomName] = mySwitch.checked;
-        // this.dataSeries = this.updateGraphableSeries();
         this.updateSeries();
-        console.log(`Graphed Symptom value: ${symptomName}  ---- ${this.appStore.graphedSymptoms[symptomName]}`)
-    }
-
-    // TODO: get the keys for the last 7 days so that they can be graphed
-    getLast7DaysKeys(): string[]{
-        return ['2019-07-14'];
-    }
-
-    refresh(){
-        console.log('trying to refresh');
-        this.routerExtensions.navigate(["/main"], { clearHistory: true } );
     }
 
     getGraphValuesFromEntries(symptomName: string) : GraphValuePair[] {
         let graphValues : GraphValuePair[]  = new Array;
-
-        // Loop around the last 7 days and pull the value to store in the array
-        if(symptomName == 'Fatigue'){
-            graphValues.push({
-                num: 5,
-                day: 'F'
-            });
-    
-            graphValues.push({
-                num: 7,
-                day: 'M'
-            });
-        } else if(symptomName == 'Irritability'){
-            graphValues.push({
-                num: 9,
-                day: 'F'
-            });
-    
-            graphValues.push({
-                num: 2,
-                day: 'M'
-            });
-        } else if(symptomName == 'Feeling sad or down'){
-            graphValues.push({
-                num: 1,
-                day: 'F'
-            });
-    
-            graphValues.push({
-                num: 9,
-                day: 'M'
-            });
-        }
-         
+        graphValues.push({
+            day: this.sixDaysAgo,
+            num: (this.userJournalEntries[this.utils.getSpecificDateKey(6)].symptoms[symptomName] ? this.userJournalEntries[this.utils.getSpecificDateKey(6)].symptoms[symptomName]: 0)
+        });
+        graphValues.push({
+            day: this.fiveDaysAgo,
+            num: (this.userJournalEntries[this.utils.getSpecificDateKey(5)].symptoms[symptomName] ? this.userJournalEntries[this.utils.getSpecificDateKey(5)].symptoms[symptomName]: 0)
+        });
+        graphValues.push({
+            day: this.fourDaysAgo,
+            num: (this.userJournalEntries[this.utils.getSpecificDateKey(4)].symptoms[symptomName] ? this.userJournalEntries[this.utils.getSpecificDateKey(4)].symptoms[symptomName]: 0)
+        });
+        graphValues.push({
+            day: this.threeDaysAgo,
+            num: (this.userJournalEntries[this.utils.getSpecificDateKey(3)].symptoms[symptomName] ? this.userJournalEntries[this.utils.getSpecificDateKey(3)].symptoms[symptomName]: 0)
+        });
+        graphValues.push({
+            day: this.twoDaysAgo,
+            num: (this.userJournalEntries[this.utils.getSpecificDateKey(2)].symptoms[symptomName] ? this.userJournalEntries[this.utils.getSpecificDateKey(2)].symptoms[symptomName]: 0)
+        });
+        graphValues.push({
+            day: this.oneDayAgo,
+            num: (this.userJournalEntries[this.utils.getSpecificDateKey(1)].symptoms[symptomName] ? this.userJournalEntries[this.utils.getSpecificDateKey(1)].symptoms[symptomName]: 0)
+        });
+        graphValues.push({
+            day: this.currentDay,
+            num: (this.userJournalEntries[this.utils.getSpecificDateKey(0)].symptoms[symptomName] ? this.userJournalEntries[this.utils.getSpecificDateKey(0)].symptoms[symptomName]: 0)
+        });
         return graphValues
     }
 
@@ -173,61 +171,19 @@ export class HomeComponent implements OnInit {
 
         if(seriesCount == 0) {
             this.series1Name = 'N/A';
-            this.series1Values = new ObservableArray([
-                {day: 'F', 
-                num: 0},
-                {day: 'M', 
-                num: 0},
-            ]);
+            this.series1Values = this.getBlankArray();
         }
 
         if(seriesCount == 1) {
             this.series2Name = 'N/A';
-            this.series2Values = new ObservableArray([
-                {day: 'F', 
-                num: 0},
-                {day: 'M', 
-                num: 0},
-            ]);
+            this.series2Values = this.getBlankArray();
         }
 
         if(seriesCount == 2) {
             this.series3Name = 'N/A';
-            this.series3Values = new ObservableArray([
-                {day: 'F', 
-                num: 0},
-                {day: 'M', 
-                num: 0},
-            ]);
+            this.series3Values = this.getBlankArray();
         }
     };
-
-    // Creates the series from the symptoms that can actually be graphed in needed
-    updateGraphableSeries(): DataSeries[]{
-        
-        this.dataSeries = null;
-        let count = 0;
-        let dataArray = new Array<DataSeries>();
-
-        // Loop around the symptoms that are needed to be graphed
-        this.userTrackedSymptoms.forEach(symptomName => {
-            
-            // If this symptom is to be graphed
-            if(this.userGraphedSymptoms[symptomName]){
-
-                console.log(`Tracking the symptom: ${symptomName}`)
-                console.log(`Tracking Array: ${dataArray}`)
-                let dataSeries = new DataSeries;
-                dataSeries.seriesName = symptomName;
-                dataSeries.seriesValues = this.getGraphValuesFromEntries(symptomName);
-                
-                dataArray.push(dataSeries);
-            }
-            count++;
-        });
-        console.log(`Graph Values: ${JSON.stringify(dataArray)}`);
-        return dataArray;
-    }
 
     setImages() {
         let fatigue = this.stats.getTrend('Fatigue');
@@ -254,5 +210,49 @@ export class HomeComponent implements OnInit {
         this.feelingSadValue = this.stats.getPercentage('Feeling sad or down').toString();
 
         this.setImages();
+
+        // Refresh graphs
+        this.series1Name = 'N/A';
+        this.series1Values = this.getBlankArray();
+        this.series2Name = 'N/A';
+        this.series2Values = this.getBlankArray();
+        this.series3Name = 'N/A';
+        this.series3Values = this.getBlankArray();
+
+        this.updateSeries();
+    }
+
+    getBlankArray() : ObservableArray<GraphValuePair> {
+
+        return new ObservableArray([
+            {
+                day: this.sixDaysAgo, 
+                num: 0
+            },
+            {
+                day: this.fiveDaysAgo, 
+                num: 0
+            },
+            {
+                day: this.fourDaysAgo, 
+                num: 0
+            },
+            {
+                day: this.threeDaysAgo, 
+                num: 0
+            },
+            {
+                day: this.twoDaysAgo, 
+                num: 0
+            },
+            {
+                day: this.oneDayAgo, 
+                num: 0
+            },
+            {
+                day: this.currentDay, 
+                num: 0
+            },
+        ]);
     }
 }
