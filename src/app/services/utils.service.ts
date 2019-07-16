@@ -15,14 +15,14 @@ export class UtilsService {
 
   public getCurrentDateKey(): string {
     let today = new Date();
-    let dayKey = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()}`
+    let dayKey = `${today.getFullYear()}-${today.getUTCMonth()}-${today.getDate()}`
     return dayKey;
   }
 
   public getSpecificDateKey(howFarBackInDays: number): string {
     let today = new Date();
     today.setDate(today.getDate() - howFarBackInDays);
-    let dayKey = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()}`
+    let dayKey = `${today.getFullYear()}-${today.getUTCMonth()}-${today.getDate()}`
     return dayKey;
   }
 

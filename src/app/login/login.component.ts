@@ -35,23 +35,7 @@ export class LoginComponent {
       email: "emelieseguin@gmail.com",
       password: "password"
     };
-
-    // TODO: here we can check whether the user has any sort of entries
-    // for this info.. If they don't use the defaults that have
-    // been made for them
-
-    console.log();
-    console.log();
     
-
-    // TODO: pull or just use the generic list of symptoms
-    this.appStore.symptoms = defaultUser.getDefaultSymptomsArray();
-
-    // Create the graphed symptoms from this as well
-    this.appStore.graphedSymptoms = defaultUser.getDefaultGraphedSymptoms(this.appStore.symptoms);    
-    
-    
-
     // this.appStore.userInfo.email = this.user.email; 
     // Set the user email from the loggin
     console.log('back to login');
@@ -72,12 +56,11 @@ export class LoginComponent {
       .then(() => {
         this.isAuthenticating = false;
 
+        // Load the app data from the data base for the user
+        this.dataService.pullSymptoms(this.user.email);
         this.dataService.pullUserInfo(this.user.email);
         this.dataService.pullJournalEntries(this.user.email);
-
-      // console.log(JSON.stringify(this.appStore.userInfo));
-
-
+    
         this.routerExtensions.navigate(["/main/default"], { clearHistory: true } );
 
       })

@@ -94,6 +94,10 @@ export class JournalComponent implements OnInit {
             this.userGraphedSymptoms[this.newTrackedSymptom] = false;
         }
 
+        this.dataService.storeSymptoms(this.appStore.userInfo.email, this.appStore.symptoms);
+
+        //TODO NATE -- make sure to resave the graph as well
+
         // refresh the field as it has already been added
         this.newTrackedSymptom = '';
     }
@@ -117,10 +121,7 @@ export class JournalComponent implements OnInit {
         if(index > -1){
             this.journalTrackedSymptoms.splice(index, 1);
         }
-
-
-        console.log(`Array after removin; ${this.journalTrackedSymptoms}`);
-        console.log(`In the store; ${this.appStore.symptoms}`);
+        this.dataService.storeSymptoms(this.appStore.userInfo.email, this.appStore.symptoms);
     }
 
     saveToDatabase(){

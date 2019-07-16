@@ -8,6 +8,7 @@ import { Switch } from "tns-core-modules/ui/switch/switch";
 import { JournalEntries, JournalEntry } from "../models/journal.model";
 import { RouterExtensions } from "nativescript-angular/router";
 import { UtilsService } from "../services";
+import { DefaultUserService } from "../services/default-user.service";
 export class GraphValuePair {
     day: string
     num: number
@@ -46,12 +47,14 @@ export class HomeComponent implements OnInit {
     public series3Name: string;
 
     constructor(private page: Page, private dataService: DataService, private routerExtensions: RouterExtensions,
-        private stats: StatAnalysisService, private appStore: AppStoreService, private utils: UtilsService) {
+        private stats: StatAnalysisService, private appStore: AppStoreService, private utils: UtilsService, 
+        private defaultData: DefaultUserService) {
         
         if (isAndroid) {
             this.page.actionBarHidden = true;
         }
 
+        this.appStore.graphedSymptoms = this.defaultData.getDefaultGraphedSymptoms(this.appStore.symptoms); 
         this.userJournalEntries = this.appStore.journalEntries.entries;
         this.userTrackedSymptoms = this.appStore.symptoms;
         this.userGraphedSymptoms = this.appStore.graphedSymptoms;
@@ -64,7 +67,6 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('home load up')
-        this.dataSeries = this.updateGraphableSeries();
     }
 
     onGraphedSymptomChange(symptomName: string, args) {

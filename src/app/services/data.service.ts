@@ -7,13 +7,14 @@ import { JsonPipe } from '@angular/common';
 import { AppStoreService } from './app-store.service';
 import { DefaultUserService } from './default-user.service';
 import { UtilsService } from './utils.service';
+import { StatAnalysisService } from './stat-analysis.service';
 
 
 const FolderName = 'files';
 const GraphedSymptomsFile: string = 'graphed-symptoms.json';
-const JournalEntriesFile: string = 'journal-entires.json';
+const JournalEntriesFile: string = 'journalentires.json';
 const SymptomsFile: string = 'symptoms.json';
-const UserInfoFile: string = 'user-info.json';
+const UserInfoFile: string = 'userinfo.json';
 const RootEmail: string = 'emelieseguin@gmail.com';
 
 
@@ -34,12 +35,14 @@ export class DataService {
 
     public documents = knownFolders.documents();
     public folder = this.documents.getFolder(FolderName);
-    public symptomFile = this.folder.getFile(UserInfoFile);
+    public userInfoFile = this.folder.getFile(UserInfoFile);
     public journalEntriesFile = this.folder.getFile(JournalEntriesFile);
+    public symptomFile = this.folder.getFile(SymptomsFile);
 
     constructor(private appStore: AppStoreService, 
         private defaultUser: DefaultUserService,
-        private utils: UtilsService){
+        private utils: UtilsService,
+        private statService: StatAnalysisService){
 
     }
 
@@ -52,7 +55,7 @@ export class DataService {
         }
 
         console.log(JSON.stringify(userInfo));
-        this.symptomFile.writeText(JSON.stringify(userInfo))
+        this.userInfoFile.writeText(JSON.stringify(userInfo))
             .then(result => {
                 console.log('Updated User info in database.');
             }
@@ -69,96 +72,126 @@ export class DataService {
 
             console.log(`User is: ${RootEmail}`);
 
-            this.symptomFile.readText()
+            this.userInfoFile.readText()
             .then(result => {
-                // console.log('Pulled data from database.');
-                // console.log(result);
+                console.log('Pulled data from database.');
+                console.log(result);
                 // If the user exists -- the return their info TODO
                 let user: UserInfo = JSON.parse(result);
-                // console.log('Parsed.');
-                // console.log(JSON.stringify(user));
-
-                let actualUser: UserInfo = {
-                    email: RootEmail,
-                    firstName: user.firstName,
-                    lastName:  user.lastName,
-                    sex: user.sex,
-                    age: user.age,
-                    diagnoses: user.diagnoses,
-                    treatments: user.treatments
-                    
-                };
+                console.log('Parsed.');
+                console.log(JSON.stringify(user));
 
                 if(user.email == RootEmail){
-                    this.appStore.userInfo = actualUser;
+                    this.appStore.userInfo = user;
                     return;
                 }
             }
                 ).catch(err => {
-                    console.log('Could read info from database.');
+                    console.log('Could not read info from database. -- User');
+                });
+        } 
+        this.appStore.userInfo = this.defaultUser.getNewUserInfo();
+        this.appStore.userInfo.email = email;
+    }
+
+    // Store Journal Entries
+    storeJournalEntries(email: string, journalEntries: JournalEntries){
+
+        if(email != RootEmail)
+        {
+            return;
+        }
+
+        console.log(JSON.stringify(journalEntries));
+        this.journalEntriesFile.writeText(JSON.stringify(journalEntries))
+            .then(result => {
+                console.log('Updated User info in database -- with Journal Entries.');
+            }
+                
+                ).catch(err => {
+                    console.log('Could not update info on Journal Entries.');
+                });
+    }
+    
+    // Pull Journal Entries
+    pullJournalEntries(email: string) {
+
+        if(email == RootEmail) {
+
+            this.journalEntriesFile.readText()
+            .then(result => {
+                console.log('Pulled data from database.');
+                console.log(result);
+                // If the user exists -- the return their info TODO
+                let journalEntries: JournalEntries = JSON.parse(result);
+                console.log('I parsed');
+                if(journalEntries){
+                    this.appStore.journalEntries = journalEntries;
+                    this.addTodaysEntryIfNeeded()
+                    return;
+                } 
+            }
+                ).catch(err => {
+                    console.log('Could not read info from database. -- journal');
+                    this.appStore.journalEntries = this.statService.getData();
+                    this.storeJournalEntries(RootEmail, this.appStore.journalEntries);
                 });
         } else {
-            this.appStore.userInfo = this.defaultUser.getNewUserInfo();
-            this.appStore.userInfo.email = email;
+            this.appStore.journalEntries = this.defaultUser.getDefaultJournalEntries(this.defaultUser.getDefaultSymptomsArray());
+            this.addTodaysEntryIfNeeded()
+        }
+
+        console.log(JSON.stringify(this.appStore.journalEntries))
+    }
+
+    addTodaysEntryIfNeeded(){
+        if( this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()]){
+        } else {
+            this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()] = this.defaultUser.getDefaultJournalEntry(this.defaultUser.getDefaultSymptomsArray());
         }
     }
 
-        // Store User Info
-        storeJournalEntries(email: string, journalEntries: JournalEntries){
+    // Store Symptoms
+    storeSymptoms(email: string, symptoms: string[]){
 
-            if(email != RootEmail)
-            {
-                return;
+        if(email != RootEmail)
+        {
+            return;
+        }
+
+        this.symptomFile.writeText(JSON.stringify(symptoms))
+            .then(result => {
+                console.log('Updated symptoms info in database.');
             }
-    
-            console.log(JSON.stringify(journalEntries));
-            this.journalEntriesFile.writeText(JSON.stringify(journalEntries))
-                .then(result => {
-                    console.log('Updated User info in database -- with Journal Entries.');
+                
+                ).catch(err => {
+                    console.log('Could not update info.');
+                });
+    }
+
+    // Pull Symptoms
+    pullSymptoms(email: string) {
+
+        if(email == RootEmail) {
+
+            this.symptomFile.readText()
+            .then(result => {
+                let symptoms: string[] = JSON.parse(result);
+                // console.log('Parsed.');
+                // console.log(JSON.stringify(user));
+
+                if(email == RootEmail){
+                    this.appStore.symptoms = symptoms;
+                    return;
                 }
-                    
-                    ).catch(err => {
-                        console.log('Could not update info on Journal Entries.');
-                    });
-        }
-    
-        // Pull User Info
-        pullJournalEntries(email: string) {
-    
-            if(email == RootEmail) {
-    
-                this.journalEntriesFile.readText()
-                .then(result => {
-                    console.log('Pulled data from database.');
-                    console.log(result);
-                    // If the user exists -- the return their info TODO
-                    let journalEntries: JournalEntries = JSON.parse(result);
-
-                    if(journalEntries){
-                        this.appStore.journalEntries = journalEntries;
-                        this.addTodaysEntryIfNeeded()
-                        return;
-                    }
-                }
-                    ).catch(err => {
-                        console.log('Could read info from database.');
-                    });
-            } else {
-                this.appStore.journalEntries = this.defaultUser.getDefaultJournalEntries(this.defaultUser.getDefaultSymptomsArray());
-                this.addTodaysEntryIfNeeded()
             }
-        }
+                ).catch(err => {
+                    console.log('Could not read info from database. -- Symptoms');
+                });
+        } 
 
-        addTodaysEntryIfNeeded(){
-            if( this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()]){
-                console.log('');
-                console.log('');
-                console.log('exists');
-                console.log('');
-                console.log('');
-            } else {
-                console.log('does not exists');
-                this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()] = this.defaultUser.getDefaultJournalEntry(this.defaultUser.getDefaultSymptomsArray());
-            }
-        }
+        this.appStore.symptoms = this.defaultUser.getDefaultSymptomsArray();
+    }
+
+
 }
