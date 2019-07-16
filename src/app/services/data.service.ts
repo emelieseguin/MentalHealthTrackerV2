@@ -6,6 +6,7 @@ import { User } from '../profile/edit/edit.component';
 import { JsonPipe } from '@angular/common';
 import { AppStoreService } from './app-store.service';
 import { DefaultUserService } from './default-user.service';
+import { UtilsService } from './utils.service';
 
 
 const FolderName = 'files';
@@ -34,9 +35,11 @@ export class DataService {
     public documents = knownFolders.documents();
     public folder = this.documents.getFolder(FolderName);
     public symptomFile = this.folder.getFile(UserInfoFile);
+    public journalEntriesFile = this.folder.getFile(JournalEntriesFile);
 
     constructor(private appStore: AppStoreService, 
-        private defaultUser: DefaultUserService){
+        private defaultUser: DefaultUserService,
+        private utils: UtilsService){
 
     }
 
@@ -59,7 +62,7 @@ export class DataService {
                 });
     }
 
-    // Store User Info
+    // Pull User Info
     pullUserInfo(email: string) {
 
         if(email == RootEmail) {
@@ -68,12 +71,12 @@ export class DataService {
 
             this.symptomFile.readText()
             .then(result => {
-                console.log('Pulled data from database.');
-                console.log(result);
+                // console.log('Pulled data from database.');
+                // console.log(result);
                 // If the user exists -- the return their info TODO
                 let user: UserInfo = JSON.parse(result);
-                console.log('Parsed.');
-                console.log(JSON.stringify(user));
+                // console.log('Parsed.');
+                // console.log(JSON.stringify(user));
 
                 let actualUser: UserInfo = {
                     email: RootEmail,
@@ -86,17 +89,76 @@ export class DataService {
                     
                 };
 
-
                 if(user.email == RootEmail){
                     this.appStore.userInfo = actualUser;
+                    return;
                 }
             }
                 ).catch(err => {
                     console.log('Could read info from database.');
                 });
+        } else {
+            this.appStore.userInfo = this.defaultUser.getNewUserInfo();
+            this.appStore.userInfo.email = email;
         }
-        
-        this.appStore.userInfo = this.defaultUser.getNewUserInfo();
-        this.appStore.userInfo.email = email;
     }
+
+        // Store User Info
+        storeJournalEntries(email: string, journalEntries: JournalEntries){
+
+            if(email != RootEmail)
+            {
+                return;
+            }
+    
+            console.log(JSON.stringify(journalEntries));
+            this.journalEntriesFile.writeText(JSON.stringify(journalEntries))
+                .then(result => {
+                    console.log('Updated User info in database -- with Journal Entries.');
+                }
+                    
+                    ).catch(err => {
+                        console.log('Could not update info on Journal Entries.');
+                    });
+        }
+    
+        // Pull User Info
+        pullJournalEntries(email: string) {
+    
+            if(email == RootEmail) {
+    
+                this.journalEntriesFile.readText()
+                .then(result => {
+                    console.log('Pulled data from database.');
+                    console.log(result);
+                    // If the user exists -- the return their info TODO
+                    let journalEntries: JournalEntries = JSON.parse(result);
+
+                    if(journalEntries){
+                        this.appStore.journalEntries = journalEntries;
+                        this.addTodaysEntryIfNeeded()
+                        return;
+                    }
+                }
+                    ).catch(err => {
+                        console.log('Could read info from database.');
+                    });
+            } else {
+                this.appStore.journalEntries = this.defaultUser.getDefaultJournalEntries(this.defaultUser.getDefaultSymptomsArray());
+                this.addTodaysEntryIfNeeded()
+            }
+        }
+
+        addTodaysEntryIfNeeded(){
+            if( this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()]){
+                console.log('');
+                console.log('');
+                console.log('exists');
+                console.log('');
+                console.log('');
+            } else {
+                console.log('does not exists');
+                this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()] = this.defaultUser.getDefaultJournalEntry(this.defaultUser.getDefaultSymptomsArray());
+            }
+        }
 }

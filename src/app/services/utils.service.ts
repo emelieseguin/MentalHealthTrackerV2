@@ -19,6 +19,13 @@ export class UtilsService {
     return dayKey;
   }
 
+  public getSpecificDateKey(howFarBackInDays: number): string {
+    let today = new Date();
+    today.setDate(today.getDate() - howFarBackInDays);
+    let dayKey = `${today.getFullYear()}-${today.getUTCMonth() + 1}-${today.getDate()}`
+    return dayKey;
+  }
+
   public getMonth(): string {
     let months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
     let monthIndex: number = new Date().getMonth();

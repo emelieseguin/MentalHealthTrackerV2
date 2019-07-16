@@ -53,7 +53,7 @@
         <CardView left="225" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
             <StackLayout orientation="horizontal">
                 <Label class="no" text = " No"></Label>
-                <Switch  checked="false" (checkedChange)="onExerciseChange($event)"></Switch>
+                <Switch  checked="{{todaysJournalEntry.exercise}}" (checkedChange)="onExerciseChange($event)"></Switch>
                 <Label class="yes" text = "Yes"></Label>
             </StackLayout>
         </CardView>
@@ -66,7 +66,7 @@
         <CardView left="225" class="cardStyleProfile"  height = "40" width="120" elevation="40" radius="40">
             <StackLayout orientation="horizontal">
                 <Label class="no" text = " No"></Label>
-                <Switch  checked="false" (checkedChange)="onMeditateChange($event)"></Switch>
+                <Switch  checked="{{todaysJournalEntry.meditate}}" (checkedChange)="onMeditateChange($event)"></Switch>
                 <Label class="yes" text = "Yes"></Label>
             </StackLayout>
         </CardView>
@@ -95,5 +95,5 @@
 </StackLayout>
 </CardView>
  <!-- TODO: put real action on button press -->
-<Button  height = "50"   class="saveButton" text="Save Changes"></Button>  -->
+<Button  height = "50"   class="saveButton" text="Save Changes" (tap)="saveToDatabase()"></Button>  -->
 </StackLayout> 

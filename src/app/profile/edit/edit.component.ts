@@ -70,7 +70,6 @@ export class ProfileEditComponent implements OnInit {
     }
 
     saveToDatabase() {
-        console.log('got here'); 
         this.dataService.storeUserInfo(this.appStore.userInfo);
     }
 

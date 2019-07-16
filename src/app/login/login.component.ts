@@ -48,11 +48,7 @@ export class LoginComponent {
     this.appStore.symptoms = defaultUser.getDefaultSymptomsArray();
 
     // Create the graphed symptoms from this as well
-    this.appStore.graphedSymptoms = defaultUser.getDefaultGraphedSymptoms(this.appStore.symptoms);
-
-    
-    this.appStore.journalEntries = defaultUser.getDefaultJournalEntries(this.appStore.symptoms);
-    
+    this.appStore.graphedSymptoms = defaultUser.getDefaultGraphedSymptoms(this.appStore.symptoms);    
     
     
 
@@ -77,7 +73,7 @@ export class LoginComponent {
         this.isAuthenticating = false;
 
         this.dataService.pullUserInfo(this.user.email);
-
+        this.dataService.pullJournalEntries(this.user.email);
 
       // console.log(JSON.stringify(this.appStore.userInfo));
 

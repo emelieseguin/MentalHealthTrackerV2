@@ -6,6 +6,7 @@ import { JournalEntry, JournalEntries } from "../models/journal.model";
 import { UtilsService } from "../services";
 import { Switch } from "tns-core-modules/ui/switch/switch";
 import { TextField } from "tns-core-modules/ui/text-field/text-field";
+import { DataService } from "../services/data.service";
 
 class Symptom {
     name: string
@@ -27,7 +28,7 @@ export class JournalComponent implements OnInit {
     newTrackedSymptom: string = '';
     
     constructor(private page: Page, private utils: UtilsService,
-        private appStore: AppStoreService) {
+        private appStore: AppStoreService, private dataService: DataService) {
         if (isAndroid) {
             this.page.actionBarHidden = true; 
         }
@@ -71,11 +72,13 @@ export class JournalComponent implements OnInit {
     onExerciseChange(args) {
         let mySwitch = args.object as Switch;
         this.todaysJournalEntry.exercise = mySwitch.checked;
+        // this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()].exercise = mySwitch.checked;
     }
 
     onMeditateChange(args) {
         let mySwitch = args.object as Switch;
         this.todaysJournalEntry.meditate = mySwitch.checked;
+        // this.appStore.journalEntries.entries[this.utils.getCurrentDateKey()].meditate = mySwitch.checked;
     }
 
     updateNewSymptomValue(args) {
@@ -118,5 +121,9 @@ export class JournalComponent implements OnInit {
 
         console.log(`Array after removin; ${this.journalTrackedSymptoms}`);
         console.log(`In the store; ${this.appStore.symptoms}`);
+    }
+
+    saveToDatabase(){
+        this.dataService.storeJournalEntries(this.appStore.userInfo.email, this.appStore.journalEntries);
     }
 }
