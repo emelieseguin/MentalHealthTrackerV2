@@ -56,7 +56,7 @@ export class LoginComponent {
 
   login() {
      this.firebaseService.login(this.user)
-      .then(() => {
+     .then(() => {
         this.isAuthenticating = false;
 
         // Load the app data from the data base for the user
@@ -78,6 +78,12 @@ export class LoginComponent {
   }
 
   signUp() {
+
+    this.user.passwordOptions = {
+      email: this.user.email,
+      password: this.user.password
+    };
+
     this.firebaseService.register(this.user)
       .then(() => {
         this.isAuthenticating = false;
